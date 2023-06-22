@@ -1,6 +1,7 @@
 import React from 'react';
 import './Layout.css';
-import { Footer, Navbar } from './components';
+import { Footer, Home, Navbar, MyTrips } from './components';
+import { Route, Routes } from 'react-router-dom';
 
 const Layout = () => {
 	return (
@@ -9,7 +10,10 @@ const Layout = () => {
 				<Navbar />
 			</div>
 			<div className="page_content">
-				<h1>Main section</h1>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/mytrips" element={<MyTrips />} />
+				</Routes>
 			</div>
 			<div className="footer">
 				<Footer />
