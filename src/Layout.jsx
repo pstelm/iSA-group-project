@@ -1,21 +1,21 @@
 import React from 'react';
-import './Layout.css';
+import styles from './Layout.module.css';
 import { Footer, Home, Navbar, MyTrips } from './components';
 import { Route, Routes } from 'react-router-dom';
 
 const Layout = () => {
 	return (
-		<div className="layout">
-			<div className="navbar">
+		<div className={styles.layout}>
+			<div className={styles.navbar}>
 				<Navbar />
 			</div>
-			<div className="page_content">
+			<div className={styles.page_content}>
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/mytrips" element={<MyTrips />} />
 				</Routes>
 			</div>
-			<div className="footer">
+			<div className={styles.footer}>
 				<Footer />
 			</div>
 		</div>
