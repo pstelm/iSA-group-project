@@ -8,15 +8,19 @@ const Layout = () => {
 
 	return (
 		<div className={styles.layout}>
-			<div className={styles.navbar}>
-				<Navbar />
-			</div>
+			{currentUser ? (
+				<div className={styles.navbar}>
+					<Navbar />
+				</div>
+			) : null}
 			<div className={styles.page_content}>
 				<Outlet />
 			</div>
-			<div className={styles.footer}>
-				<Footer />
-			</div>
+			{currentUser ? (
+				<div className={styles.footer}>
+					<Footer />
+				</div>
+			) : null}
 		</div>
 	);
 };
