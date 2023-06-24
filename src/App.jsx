@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
-import { Layout, Login, Home, MyTrips } from './components';
+import { Layout, Login, Home, MyTrips, Register } from './components';
 
 export const App = () => {
 	return (
@@ -8,7 +8,7 @@ export const App = () => {
 			<Route path="/" element={<Layout />}>
 				{/* Publiczne ściezki */}
 				<Route path="/login" element={<Login />} />
-				{/* <Route path="/register" element={<Register />} /> */}
+				<Route path="/register" element={<Register />} />
 
 				{/* Ściezki prywatne */}
 				<Route element={<PrivateRoute />}>
