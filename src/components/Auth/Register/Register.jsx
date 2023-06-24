@@ -3,8 +3,11 @@ import useAuth from "../../../contexts/AuthContext";
 import { toast } from "react-hot-toast";
 import { db } from "../../../config/firebase";
 import { addDoc, collection } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+
+  const navigate = useNavigate();
   const usersCollectionRef = collection(db, "Users");
 
   const { register } = useAuth();
@@ -48,9 +51,10 @@ const Register = () => {
         sex: sex,
       });
       toast.success("Witaj w aplikacji!");
+      navigate("/");
       formEvent.target.reset();
     } catch (error) {
-      toast.error("Wystąpił błąd: " + error);
+      toast.success("Wystąpił błąd: " + error.message);
     }
   };
 
@@ -68,14 +72,23 @@ const Register = () => {
         <label htmlFor="email">Adres email</label>
         <input type="email" name="email" id="email" />
         <label htmlFor="password">Hasło</label>
-        <input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny i 1 dużą literę" />
-        <p>Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny i 1 dużą literę</p>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*[&%$]).{8,}$"
+          title="Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny i 1 dużą literę"
+        />
+        <p>
+          Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak
+          specjalny i 1 dużą literę
+        </p>
         <label htmlFor="password_confirm">Powtórz hasło</label>
         <input type="password" name="password_confirm" id="password_confirm" />
         <button type="submit">Zarejestruj się</button>
       </form>
     </div>
   );
-}
+};
 
 export default Register;

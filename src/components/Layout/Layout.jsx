@@ -2,6 +2,7 @@ import { Navbar, Footer } from '../index';
 import { Outlet } from 'react-router';
 import styles from './Layout.module.css';
 import useAuth from '../../contexts/AuthContext';
+import { Toaster } from 'react-hot-toast';
 
 const Layout = () => {
 	const { currentUser } = useAuth();
@@ -14,6 +15,7 @@ const Layout = () => {
 				</div>
 			) : null}
 			<div className={styles.page_content}>
+				<Toaster />
 				<Outlet />
 			</div>
 			{currentUser ? (

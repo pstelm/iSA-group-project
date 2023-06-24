@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 import { Layout, Login, Home, MyTrips, Register } from './components';
 
+
 export const App = () => {
 	return (
 		<Routes>
