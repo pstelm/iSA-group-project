@@ -54,7 +54,7 @@ const Register = () => {
       navigate("/");
       formEvent.target.reset();
     } catch (error) {
-      toast.success("Wystąpił błąd: " + error.message);
+      toast.error("Wystąpił błąd: " + error.message);
     }
   };
 
@@ -77,7 +77,7 @@ const Register = () => {
           name="password"
           id="password"
           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*[&%$]).{8,}$"
-          title="Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny i 1 dużą literę"
+          title="Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny, 1 dużą literę i 1 małą literę"
         />
         <p>
           Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak
