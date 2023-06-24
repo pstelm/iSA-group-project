@@ -35,9 +35,9 @@ const Login = () => {
 						</label>
 						<input type="password" name="password" className={styles.input} required />
 						<button type="submit">Zaloguj się</button>
-						{/* <p>
+						<p>
 							Nie masz jeszcze konta? <Link to="/register">Utwórz</Link>
-						</p> */}
+						</p>
 					</form>
 				</div>
 			) : (

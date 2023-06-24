@@ -16,9 +16,9 @@ const useAuth = () => {
 export const AuthProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState();
 
-	// function register(email, password) {
-	// 	return createUserWithEmailAndPassword(auth, email, password);
-	// }
+	function register(email, password) {
+		return createUserWithEmailAndPassword(auth, email, password);
+	}
 
 	function login(email, password) {
 		return signInWithEmailAndPassword(auth, email, password);
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
 
 	const value = {
 		currentUser,
-		// register,
+		register,
 		login,
 		logout,
 	};
@@ -46,4 +46,5 @@ export const AuthProvider = ({ children }) => {
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default useAuth;
