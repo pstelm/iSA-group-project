@@ -1,7 +1,13 @@
 :root {
 	/* colors variables */
+	--clr-blue-dark: #0000ff;
+	--clr-blue-medbium: #3a9efd;
+	--clr-blue-light: #bee6ff;
+	--clr-bg: #fffffd;
+
 	/* font size variables */
 	/* font family variables */
+	--font-family: 'Poppins', sans-serif;
 }
 
 *,
