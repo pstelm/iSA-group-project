@@ -95,7 +95,8 @@ const Register = () => {
 					title="Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny, 1 dużą literę i 1 małą literę"
 				/>
 				<p>
-					Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny i 1 dużą literę
+					Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny, 1 dużą i 1 małą
+					literę
 				</p>
 				<label htmlFor="password_confirm">Powtórz hasło</label>
 				<input type="password" name="password_confirm" id="password_confirm" />
