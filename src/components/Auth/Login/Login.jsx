@@ -3,6 +3,7 @@ import { toast, Toaster } from "react-hot-toast";
 import styles from "./Login.module.css";
 import useAuth from "../../../contexts/AuthContext";
 import { firebaseErrors } from "../../../utils/firebaseErrors";
+import GrayButton from "../../GrayButton/GrayButton";
 
 const Login = () => {
   const { login, currentUser } = useAuth();
@@ -25,9 +26,12 @@ const Login = () => {
       <Toaster />
       {!currentUser ? (
         <div className={styles.container}>
+          <br />
           <div className={styles.logo}>
             <img src="../../src/assets/logo.png" alt="Logo CoTravel" />
           </div>
+          <br />
+          <br />
           <form onSubmit={handleSubmit} className={styles.form}>
             <label htmlFor="" className={styles.label}>
               Adres e-mail
@@ -42,10 +46,12 @@ const Login = () => {
               className={styles.input}
               required
             />
-            <button className={styles.button} type="submit">
-              Zaloguj się
-            </button>
-            <p>
+            <br />
+            <br />
+            <GrayButton type={"submit"} btnText={"Zaloguj się"} />
+            <br />
+            <br />
+            <p className={styles.p}>
               Nie masz jeszcze konta? <Link to="/register">Utwórz</Link>
             </p>
           </form>

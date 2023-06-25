@@ -1,0 +1,57 @@
+/* .small-text to text pod ikonkami home, podróżuj, moje podróże, czat, profil na głównej stronie*/
+
+h1,
+h2,
+h3,
+label,
+p,
+.small-text,
+link {
+  word-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+label {
+  font-weight: var(--font-medium);
+}
+
+p,
+.small-text,
+link {
+  font-weight: var(--font-regular);
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
+
+label {
+  font-size: var(--fs-label);
+}
+
+p {
+  font-size: var(--fs-p);
+}
+
+.small-text {
+  font-size: var(--fs-small-text);
+}
+
+link {
+  font-size: var(--fs-link);
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-family);
+}
