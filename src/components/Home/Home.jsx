@@ -1,5 +1,4 @@
 import React from "react";
-import GrayButton from "../GrayButton/GrayButton";
 
 const Home = () => {
   return (

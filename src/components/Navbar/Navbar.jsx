@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./Navbar.module.css";
 import useAuth from "../../contexts/AuthContext";
-import GrayButton from "../GrayButton/GrayButton";
 
 const Navbar = () => {
   const { logout } = useAuth();
