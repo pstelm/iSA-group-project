@@ -1,6 +1,6 @@
 import styles from "./Register.module.css";
 import useAuth from "../../../contexts/AuthContext";
-import { toast } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import { auth, db } from "../../../config/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -22,9 +22,11 @@ const Register = () => {
         navigate("/");
       }
     } catch (error) {
-      //   toast.error(firebaseErrors[error.code]);
-      //   toast.error("Wystąpił błąd: " + error.message);
-      toast.error(firebaseErrors[error.code]);
+      if (error.code) {
+        toast.error("Wystąpił błąd: " + firebaseErrors[error.code]);
+      } else {
+        toast.error("Wystąpił błąd: " + error.message);
+      }
     }
   };
 
@@ -72,41 +74,51 @@ const Register = () => {
 
       formEvent.target.reset();
     } catch (error) {
-      toast.error(firebaseErrors[error.code]);
-      toast.error("Wystąpił błąd: " + error.message);
+      if (error.code) {
+        toast.error("Wystąpił błąd: " + firebaseErrors[error.code]);
+      } else {
+        toast.error("Wystąpił błąd: " + error.message);
+      }
     }
   };
 
   return (
-    <div className={styles.container}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <label htmlFor="text">Imię</label>
-        <input type="text" name="firstName" id="firstName" />
-        <label htmlFor="text">Nazwisko</label>
-        <input type="text" name="lastName" id="lastName" />
-        <label htmlFor="sexF">Kobieta</label>
-        <input type="radio" name="sex" id="sexF" defaultChecked={true} />
-        <label htmlFor="sexM">Mężczyzna</label>
-        <input type="radio" name="sex" id="sexM" />
-        <label htmlFor="email">Adres email</label>
-        <input type="email" name="email" id="email" />
-        <label htmlFor="password">Hasło</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*[&%$]).{8,}$"
-          title="Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny, 1 dużą literę i 1 małą literę"
-        />
-        <p>
-          Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak
-          specjalny, 1 dużą i 1 małą literę
-        </p>
-        <label htmlFor="password_confirm">Powtórz hasło</label>
-        <input type="password" name="password_confirm" id="password_confirm" />
-        <button type="submit">Zarejestruj się</button>
-      </form>
-    </div>
+    <>
+      <Toaster />
+      <div className={styles.container}>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <label htmlFor="text">Imię</label>
+          <input type="text" name="firstName" id="firstName" />
+          <label htmlFor="text">Nazwisko</label>
+          <input type="text" name="lastName" id="lastName" />
+          <label htmlFor="sexF">Kobieta</label>
+          <input type="radio" name="sex" id="sexF" defaultChecked={true} />
+          <label htmlFor="sexM">Mężczyzna</label>
+          <input type="radio" name="sex" id="sexM" />
+          <label htmlFor="email">Adres email</label>
+          <input type="email" name="email" id="email" />
+          <label htmlFor="password">Hasło</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*[&%$]).{8,}$"
+            title="Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny, 1 dużą literę i 1 małą literę"
+          />
+          <p>
+            Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak
+            specjalny, 1 dużą i 1 małą literę
+          </p>
+          <label htmlFor="password_confirm">Powtórz hasło</label>
+          <input
+            type="password"
+            name="password_confirm"
+            id="password_confirm"
+          />
+          <button type="submit">Zarejestruj się</button>
+        </form>
+      </div>
+    </>
   );
 };
 
