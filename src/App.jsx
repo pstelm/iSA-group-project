@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 import { Layout, Login, Home, MyTrips, Register } from './components';
+import { Toaster } from 'react-hot-toast';
 
 export const App = () => {
 	return (
