@@ -7,6 +7,24 @@ import { Toaster } from 'react-hot-toast';
 const Layout = () => {
 	const { currentUser } = useAuth();
 
+	if (currentUser) {
+		console.log(currentUser.uid);
+	}
+
+	// const getUserData = async () => {
+	// 	const userRef = doc(db, 'Users', currentUser.uid);
+	// 	console.log('UserRef: ' + userRef);
+
+	// 	try {
+	// 		const userData = await getDoc(userRef);
+	// 		console.log('UserData: ' + userData);
+	// 	} catch (error) {
+	// 		console.error();
+	// 	}
+	// };
+
+	// getUserData();
+
 	return (
 		<div className={styles.layout}>
 			{currentUser ? (
