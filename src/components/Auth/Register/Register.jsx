@@ -5,6 +5,7 @@ import { auth, db } from "../../../config/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { firebaseErrors } from "../../../utils/firebaseErrors";
+import GrayButton from "../../GrayButton/GrayButton";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -86,6 +87,7 @@ const Register = () => {
     <>
       <Toaster />
       <div className={styles.container}>
+        <h2>Rejestracja</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
           <label htmlFor="text">Imię</label>
           <input type="text" name="firstName" id="firstName" />
@@ -115,7 +117,7 @@ const Register = () => {
             name="password_confirm"
             id="password_confirm"
           />
-          <button type="submit">Zarejestruj się</button>
+          <GrayButton btnText={"Zarejestruj się"} />
         </form>
       </div>
     </>
