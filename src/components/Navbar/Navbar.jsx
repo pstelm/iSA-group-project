@@ -13,7 +13,7 @@ const Navbar = () => {
 			</div>
 			{/* <button className={styles.hamburgerBtn} type="button">
 				<div className={styles.hamburgerBtnBox}>
-					<span className={styles.hamburgerBtnLine}>MENU</span>
+					MENU
 				</div>
 			</button> */}
 			<button className={styles.logoutBtn} onClick={logout} type="button">
