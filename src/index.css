@@ -1,7 +1,13 @@
 :root {
 	/* colors variables */
+	--clr-blue-dark: #0000ff;
+	--clr-blue-medbium: #3a9efd;
+	--clr-blue-light: #bee6ff;
+	--clr-bg: #fffffd;
+
 	/* font size variables */
 	/* font family variables */
+	--font-family: 'Poppins', sans-serif;
 }
 
 *,
@@ -19,9 +25,15 @@ html {
 body {
 	height: 100vh;
 	width: 100vw;
+	font-family: var(--font-family);
 }
 
 #root {
 	width: 100%;
 	height: 100%;
+}
+
+button {
+	cursor: pointer;
+	font-family: var(--font-family);
 }

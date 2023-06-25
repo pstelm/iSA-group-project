@@ -1,4 +1,5 @@
 import { Link, Navigate } from 'react-router-dom';
+import { toast, Toaster } from 'react-hot-toast';
 import styles from './Login.module.css';
 import useAuth from '../../../contexts/AuthContext';
 
@@ -14,12 +15,13 @@ const Login = () => {
 		try {
 			await login(email, password);
 		} catch (error) {
-			console.log(error);
+			toast.error(error.message);
 		}
 	};
 
 	return (
 		<>
+			<Toaster />
 			{!currentUser ? (
 				<div className={styles.container}>
 					<div className={styles.logo}>
@@ -34,7 +36,9 @@ const Login = () => {
 							Hasło
 						</label>
 						<input type="password" name="password" className={styles.input} required />
-						<button type="submit">Zaloguj się</button>
+						<button className={styles.button} type="submit">
+							Zaloguj się
+						</button>
 						<p>
 							Nie masz jeszcze konta? <Link to="/register">Utwórz</Link>
 						</p>
