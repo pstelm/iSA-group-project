@@ -107,22 +107,24 @@ const Register = () => {
 						id='lastName'
 						className={styles.input}
 					/>
-					<label htmlFor='sexF' className={styles.label}>
-						Kobieta
-					</label>
-					<input
-						type='radio'
-						name='sex'
-						id='sexF'
-						defaultChecked={true}
-						className={styles.input}
-					/>
-					<label htmlFor='sexM' className={styles.label}>
-						Mężczyzna
-					</label>
-					<input type='radio' name='sex' id='sexM' className={styles.input} />
+					<div className={styles.checkBox}>
+						<input
+							type='radio'
+							name='sex'
+							id='sexF'
+							defaultChecked={true}
+							className={styles.input}
+						/>
+						<label htmlFor='sexF' className={styles.label}>
+							Kobieta
+						</label>
+						<input type='radio' name='sex' id='sexM' className={styles.input} />
+						<label htmlFor='sexM' className={styles.label}>
+							Mężczyzna
+						</label>
+					</div>
 					<label htmlFor='email' className={styles.label}>
-						Adres email
+						Adres e-mail
 					</label>
 					<input type='email' name='email' id='email' className={styles.input} />
 					<label htmlFor='password' className={styles.label}>
