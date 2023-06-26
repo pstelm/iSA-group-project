@@ -2,6 +2,8 @@ import useAuth from '../../contexts/AuthContext';
 import { db } from '../../config/firebase';
 import { doc, getDoc } from '@firebase/firestore';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import styles from './Home.module.css';
 
 const Home = () => {
 	const { currentUser } = useAuth();
@@ -27,13 +29,59 @@ const Home = () => {
 	// console.log('User:', user);
 
 	return (
-		<div>
+		<>
 			{user ? (
-				<h2>
-					Witaj {user.firstName} {user.lastName}!
-				</h2>
+				<div>
+					<div>
+						<h2>
+							Witaj {user.firstName} {user.lastName}!
+						</h2>
+
+						<div className={styles.honeycomb}>
+							<div className={styles.ibwsfix}>
+								<div className={styles.hexagon}>
+									<div className={styles.hexagontent}>
+										<Link to='/userprofile'>Mój profil</Link>
+									</div>
+								</div>
+								<div className={styles.hexagon}>
+									<div className={styles.hexagontent}>
+										<Link to='/mytrips'>Moje podróże</Link>
+									</div>
+								</div>
+								<div className={styles.hexagon}>
+									<div className={styles.hexagontent}>
+										<Link to='/addtrip'>Stwórz podróż</Link>
+									</div>
+								</div>
+								<div className={styles.hexagon}>
+									<div className={styles.hexagontent}>
+										<Link to='/alltrips'>Szukaj podróży</Link>
+									</div>
+								</div>
+								<div className={styles.ibwsfix}>
+									<div className={styles.hexagon}>
+										<div className={styles.hexagontent}>
+											TEST MOŻNA DODAĆ COŚ INNEGO 1
+										</div>
+									</div>
+									<div className={styles.hexagon}>
+										<div className={styles.hexagontent}>
+											TEST MOŻNA DODAĆ COŚ INNEGO 2
+										</div>
+									</div>
+									<div className={styles.hexagon}>
+										<div className={styles.hexagontent}>
+											TEST MOŻNA DODAĆ COŚ INNEGO 3
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			) : null}
-		</div>
+		</>
 	);
 };
 
