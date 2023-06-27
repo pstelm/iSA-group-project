@@ -41,22 +41,22 @@ const Home = () => {
 							<div className={styles.ibwsfix}>
 								<div className={styles.hexagon}>
 									<div className={styles.hexagontent}>
-										<Link to='/userprofile'>Mój profil</Link>
+										<Link to='/userprofile' className={styles.linkshx}>Mój profil</Link>
 									</div>
 								</div>
 								<div className={styles.hexagon}>
 									<div className={styles.hexagontent}>
-										<Link to='/mytrips'>Moje podróże</Link>
+										<Link to='/mytrips' className={styles.linkshx}>Moje podróże</Link>
 									</div>
 								</div>
 								<div className={styles.hexagon}>
 									<div className={styles.hexagontent}>
-										<Link to='/addtrip'>Stwórz podróż</Link>
+										<Link to='/addtrip' className={styles.linkshx}>Stwórz podróż</Link>
 									</div>
 								</div>
 								<div className={styles.hexagon}>
 									<div className={styles.hexagontent}>
-										<Link to='/alltrips'>Szukaj podróży</Link>
+										<Link to='/alltrips' className={styles.linkshx}>Szukaj podróży</Link>
 									</div>
 								</div>
 								<div className={styles.ibwsfix}>
