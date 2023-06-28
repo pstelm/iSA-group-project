@@ -1,9 +1,8 @@
 :root {
-	--clr-blue-dark: #0000ff;
-	--clr-blue-medium: #3a9efd;
-	--clr-blue-light: #bee6ff;
 	--clr-bg: #fffffd;
 	--clr-orange: hsla(32, 98%, 56%, 1);
+	--clr-main-dark: hsla(176, 79%, 15%, 1);
+	--clr-main-light: hsla(173, 68%, 44%, 1);
 
 	--font-family: 'Poppins', sans-serif;
 	--font-regular: 400;
