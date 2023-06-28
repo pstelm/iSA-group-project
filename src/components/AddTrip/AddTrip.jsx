@@ -19,13 +19,13 @@ const AddTrip = () => {
 
 		try {
 			const title = e.target.title.value;
-			const info = e.target?.info.value;
+			const info = e.target.info.value;
 			const startDate = new Date(e.target.startDate.value);
 			const endDate = new Date(e.target.endDate.value);
 			const startPlace = e.target.startPlace.value;
 			const endPlace = e.target.endPlace.value;
 			const maxParticipantsCount = Number(e.target.maxParticipantsCount.value);
-			const participants = [];
+			const participants = [currentUser.uid];
 			const budget = Number(e.target.budget.value);
 			const tags = parseTags(e.target.tags.value);
 			const owner = currentUser.uid;
@@ -74,19 +74,23 @@ const AddTrip = () => {
 			<div className={styles.container}>
 				<form className={styles.form} onSubmit={handleSubmit}>
 					<label htmlFor='title'>Dodaj tytuł podróży</label>
+					<span> (max. 200 znaków)</span>
 					<input
 						type='text'
 						name='title'
 						id='title'
 						placeholder='np. Wakacje 2023'
+						maxLength='200'
 						required
 					/>
 					<legend>Dodaj opis swojej podróży</legend>
+					<span> (max. 1500 znaków)</span>
 					<textarea
 						type='text'
 						name='info'
 						id='info'
 						placeholder='Opisz tutaj swój plan na podróż'
+						maxLength='1500'
 						required
 					></textarea>
 					<div className={styles.data}>

@@ -4,6 +4,7 @@
 	display: grid;
 	justify-content: center;
 	align-items: center;
+    overflow: scroll;
 }
 
 .form {
@@ -11,7 +12,8 @@
 	flex-direction: column;
 	justify-content: center;
 	gap: 5px;
-	width: 250px;
+	width: 270px;
+    height: 800px;
 }
 
 textarea {
@@ -33,7 +35,7 @@ textarea {
 
 .data {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	gap: 5px;
 }
