@@ -9,6 +9,8 @@ import {
 	UserProfile,
 	AddTrip,
 	AllTrips,
+	OwnedTrips,
+	JoinedTrips,
 } from './components';
 
 export const App = () => {
@@ -22,11 +24,14 @@ export const App = () => {
 				{/* Ściezki prywatne */}
 				<Route element={<PrivateRoute />}>
 					<Route path='/' element={<Home />} />
-					<Route path='/mytrips' element={<MyTrips />} />
 					<Route path='/userprofile' element={<UserProfile />} />
+					<Route path='/mytrips' element={<MyTrips />}>
+						<Route path='/mytrips/ownedtrips' element={<OwnedTrips />} />
+						<Route path='/mytrips/joinedtrips' element={<JoinedTrips />} />
+					</Route>
 					<Route path='/addtrip' element={<AddTrip />} />
 					<Route path='/alltrips' element={<AllTrips />} />
-					<Route path="*" element={<Home />} />
+					<Route path='*' element={<Home />} />
 				</Route>
 			</Route>
 		</Routes>
