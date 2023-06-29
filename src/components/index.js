@@ -12,6 +12,7 @@ import OwnedTrips from './OwnedTrips/OwnedTrips';
 import JoinedTrips from './JoinedTrips/JoinedTrips';
 import TripMini from './Trip/TripMini/TripMini';
 import TripFullPage from './Trip/TripFullPage/TripFullPage';
+import PasswordReminder from './Auth/PasswordReminder/PasswordReminder';
 
 export {
 	Layout,
@@ -28,4 +29,5 @@ export {
 	JoinedTrips,
 	TripMini,
 	TripFullPage,
+    PasswordReminder
 };
