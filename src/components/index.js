@@ -11,6 +11,7 @@ import AllTrips from './AllTrips/AllTrips';
 import OwnedTrips from './OwnedTrips/OwnedTrips';
 import JoinedTrips from './JoinedTrips/JoinedTrips';
 import TripMini from './Trip/TripMini/TripMini';
+import TripFullPage from './Trip/TripFullPage/TripFullPage';
 
 export {
 	Layout,
@@ -26,4 +27,5 @@ export {
 	OwnedTrips,
 	JoinedTrips,
 	TripMini,
+	TripFullPage,
 };
