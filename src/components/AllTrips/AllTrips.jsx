@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import styles from './AllTrips.module.css';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import useAuth from '../../contexts/AuthContext';
-import Trip from '../Trip/TripMini/TripMini';
+import TripMini from '../Trip/TripMini/TripMini';
 
 const AllTrips = () => {
 	const { currentUser } = useAuth();
-	const allTripsCollectionRef = collection(db, 'Trips');
 	const [trips, setTrips] = useState([]);
+
+	// Pobieram referencję do wszystkich wycieczek, których aktualnie zalogowany user nie jest właścicielem
+	const filteredTripsCollectionRef = query(
+		collection(db, 'Trips'),
+		where('owner', '!=', currentUser.uid)
+	);
 
 	const getTrips = async () => {
 		try {
-			const tripsSnapshot = await getDocs(allTripsCollectionRef);
+			const tripsSnapshot = await getDocs(filteredTripsCollectionRef);
 			const tripsData = tripsSnapshot.docs.map((doc) => ({
 				id: doc.id,
 				...doc.data(),
@@ -25,14 +30,13 @@ const AllTrips = () => {
 
 	useEffect(() => {
 		getTrips();
-		// console.log(trips);
 	}, []);
 
 	return (
 		<div className={styles.container}>
 			<h3>Podróżuj</h3>
 			<ul>
-				{trips ? trips.map((trip) => <Trip key={trip.id} {...trip} />) : null}
+				{trips ? trips.map((trip) => <TripMini key={trip.id} {...trip} />) : null}
 			</ul>
 		</div>
 	);
