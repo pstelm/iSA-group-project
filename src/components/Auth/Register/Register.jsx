@@ -115,11 +115,11 @@ const Register = () => {
 							defaultChecked={true}
 							className={styles.input}
 						/>
-						<label htmlFor='sexF' className={styles.label}>
+						<label htmlFor='sexF' className={styles.gender}>
 							Kobieta
 						</label>
 						<input type='radio' name='sex' id='sexM' className={styles.input} />
-						<label htmlFor='sexM' className={styles.label}>
+						<label htmlFor='sexM' className={styles.gender}>
 							Mężczyzna
 						</label>
 					</div>
@@ -151,9 +151,9 @@ const Register = () => {
 						id='password_confirm'
 						className={styles.input}
 					/>
-					<br />
-					<br />
-					<GrayButton btnText={'Zarejestruj się'} />
+					<div className={styles.button}>
+						<GrayButton btnText={'Zarejestruj się'} />
+					</div>
 				</form>
 			</div>
 		</>

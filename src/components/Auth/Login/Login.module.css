@@ -23,7 +23,7 @@
 
 .input {
 	height: 45px;
-	width: 250px;
+	width: 100%;
 	border: 1px solid var(--clr-6);
 	border-radius: 5px;
 	background-color: var(--clr-0);
@@ -37,6 +37,7 @@
 
 .p {
 	font-size: var(--fs-small-text);
+	margin-left: unset;
 }
 
 .button {

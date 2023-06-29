@@ -57,6 +57,12 @@
 	height: 20px;
 }
 
+.gender {
+	margin-right: 44px;
+	margin-left: 4px;
+	font-size: var(--fs-small-text);
+}
+
 p {
 	font-size: var(--fs-small-text);
 	margin-top: 10px;
@@ -67,4 +73,8 @@ p {
 	margin-top: 10px;
 	display: flex;
 	align-items: flex-end;
+}
+
+.button {
+	margin-top: 50px;
 }
