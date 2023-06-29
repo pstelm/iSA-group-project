@@ -1,0 +1,21 @@
+.container {
+	padding: 10px;
+}
+
+.tripCard {
+	text-align: left;
+}
+
+.title {
+	text-align: left;
+}
+
+.oneLine {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.icon {
+	height: 20px;
+}

@@ -26,10 +26,22 @@ const TripFullPage = () => {
 	return (
 		<>
 			{trip ? (
-				<div className={styles.tripCard}>
+				<div className={styles.container}>
 					<h3>Podróże</h3>
-					<h4>{trip.title}</h4>
-					<p>TripID: {tripID}</p>
+
+					<div className={styles.tripCard}>
+						<h4 className={styles.title}>{trip.title}</h4>
+						<div className={styles.oneLine}>
+							<img
+								className={styles.icon}
+								src='/src/assets/icons/location-dot-solid.svg'
+								alt=''
+							/>
+							<p>{trip.endPlace}</p>
+						</div>
+						<p></p>
+						{/* <p>TripID: {tripID}</p> */}
+					</div>
 				</div>
 			) : null}
 		</>
