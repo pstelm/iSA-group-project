@@ -36,7 +36,11 @@ const AllTrips = () => {
 		<div className={styles.container}>
 			<h3>Podróżuj</h3>
 			<ul>
-				{trips ? trips.map((trip) => <TripMini key={trip.id} {...trip} />) : null}
+				{trips ? (
+					trips.map((trip) => <TripMini key={trip.id} {...trip} />)
+				) : (
+					<p>Trwa ładowanie.</p>
+				)}
 			</ul>
 		</div>
 	);
