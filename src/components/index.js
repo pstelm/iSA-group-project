@@ -10,7 +10,7 @@ import AddTrip from './AddTrip/AddTrip';
 import AllTrips from './AllTrips/AllTrips';
 import OwnedTrips from './OwnedTrips/OwnedTrips';
 import JoinedTrips from './JoinedTrips/JoinedTrips';
-import Trip from './Trip/Trip';
+import TripMini from './Trip/TripMini/TripMini';
 
 export {
 	Layout,
@@ -25,5 +25,5 @@ export {
 	AllTrips,
 	OwnedTrips,
 	JoinedTrips,
-	Trip,
+	TripMini,
 };

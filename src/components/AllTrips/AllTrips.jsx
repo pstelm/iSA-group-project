@@ -3,7 +3,7 @@ import styles from './AllTrips.module.css';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import useAuth from '../../contexts/AuthContext';
-import Trip from '../Trip/Trip';
+import Trip from '../Trip/TripMini/TripMini';
 
 const AllTrips = () => {
 	const { currentUser } = useAuth();
@@ -30,7 +30,7 @@ const AllTrips = () => {
 
 	return (
 		<div className={styles.container}>
-			<h4>Podróżuj</h4>
+			<h3>Podróżuj</h3>
 			<ul>
 				{trips ? trips.map((trip) => <Trip key={trip.id} {...trip} />) : null}
 			</ul>
