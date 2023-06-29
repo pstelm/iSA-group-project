@@ -1,9 +1,9 @@
 :root {
-	--clr-blue-dark: #0000ff;
-	--clr-blue-medium: #3a9efd;
-	--clr-blue-light: #bee6ff;
 	--clr-bg: #fffffd;
 	--clr-orange: hsla(32, 98%, 56%, 1);
+	--clr-main-dark: hsla(176, 79%, 15%, 1);
+	--clr-main-light: hsla(173, 68%, 44%, 1);
+	--clr-main-light-transparent: hsla(173, 68%, 44%, 0.2);
 
 	--font-family: 'Poppins', sans-serif;
 	--font-regular: 400;
@@ -12,6 +12,7 @@
 	--fs-h1: 28px;
 	--fs-h2: 24px;
 	--fs-h3: 20px;
+	--fs-h4: 20px;
 	--fs-label: 15px;
 	--fs-p: 16px;
 	--fs-small-text: 12px;

@@ -11,6 +11,7 @@ import {
 	AllTrips,
 	OwnedTrips,
 	JoinedTrips,
+	TripFullPage,
 } from './components';
 
 export const App = () => {
@@ -31,6 +32,7 @@ export const App = () => {
 					</Route>
 					<Route path='/addtrip' element={<AddTrip />} />
 					<Route path='/alltrips' element={<AllTrips />} />
+					<Route path='/trip/:tripID' element={<TripFullPage />} />
 					<Route path='*' element={<Home />} />
 				</Route>
 			</Route>
