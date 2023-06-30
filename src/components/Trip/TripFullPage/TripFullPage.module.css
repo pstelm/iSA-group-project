@@ -6,7 +6,8 @@
 	text-align: left;
 }
 
-.title {
+.title,
+.sectionTitle {
 	text-align: left;
 }
 
@@ -18,4 +19,43 @@
 
 .icon {
 	height: 20px;
+}
+
+.sectionTitle {
+	width: 100%;
+	border-bottom: 1px solid var(--clr-main-light);
+}
+
+.box {
+	margin-bottom: 10px;
+	padding: 10px;
+	background-color: var(--clr-main-light-transparent);
+	border-radius: 15px;
+}
+
+.tagsBox {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-bottom: 10px;
+	padding: 10px 0;
+}
+
+.tag,
+.addToTripBtn {
+	padding: 4px 8px;
+	color: var(--clr-main-dark);
+	border-radius: 8px;
+}
+
+.tag {
+	border: 1px solid var(--clr-main-dark);
+	font-size: var(--fs-tags);
+}
+
+.addToTripBtn {
+	border: 2px solid var(--clr-main-dark);
+	font-family: var(--font-family);
+	font-size: var(--fs-p);
+	background-color: transparent;
 }

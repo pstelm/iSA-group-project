@@ -63,7 +63,7 @@
 	font-size: var(--fs-small-text);
 }
 
-p {
+.container p {
 	font-size: var(--fs-small-text);
 	margin-top: 10px;
 	margin-left: 23px;
