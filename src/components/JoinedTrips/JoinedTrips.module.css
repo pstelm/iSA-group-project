@@ -1,0 +1,10 @@
+.container {
+	width: 100%;
+	padding: 10px;
+	background-color: var(--clr-main-light-transparent);
+	border-radius: 5px;
+}
+
+.trip {
+	list-style-type: none;
+}
