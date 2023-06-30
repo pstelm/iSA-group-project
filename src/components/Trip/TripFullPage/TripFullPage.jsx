@@ -38,6 +38,7 @@ const TripFullPage = () => {
 			})
 		);
 
+		// Te kompenntarze na razie niech zostaną, bo mam dużo pytań przyszykowanych na sobotę i dzięki nim będę o tym pamiętać ;D
 		// setParticipantsDataArr(participantsDataResolved);
 		// console.log('participantsDataArr: ', participantsDataArr);
 	};
