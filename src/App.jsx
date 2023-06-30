@@ -12,6 +12,7 @@ import {
 	OwnedTrips,
 	JoinedTrips,
 	TripFullPage,
+	PasswordReminder
 } from './components';
 
 export const App = () => {
@@ -20,6 +21,7 @@ export const App = () => {
 			{/* Publiczne ściezki */}
 			<Route path='/login' element={<Login />} />
 			<Route path='/register' element={<Register />} />
+			<Route path='/passwordreminder' element={<PasswordReminder />} />
 
 			<Route path='/' element={<Layout />}>
 				{/* Ściezki prywatne */}

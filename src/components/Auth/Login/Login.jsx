@@ -43,6 +43,9 @@ const Login = () => {
 							className={styles.input}
 							required
 						/>
+            <p className={styles.p}>
+							Nie pamiętasz hasła? <Link to='/passwordreminder'>Przypomnij</Link>
+						</p>
 						<div className={styles.button}>
 							<GrayButton type={'submit'} btnText={'Zaloguj się'} />
 						</div>
@@ -56,6 +59,7 @@ const Login = () => {
 			)}
 		</>
 	);
+
 };
 
 export default Login;
