@@ -1,11 +1,11 @@
 .GrayButton {
-	background-color: var(--clr-4);
+	background-color: var(--clr-main-dark);
 	color: var(--clr-0);
-	height: 55px;
-	width: 180px;
+	height: 50px;
+	width: 250px;
 
 	border: none;
-	border-radius: 5px;
+	border-radius: 7px;
 
 	font-family: var(--font-family);
 	font-size: var(--fs-h3);
