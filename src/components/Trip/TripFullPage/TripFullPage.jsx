@@ -10,6 +10,7 @@ const TripFullPage = () => {
 	const { tripID } = useParams();
 
 	const [trip, setTrip] = useState();
+	const [users, serUsers] = useState();
 	const [participantsDataArr, setParticipantsDataArr] = useState();
 
 	const getTrip = async () => {
