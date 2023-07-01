@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './TripFullPage.module.css';
 import { useParams } from 'react-router-dom';
-import { getUserData } from '../../../utils/getUserData';
+// import { getUserData } from '../../../utils/getUserData';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import { toast } from 'react-hot-toast';
@@ -39,14 +39,11 @@ const TripFullPage = () => {
 		);
 
 		setParticipantsDataArr(participantsDataResolved);
-
-		// Te kompenntarze na razie niech zostaną, bo mam dużo pytań przyszykowanych na sobotę i dzięki nim będę o tym pamiętać ;D
-
-		// console.log('participantsDataArr: ', participantsDataArr);
 	};
 
 	useEffect(() => {
 		getTrip();
+		// Wydaje mi się, że pomimo .then() getParticipans działo sie jeszcze przed rozwiązaniem getTrip()
 		// getTrip().then((tripSnap) => {
 		// 	getParticipants(tripSnap);
 		// });
