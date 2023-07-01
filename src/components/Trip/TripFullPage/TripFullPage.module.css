@@ -65,8 +65,8 @@
 	cursor: pointer;
 }
 
-.participant:first-of-type {
-	text-decoration: underline;
+.owner {
+	font-weight: 700;
 }
 
 button:disabled {
