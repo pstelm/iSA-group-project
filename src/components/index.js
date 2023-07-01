@@ -8,8 +8,8 @@ import Register from './Auth/Register/Register';
 import UserProfile from './UserProfile/UserProfile';
 import AddTrip from './AddTrip/AddTrip';
 import AllTrips from './AllTrips/AllTrips';
-import OwnedTrips from './OwnedTrips/OwnedTrips';
-import JoinedTrips from './JoinedTrips/JoinedTrips';
+import OwnedTrips from './MyTrips/OwnedTrips/OwnedTrips';
+import JoinedTrips from './MyTrips/JoinedTrips/JoinedTrips';
 import TripMini from './Trip/TripMini/TripMini';
 import TripFullPage from './Trip/TripFullPage/TripFullPage';
 import PasswordReminder from './Auth/PasswordReminder/PasswordReminder';
@@ -29,5 +29,5 @@ export {
 	JoinedTrips,
 	TripMini,
 	TripFullPage,
-    PasswordReminder
+	PasswordReminder,
 };

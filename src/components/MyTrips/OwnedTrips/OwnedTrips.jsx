@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styles from './OwnedTrips.module.css';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../../config/firebase';
+import { db } from '../../../config/firebase';
 import { getAuth } from 'firebase/auth';
-import TripMini from '../Trip/TripMini/TripMini';
+import TripMini from '../../Trip/TripMini/TripMini';
 import { toast } from 'react-hot-toast';
-import { firebaseErrors } from '../../utils/firebaseErrors';
+import { firebaseErrors } from '../../../utils/firebaseErrors';
 import { useNavigate } from 'react-router-dom';
 
 const OwnedTrips = () => {
