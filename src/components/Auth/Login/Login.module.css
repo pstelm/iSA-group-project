@@ -49,7 +49,6 @@
 
 p {
 	width: -webkit-fill-available;
-	margin-bottom: revert;
 }
 
 p:not(:first-of-type) {
