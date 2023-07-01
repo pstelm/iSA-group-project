@@ -51,6 +51,11 @@ p {
 	width: -webkit-fill-available;
 }
 
+p:first-of-type {
+	font-size: var(--fs-small-text);
+	margin-bottom: 50px;
+}
+
 p:not(:first-of-type) {
 	width: unset;
 	font-size: var(--fs-p);
