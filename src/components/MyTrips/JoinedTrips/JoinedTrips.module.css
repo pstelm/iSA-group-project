@@ -8,3 +8,23 @@
 .trip {
 	list-style-type: none;
 }
+
+.buttonBox {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 3px;
+}
+
+.myTripsLink {
+	color: var(--dark);
+	width: 50%;
+	text-align: center;
+	border-bottom-style: solid;
+	border-color: var(--clr-main-light);
+}
+
+.myTripsLinkActive {
+	color: var(--clr-orange);
+	border-color: var(--clr-orange);
+	border-width: 5px;
+}

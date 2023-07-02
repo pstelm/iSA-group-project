@@ -6,6 +6,7 @@ import { getAuth } from 'firebase/auth';
 import TripMini from '../../Trip/TripMini/TripMini';
 import { toast } from 'react-hot-toast';
 import { firebaseErrors } from '../../../utils/firebaseErrors';
+import { Link } from 'react-router-dom';
 
 const JoinedTrips = () => {
 	const { currentUser } = getAuth();
@@ -41,13 +42,26 @@ const JoinedTrips = () => {
 	}, []);
 
 	return (
-		<div className={styles.container}>
-			<ul className={styles.trip}>
-				{joinedTrips
-					? joinedTrips.map((trip) => <TripMini key={trip.id} {...trip} />)
-					: null}
-			</ul>
-		</div>
+		<>
+			<div className={styles.buttonBox}>
+				<Link to='/mytrips/ownedtrips' className={styles.myTripsLink}>
+					Moje
+				</Link>
+				<Link
+					to='/mytrips/joinedtrips'
+					className={`${styles.myTripsLink} ${styles.myTripsLinkActive}`}
+				>
+					Dołączone
+				</Link>
+			</div>
+			<div className={styles.container}>
+				<ul className={styles.trip}>
+					{joinedTrips
+						? joinedTrips.map((trip) => <TripMini key={trip.id} {...trip} />)
+						: null}
+				</ul>
+			</div>
+		</>
 	);
 };
 
