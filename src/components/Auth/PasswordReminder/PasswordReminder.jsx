@@ -26,7 +26,7 @@ const PasswordReminder = () => {
 	return (
 		<div className={styles.container}>
 			<Toaster />
-			<header className={styles.titleReminder}>
+			<header className={styles.header}>
 				<Link to='/login'>
 					<img
 						className={styles.arrow}

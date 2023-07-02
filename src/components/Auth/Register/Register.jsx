@@ -87,7 +87,7 @@ const Register = () => {
 		<>
 			<Toaster />
 			<div className={styles.container}>
-				<header className={styles.titleRegister}>
+				<header className={styles.header}>
 					<Link to='/login'>
 						<img
 							className={styles.arrow}
