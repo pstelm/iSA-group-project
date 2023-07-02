@@ -2,6 +2,7 @@
 	--clr-bg: #fffffd;
 	--clr-orange: hsla(32, 98%, 56%, 1);
 	--clr-main-dark: hsla(176, 79%, 15%, 1);
+	--clr-main-dark-transparent: hsla(176, 79%, 15%, 0.2);
 	--clr-main-light: hsla(173, 68%, 44%, 1);
 	--clr-main-light-transparent: hsla(173, 68%, 44%, 0.2);
 
@@ -17,6 +18,7 @@
 	--fs-p: 16px;
 	--fs-small-text: 12px;
 	--fs-link: 12px;
+	--fs-tags: 14px;
 
 	--clr-0: #ffffff;
 	--clr-2: #d6d6d6;

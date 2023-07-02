@@ -1,0 +1,81 @@
+.container {
+	padding: 10px;
+}
+
+.tripCard {
+	text-align: left;
+}
+
+.title,
+.sectionTitle {
+	text-align: left;
+}
+
+.sectionTitle {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid var(--clr-main-light);
+}
+
+.oneLine {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.icon {
+	height: 20px;
+}
+
+.box {
+	margin-bottom: 10px;
+	padding: 10px;
+	background-color: var(--clr-main-light-transparent);
+	border-radius: 15px;
+}
+
+.tagsBox {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-bottom: 10px;
+	padding: 10px 0;
+}
+
+.tag,
+.addToTripBtn {
+	padding: 4px 8px;
+	color: var(--clr-main-dark);
+	border-radius: 8px;
+}
+
+.tag {
+	border: 1px solid var(--clr-main-dark);
+	font-size: var(--fs-tags);
+}
+
+.addToTripBtn {
+	border: 2px solid var(--clr-main-dark);
+	font-family: var(--font-family);
+	font-size: var(--fs-p);
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.owner {
+	font-weight: 700;
+}
+
+.addToTripBtnDisabled {
+	padding: 4px 8px;
+	border: 2px solid var(--clr-main-dark-transparent);
+	border-radius: 8px;
+	color: var(--clr-main-dark-transparent);
+	font-family: var(--font-family);
+	font-size: var(--fs-p);
+	background-color: transparent;
+	cursor: default;
+}
