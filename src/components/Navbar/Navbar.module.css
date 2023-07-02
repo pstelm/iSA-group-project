@@ -2,6 +2,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	/* align-items: center; */
 	width: 100%;
 	height: 100%;
 	padding: 0.5em;
@@ -9,6 +10,7 @@
 
 .navLogo {
 	display: flex;
+	align-items: center;
 }
 
 img {
@@ -16,16 +18,22 @@ img {
 	height: 100%;
 }
 
+.name {
+	font-size: var(--fs-h1);
+	line-height: var(--fs-h1);
+}
+
 .logoutBtn {
-	background-color: var(--clr-4);
-	color: var(--clr-0);
-	height: 35px;
-	width: 125px;
+	background-color: transparent;
+	color: var(--clr-main-dark);
+	/* height: 35px; */
+	/* width: 125px; */
 
 	border: none;
-	border-radius: 5px;
+	/* border-radius: 5px; */
 
 	font-family: var(--font-family);
-	font-size: var(--fs-h3);
-	font-weight: var(--font-medium);
+	font-size: var(--fs-p);
+	line-height: var(--fs-h1);
+	/* font-weight: var(--font-medium); */
 }

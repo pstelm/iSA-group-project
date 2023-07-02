@@ -3,25 +3,29 @@
 	height: 100%;
 
 	display: grid;
-	grid-template-rows: 50px 1fr 100px;
+	grid-template-rows: 40px 1fr 80px;
 	grid-template-areas:
 		'navbar'
 		'page_content'
 		'footer';
+
+	background-color: var(--clr-main-light);
 }
 
 .navbar {
 	grid-area: navbar;
-	background-color: rgb(118, 219, 230);
 }
 
 .page_content {
 	grid-area: page_content;
+	padding-top: 10px;
+
+	/* background-color: var(--clr-main-light); */
 }
 
 .footer {
 	grid-area: footer;
-	background-color: rgb(118, 219, 230);
+	background-color: var(--clr-bg);
 	position: sticky;
 	bottom: 0;
 }

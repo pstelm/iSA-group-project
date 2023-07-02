@@ -8,8 +8,8 @@ const Navbar = () => {
 	return (
 		<div className={styles.navbar}>
 			<div className={styles.navLogo}>
-				<img src='../../src/assets/logo.png' alt='Logo CoTravel' />
-				<h1>CoTravel</h1>
+				<img src='../../src/assets/logo_transparent.png' alt='Logo CoTravel' />
+				<h1 className={styles.name}>CoTravel</h1>
 			</div>
 			{/* <button className={styles.hamburgerBtn} type="button">
 				<div className={styles.hamburgerBtnBox}>
