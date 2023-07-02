@@ -4,6 +4,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import useAuth from '../../contexts/AuthContext';
 import TripMini from '../Trip/TripMini/TripMini';
+import BackButton from '../BackButton/BackButton';
 
 const AllTrips = () => {
 	const { currentUser } = useAuth();
@@ -34,7 +35,10 @@ const AllTrips = () => {
 
 	return (
 		<div className={styles.container}>
-			<h3>Podróżuj</h3>
+			<div className={styles.titleBox}>
+				<BackButton />
+				<h3>Podróżuj</h3>
+			</div>
 			<ul>
 				{trips ? (
 					trips.map((trip) => <TripMini key={trip.id} {...trip} />)
