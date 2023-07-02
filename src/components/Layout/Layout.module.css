@@ -3,7 +3,7 @@
 	height: 100%;
 
 	display: grid;
-	grid-template-rows: 50px 1fr 100px;
+	grid-template-rows: 40px 1fr 80px;
 	grid-template-areas:
 		'navbar'
 		'page_content'
@@ -12,7 +12,7 @@
 
 .navbar {
 	grid-area: navbar;
-	background-color: rgb(118, 219, 230);
+	background-color: var(--clr-main-light);
 }
 
 .page_content {
@@ -21,7 +21,8 @@
 
 .footer {
 	grid-area: footer;
-	background-color: rgb(118, 219, 230);
 	position: sticky;
 	bottom: 0;
+	background-color: var(--clr-bg);
+	box-shadow: 0 -5px 10px var(--clr-shadow);
 }
