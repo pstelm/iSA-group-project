@@ -58,13 +58,19 @@ const Home = () => {
 							</div>
 							<div className={styles.ibwsfix}>
 								<div className={styles.hexagon}>
-									<div className={styles.hexagontent}>TEST MOŻNA DODAĆ COŚ INNEGO 1</div>
+									<div className={styles.hexagontent}>
+										<span>+</span>
+									</div>
 								</div>
 								<div className={styles.hexagon}>
-									<div className={styles.hexagontent}>TEST MOŻNA DODAĆ COŚ INNEGO 2</div>
+									<div className={styles.hexagontent}>
+										<span>+</span>
+									</div>
 								</div>
 								<div className={styles.hexagon}>
-									<div className={styles.hexagontent}>TEST MOŻNA DODAĆ COŚ INNEGO 3</div>
+									<div className={styles.hexagontent}>
+										<span>+</span>
+									</div>
 								</div>
 							</div>
 						</div>

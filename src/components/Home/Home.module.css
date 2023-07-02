@@ -56,6 +56,11 @@
 	line-height: 1.2;
 	z-index: 100;
 }
+
+.hexagontent span {
+	font-size: 24px;
+}
+
 .ibwsfix {
 	font-size: 0;
 }
