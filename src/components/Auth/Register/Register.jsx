@@ -3,7 +3,7 @@ import useAuth from '../../../contexts/AuthContext';
 import { Toaster, toast } from 'react-hot-toast';
 import { auth, db } from '../../../config/firebase';
 import { doc, setDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { firebaseErrors } from '../../../utils/firebaseErrors';
 import GrayButton from '../../GrayButton/GrayButton';
 
@@ -87,70 +87,108 @@ const Register = () => {
 		<>
 			<Toaster />
 			<div className={styles.container}>
-				<h2>Rejestracja</h2>
-				<form onSubmit={handleSubmit} className={styles.form}>
-					<label htmlFor='text' className={styles.label}>
-						Imię
-					</label>
-					<input
-						type='text'
-						name='firstName'
-						id='firstName'
-						className={styles.input}
-					/>
-					<label htmlFor='text' className={styles.label}>
-						Nazwisko
-					</label>
-					<input
-						type='text'
-						name='lastName'
-						id='lastName'
-						className={styles.input}
-					/>
-					<div className={styles.checkBox}>
-						<input
-							type='radio'
-							name='sex'
-							id='sexF'
-							defaultChecked={true}
-							className={styles.input}
+				<header className={styles.header}>
+					<Link to='/login'>
+						<img
+							className={styles.arrow}
+							src='../../src/assets/arrow.svg'
+							alt='Arrow pointing left'
 						/>
-						<label htmlFor='sexF' className={styles.gender}>
-							Kobieta
-						</label>
-						<input type='radio' name='sex' id='sexM' className={styles.input} />
-						<label htmlFor='sexM' className={styles.gender}>
-							Mężczyzna
-						</label>
+					</Link>
+					<h2>Rejestracja</h2>
+				</header>
+				<form onSubmit={handleSubmit} className={styles.form}>
+					<div className={styles.relative}>
+						<div className={styles.data}>
+							<h2>Dane podstawowe</h2>
+						</div>
+						<div className={styles.info}>
+							<label htmlFor='text' className={styles.label}>
+								Imię
+							</label>
+							<input
+								type='text'
+								name='firstName'
+								id='firstName'
+								className={styles.input}
+							/>
+							<label htmlFor='text' className={styles.label}>
+								Nazwisko
+							</label>
+							<input
+								type='text'
+								name='lastName'
+								id='lastName'
+								className={styles.input}
+							/>
+							<label htmlFor='password' className={styles.label}>
+								Data urodzenia
+							</label>
+							<input
+								type='date'
+								name='birthDate'
+								id='birthDate'
+								title='Data musi zawierać format DD/MM/RRRR'
+								className={styles.input}
+							/>
+							<p>Data musi zawierać format DD/MM/RRRR</p>
+							<div className={styles.checkBox}>
+								<input
+									type='radio'
+									name='sex'
+									id='sexF'
+									defaultChecked={true}
+									className={styles.input}
+								/>
+								<label htmlFor='sexF' className={styles.gender}>
+									Kobieta
+								</label>
+								<input type='radio' name='sex' id='sexM' className={styles.input} />
+								<label htmlFor='sexM' className={styles.gender}>
+									Mężczyzna
+								</label>
+							</div>
+						</div>
 					</div>
-					<label htmlFor='email' className={styles.label}>
-						Adres e-mail
-					</label>
-					<input type='email' name='email' id='email' className={styles.input} />
-					<label htmlFor='password' className={styles.label}>
-						Hasło
-					</label>
-					<input
-						type='password'
-						name='password'
-						id='password'
-						pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*[&%$]).{8,}$'
-						title='Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny, 1 dużą literę i 1 małą literę'
-						className={styles.input}
-					/>
-					<p>
-						Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny,
-						1 dużą i 1 małą literę
-					</p>
-					<label htmlFor='password_confirm' className={styles.label}>
-						Powtórz hasło
-					</label>
-					<input
-						type='password'
-						name='password_confirm'
-						id='password_confirm'
-						className={styles.input}
-					/>
+					<div className={styles.relative}>
+						<div className={styles.data}>
+							<h2>Dane logowania</h2>
+						</div>
+						<div className={styles.info}>
+							<label htmlFor='email' className={styles.label}>
+								Adres e-mail
+							</label>
+							<input type='email' name='email' id='email' className={styles.input} />
+							<label htmlFor='password' className={styles.label}>
+								Hasło
+							</label>
+							<input
+								type='password'
+								name='password'
+								id='password'
+								pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*[&%$]).{8,}$'
+								title='Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny i 1 dużą literę'
+								className={styles.input}
+							/>
+							<p>
+								Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak
+								specjalny i 1 dużą literę
+							</p>
+							<label htmlFor='password_confirm' className={styles.label}>
+								Powtórz hasło
+							</label>
+							<input
+								type='password'
+								name='password_confirm'
+								id='password_confirm'
+								className={styles.input}
+							/>
+							<p>
+								Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak
+								specjalny i 1 dużą literę
+							</p>
+						</div>
+					</div>
 					<div className={styles.button}>
 						<GrayButton btnText={'Zarejestruj się'} />
 					</div>
