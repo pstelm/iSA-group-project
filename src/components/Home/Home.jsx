@@ -61,7 +61,11 @@ const Home = () => {
 									<div className={styles.hexagontent}>TEST MOŻNA DODAĆ COŚ INNEGO 1</div>
 								</div>
 								<div className={styles.hexagon}>
-									<div className={styles.hexagontent}>TEST MOŻNA DODAĆ COŚ INNEGO 2</div>
+									<div className={styles.hexagontent}>
+										<Link to='/mytrips/ownedtrips' className={styles.linkshx}>
+											Moje podróże
+										</Link>
+									</div>
 								</div>
 								<div className={styles.hexagon}>
 									<div className={styles.hexagontent}>TEST MOŻNA DODAĆ COŚ INNEGO 3</div>
