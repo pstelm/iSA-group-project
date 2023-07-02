@@ -1,6 +1,4 @@
 import useAuth from '../../contexts/AuthContext';
-// import { db } from '../../config/firebase';
-// import { doc, getDoc } from '@firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
@@ -10,24 +8,11 @@ const Home = () => {
 	const { currentUser } = useAuth();
 	const [user, setUser] = useState();
 
-	// const getUserData = async () => {
-	// 	const userRef = await doc(db, 'Users', currentUser.uid);
-	// 	await getDoc(userRef).then((userSnapshot) => {
-	// 		setUser({
-	// 			id: currentUser.uid,
-	// 			...userSnapshot.data(),
-	// 		});
-	// 	});
-	// };
-
 	useEffect(() => {
 		if (currentUser) {
-			// console.log(currentUser.uid);
 			getUserData(currentUser.uid, setUser);
 		}
 	}, [currentUser]);
-
-	// console.log('User:', user);
 
 	return (
 		<>

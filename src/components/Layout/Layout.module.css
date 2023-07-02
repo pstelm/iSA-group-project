@@ -8,24 +8,21 @@
 		'navbar'
 		'page_content'
 		'footer';
-
-	background-color: var(--clr-main-light);
 }
 
 .navbar {
 	grid-area: navbar;
+	background-color: var(--clr-main-light);
 }
 
 .page_content {
 	grid-area: page_content;
-	padding-top: 10px;
-
-	/* background-color: var(--clr-main-light); */
 }
 
 .footer {
 	grid-area: footer;
-	background-color: var(--clr-bg);
 	position: sticky;
 	bottom: 0;
+	background-color: var(--clr-bg);
+	box-shadow: 0 -5px 10px var(--clr-shadow);
 }
