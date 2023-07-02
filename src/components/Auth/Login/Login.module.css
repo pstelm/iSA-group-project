@@ -47,16 +47,16 @@
 	bottom: 22px;
 }
 
-p {
+.hints {
 	width: -webkit-fill-available;
 }
 
-p:first-of-type {
+.hints:first-of-type {
 	font-size: var(--fs-small-text);
 	margin-bottom: 50px;
 }
 
-p:not(:first-of-type) {
+.hints:not(:first-of-type) {
 	width: unset;
 	font-size: var(--fs-p);
 }
