@@ -26,6 +26,7 @@ const TripFullPage = () => {
 			getTrip();
 		} catch (error) {
 			console.error(error);
+			toast.error('Błąd serwera');
 		}
 	};
 
@@ -38,10 +39,11 @@ const TripFullPage = () => {
 				const tripFilteredData = tripSnap.data();
 				setTrip(tripFilteredData);
 			} else {
-				toast.error('Ta wycieczka już nie istnieje');
+				toast.error('Ta wycieczka została usunięta');
 			}
 		} catch (error) {
 			console.error(error);
+			toast.error('Błąd serwera');
 		}
 	};
 
