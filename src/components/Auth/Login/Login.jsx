@@ -47,7 +47,7 @@ const Login = () => {
 							title='Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny i 1 dużą literę'
 							required
 						/>
-						<p>
+						<p className={styles.hints}>
 							Twoje hasło musi zawierać 8 znaków, co
 							<br /> najmniej 1 cyfrę, 1 znak specjalny i 1 dużą literę
 						</p>
@@ -57,7 +57,7 @@ const Login = () => {
 						<div className={styles.button}>
 							<GrayButton type={'submit'} btnText={'Zaloguj się'} />
 						</div>
-						<p>
+						<p className={styles.hints}>
 							Nie masz jeszcze konta? <Link to='/register'>Utwórz</Link>
 						</p>
 					</form>
