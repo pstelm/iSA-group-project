@@ -49,7 +49,7 @@ const Home = () => {
 								</div>
 								<div className={styles.hexagon}>
 									<div className={styles.hexagontent}>
-										<Link to='/mytrips' className={styles.linkshx}>
+										<Link to='/mytrips/ownedtrips' className={styles.linkshx}>
 											Moje podróże
 										</Link>
 									</div>
