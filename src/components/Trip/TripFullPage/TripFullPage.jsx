@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import { toast } from 'react-hot-toast';
+import BackButton from '../../BackButton/BackButton';
 
 const TripFullPage = () => {
 	const { tripID } = useParams();
@@ -68,7 +69,10 @@ const TripFullPage = () => {
 		<>
 			{participantsData ? (
 				<div className={styles.container}>
-					<h3>Podróże</h3>
+					<div className={styles.titleBox}>
+						<BackButton />
+						<h3>Podróże</h3>
+					</div>
 
 					<div className={styles.tripCard}>
 						<h4 className={styles.title}>{trip.title}</h4>
