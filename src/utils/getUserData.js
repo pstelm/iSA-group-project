@@ -1,5 +1,6 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
+import { toast } from 'react-hot-toast';
 
 export const getUserData = async (userId, setUser) => {
 	const userRef = await doc(db, 'Users', userId);
@@ -12,6 +13,7 @@ export const getUserData = async (userId, setUser) => {
 		}
 	} catch (error) {
 		console.log(error);
+		toast.error('Błąd serwera');
 	}
 
 	// return await getDoc(userRef).then((userSnapshot) => {

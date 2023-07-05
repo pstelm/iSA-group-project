@@ -72,11 +72,11 @@ const TripFullPage = () => {
 	const getTripDuration = () => {
 		let tripDurationText = '';
 		const startDay = trip.startDate.toDate().getDate();
-		const startMonth = trip.startDate.toDate().getMonth();
+		const startMonth = trip.startDate.toDate().getMonth() + 1;
 		const startYear = trip.endDate.toDate().getFullYear();
 
 		const endDay = trip.endDate.toDate().getDate();
-		const endMonth = trip.endDate.toDate().getMonth();
+		const endMonth = trip.endDate.toDate().getMonth() + 1;
 		const endYear = trip.endDate.toDate().getFullYear();
 
 		if (startYear === endYear && startMonth === endMonth) {

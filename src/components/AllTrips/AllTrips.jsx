@@ -3,6 +3,7 @@ import styles from './AllTrips.module.css';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import TripMini from '../Trip/TripMini/TripMini';
+import { toast } from 'react-hot-toast';
 
 const AllTrips = () => {
 	const [trips, setTrips] = useState([]);
@@ -16,7 +17,7 @@ const AllTrips = () => {
 			}));
 			setTrips(tripsData);
 		} catch (error) {
-			console.log(error);
+			toast.error('Ta podróż już nie istnieje');
 		}
 	};
 
