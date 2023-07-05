@@ -89,7 +89,7 @@
 	font-size: var(--fs-p);
 	background-color: transparent;
 	cursor: pointer;
-	margin-left: 5px;
+	/* margin-left: 5px; */
 }
 
 .overlay {

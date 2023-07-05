@@ -111,15 +111,6 @@ const TripFullPage = () => {
 							<p>Termin podróży:</p>
 						</div>
 						<p>Początek: {trip.startDate.toDate().toLocaleDateString()}</p>
-						<p>Koniec: {trip.endDate.toDate().toLocaleDateString()}</p>
-						{participantsData &&
-						participantsData.length < trip.maxParticipantsCount ? (
-							<button className={styles.addToTripBtn}>Dołącz do podróży</button>
-						) : (
-							<button className={styles.addToTripBtnDisabled} disabled>
-								Mamy już komplet!
-							</button>
-						)}
 						{trip.owner === currentUser.uid ? (
 							<Popup
 								trigger={
@@ -161,6 +152,15 @@ const TripFullPage = () => {
 									</div>
 								)}
 							</Popup>
+						) : !participantsData.some((item) => item.id === currentUser.uid) ? (
+							participantsData &&
+							participantsData.length < trip.maxParticipantsCount ? (
+								<button className={styles.addToTripBtn}>Dołącz do podróży</button>
+							) : (
+								<button className={styles.addToTripBtnDisabled} disabled>
+									Mamy już komplet!
+								</button>
+							)
 						) : null}
 
 						<div className={styles.tagsBox}>
