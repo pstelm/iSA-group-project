@@ -8,11 +8,13 @@ import {
 	doc,
 	getDoc,
 	getDocs,
+	updateDoc,
 } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import { toast } from 'react-hot-toast';
 import { Popup } from 'reactjs-popup';
 import useAuth from '../../../contexts/AuthContext';
+import { async } from '@firebase/util';
 
 const TripFullPage = () => {
 	const { tripID } = useParams();
@@ -64,6 +66,18 @@ const TripFullPage = () => {
 			return trip?.participants.some((partID) => doc.id.includes(partID));
 		});
 		setParticipantsData(participantsFilteredArray);
+	};
+
+	const handleAddToTrip = async () => {
+		try {
+			const participantsIdArray = [...trip.participants];
+			participantsIdArray.push(currentUser.uid);
+			await updateDoc(tripRef, { participants: participantsIdArray });
+			toast.success('Dodano do podróży');
+			navigate('/mytrips/joinedtrips');
+		} catch (error) {
+			toast.error('Błąd serwera');
+		}
 	};
 
 	const handleDeleteTripClick = async () => {
@@ -155,10 +169,12 @@ const TripFullPage = () => {
 						) : !participantsData.some((item) => item.id === currentUser.uid) ? (
 							participantsData &&
 							participantsData.length < trip.maxParticipantsCount ? (
-								<button className={styles.addToTripBtn}>Dołącz do podróży</button>
+								<button className={styles.addToTripBtn} onClick={handleAddToTrip}>
+									Dołącz do podróży
+								</button>
 							) : (
 								<button className={styles.addToTripBtnDisabled} disabled>
-									Mamy już komplet!
+									Dołącz do podróży
 								</button>
 							)
 						) : null}
