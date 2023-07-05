@@ -1,7 +1,0 @@
-.titleBox {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	height: 50px;
-	/* height: var(--fs-h3); */
-}

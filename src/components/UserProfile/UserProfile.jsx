@@ -3,12 +3,7 @@ import styles from './UserProfile.module.css';
 import BackButton from '../BackButton/BackButton';
 
 const UserProfile = () => {
-	return (
-		<div className={styles.titleBox}>
-			<BackButton />
-			<h3>Profil użytkownika</h3>
-		</div>
-	);
+	return <BackButton sectionTitle={'Profil użytkownika'} />;
 };
 
 export default UserProfile;
