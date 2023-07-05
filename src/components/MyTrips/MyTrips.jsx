@@ -6,10 +6,8 @@ import BackButton from '../BackButton/BackButton';
 const MyTrips = () => {
 	return (
 		<div className={styles.container}>
-			<div className={styles.titleBox}>
-				<BackButton />
-				<h3>Moje podróże</h3>
-			</div>
+			<BackButton sectionTitle={'Moje podróże'} />
+
 			<Outlet />
 		</div>
 	);

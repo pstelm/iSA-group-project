@@ -69,10 +69,7 @@ const TripFullPage = () => {
 		<>
 			{participantsData ? (
 				<div className={styles.container}>
-					<div className={styles.titleBox}>
-						<BackButton />
-						<h3>Podróże</h3>
-					</div>
+					<BackButton sectionTitle={'Podróże'} />
 
 					<div className={styles.tripCard}>
 						<h4 className={styles.title}>{trip.title}</h4>

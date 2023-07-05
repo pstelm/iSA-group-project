@@ -35,10 +35,8 @@ const AllTrips = () => {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.titleBox}>
-				<BackButton />
-				<h3>Podróżuj</h3>
-			</div>
+			<BackButton sectionTitle={'Podróżuj'} />
+
 			<ul>
 				{trips ? (
 					trips.map((trip) => <TripMini key={trip.id} {...trip} />)
