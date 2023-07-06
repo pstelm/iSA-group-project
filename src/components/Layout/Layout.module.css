@@ -26,3 +26,7 @@
 	background-color: var(--clr-bg);
 	box-shadow: 0 -5px 10px var(--clr-shadow);
 }
+
+.titleBox {
+	display: flex;
+}
