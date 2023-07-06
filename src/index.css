@@ -7,6 +7,8 @@
 	--clr-main-light-transparent: hsla(173, 68%, 44%, 0.2);
 	--clr-white-transparent: hsla(0, 0%, 100%, 0.2);
 	--clr-shadow: hsl(0, 0%, 79%, 50%);
+	--clr-shadow-transparent: hsl(0, 0%, 79%, 50%);
+	--clr-dark-red: #922b48;
 
 	--font-family: 'Poppins', sans-serif;
 	--font-regular: 400;

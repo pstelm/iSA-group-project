@@ -1,17 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import styles from './TripFullPage.module.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // import { getUserData } from '../../../utils/getUserData';
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import {
+	collection,
+	deleteDoc,
+	doc,
+	getDoc,
+	getDocs,
+} from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import { toast } from 'react-hot-toast';
+import { Popup } from 'reactjs-popup';
+import useAuth from '../../../contexts/AuthContext';
+import BackButton from '../../BackButton/BackButton';
 
 const TripFullPage = () => {
 	const { tripID } = useParams();
 
+	const { currentUser } = useAuth();
+
 	const [trip, setTrip] = useState();
 	const [users, setUsers] = useState();
 	const [participantsData, setParticipantsData] = useState();
+
+	const tripRef = doc(db, 'Trips', tripID);
+
+	const navigate = useNavigate();
 
 	const getUsers = async () => {
 		const usersRef = collection(db, 'Users');
@@ -31,8 +46,6 @@ const TripFullPage = () => {
 	};
 
 	const getTrip = async () => {
-		const tripRef = doc(db, 'Trips', tripID);
-
 		try {
 			const tripSnap = await getDoc(tripRef);
 			if (tripSnap.exists()) {
@@ -54,6 +67,16 @@ const TripFullPage = () => {
 		setParticipantsData(participantsFilteredArray);
 	};
 
+	const handleDeleteTripClick = async () => {
+		try {
+			await deleteDoc(tripRef);
+			toast.success('Pomyślnie usunięto wycieczkę');
+			navigate('/mytrips/ownedtrips');
+		} catch (error) {
+			toast.error('Błąd serwera');
+		}
+	};
+
 	useEffect(() => {
 		getUsers();
 	}, []);
@@ -68,7 +91,7 @@ const TripFullPage = () => {
 		<>
 			{participantsData ? (
 				<div className={styles.container}>
-					<h3>Podróże</h3>
+					<BackButton sectionTitle={'Podróże'} />
 
 					<div className={styles.tripCard}>
 						<h4 className={styles.title}>{trip.title}</h4>
@@ -98,6 +121,48 @@ const TripFullPage = () => {
 								Mamy już komplet!
 							</button>
 						)}
+						{trip.owner === currentUser.uid ? (
+							<Popup
+								trigger={
+									<button className={styles.deleteTripBtn}> Usuń podróż </button>
+								}
+								modal
+								nested
+							>
+								{(close) => (
+									<div className={styles.overlay}>
+										<div className={styles.modal}>
+											<button className={styles.close_sign} onClick={close}>
+												&times;
+											</button>
+											<div className={styles.modal_header}>
+												Czy na pewno chcesz usunąć tę podróż?
+											</div>
+											<p className={styles.modal_additional_info}>
+												Spowoduje to trwałe usunięcie podróży.
+											</p>
+											<div className={styles.actions}>
+												<button
+													className={`${styles.actions_btn} + ${styles.actions_btn_cancel}`}
+													onClick={() => close()}
+												>
+													Powrót
+												</button>
+												<button
+													className={`${styles.actions_btn} + ${styles.actions_btn_confirm}`}
+													onClick={() => {
+														handleDeleteTripClick();
+														close();
+													}}
+												>
+													Potwierdź
+												</button>
+											</div>
+										</div>
+									</div>
+								)}
+							</Popup>
+						) : null}
 
 						<div className={styles.tagsBox}>
 							{trip.tags.map((tag) => {
