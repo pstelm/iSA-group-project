@@ -34,23 +34,14 @@ const AllTrips = () => {
 
 	const handleInputSearch = (searchedText) => {
 		if (!searchedText) {
-			console.log('pusty input');
 			getTrips();
 		} else {
-			console.log(allTrips);
 			const searchedTrips = allTrips.filter((trip) => {
-				return trip && trip.title.toLowerCase().includes(searchedText);
+				return (
+					trip && trip.title.toLowerCase().includes(searchedText.toLowerCase())
+				);
 			});
-			// const filteredTrips = trips.map((trip) => {
-			// 	trip && trip.title.toLowerCase().includes(searchedText)
-			// 		? {
-			// 				id: trip.id,
-			// 				...trip.data(),
-			// 		  }
-			// 		: null;
-			// });
 			setFilteredTrips(searchedTrips);
-			console.log(searchedTrips);
 		}
 	};
 
@@ -63,15 +54,15 @@ const AllTrips = () => {
 			<BackButton sectionTitle={'Podróżuj'} />
 
 			<div className={styles.filtersBox}>
-				<div className={styles.searchInputBox}>
+				<div className={styles.searchbarBox}>
 					<input
-						className={styles.searchInput}
+						className={styles.searchbarInput}
 						onChange={(e) => handleInputSearch(e.target.value)}
 						type='text'
 						name='searchbar'
 						placeholder='Wpisz, czego szukasz'
 					/>
-					<div className={styles.searchInputIcon}>
+					<div className={styles.searchbarInputIcon}>
 						<img src='/src/assets/icons/magnifying-glass.svg' alt='Przycisk szukaj' />
 					</div>
 				</div>
