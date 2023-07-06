@@ -3,7 +3,7 @@ import styles from './Tags.module.css';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 
-const Tags = ({ tags, setTags, selectedTags, setSelectedTags }) => {
+const Tags = ({ tags, selectedTags, setSelectedTags }) => {
 	const tagsContainerRef = useRef();
 
 	const handleTagClick = (tag) => {

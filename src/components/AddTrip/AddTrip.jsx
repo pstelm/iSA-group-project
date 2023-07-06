@@ -13,7 +13,6 @@ import { useState } from 'react';
 const AddTrip = () => {
 	const tripsCollectionRef = collection(db, 'Trips');
 
-	const [tags, setTags] = useState(tagsData);
 	const [selectedTags, setSelectedTags] = useState([]);
 
 	const { currentUser } = useAuth();
@@ -183,7 +182,7 @@ const AddTrip = () => {
 
 						<div className={styles.dates}>
 							<label htmlFor='startDate' className={styles.small_notes}>
-								Wylot
+								Początek
 							</label>
 							<input
 								className={styles.input_add_trip}
@@ -241,7 +240,6 @@ const AddTrip = () => {
 						<Tags
 							tags={tagsData}
 							selectedTags={selectedTags}
-							setTags={setTags}
 							setSelectedTags={setSelectedTags}
 						/>
 					</div>
