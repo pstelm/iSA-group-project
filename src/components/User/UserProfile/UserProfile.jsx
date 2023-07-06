@@ -10,6 +10,7 @@ import {
 	uploadBytes,
 } from '@firebase/storage';
 import { toast } from 'react-hot-toast';
+import BackButton from '../../BackButton/BackButton';
 
 const UserProfile = () => {
 	const { currentUser } = useAuth();
@@ -75,6 +76,7 @@ const UserProfile = () => {
 		<>
 			{user ? (
 				<div className={styles.user_profile_container}>
+					<BackButton sectionTitle={'Profil użytkownika'} />
 					<div className={styles.user_profile_content}>
 						{/* Link do edycji danych użytkownika? */}
 						<button type='button' className={styles.btn_edit}>
