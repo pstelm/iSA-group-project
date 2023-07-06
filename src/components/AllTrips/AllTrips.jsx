@@ -21,6 +21,10 @@ const AllTrips = () => {
 		}
 	};
 
+	const handleInputSearch = async (e) => {
+		const searchedTrips = e.target.searchbar.value;
+	};
+
 	useEffect(() => {
 		getTrips();
 	}, []);
@@ -28,6 +32,23 @@ const AllTrips = () => {
 	return (
 		<div className={styles.container}>
 			<h3>Podróżuj</h3>
+			<div className={styles.filtersBox}>
+				<div className={styles.searchInputBox}>
+					<input
+						onChange={handleInputSearch}
+						type='text'
+						name='searchbar'
+						placeholder='Wpisz, czego szukasz'
+					/>
+					<button className={styles.searchInputBtn} type='submit'>
+						<img src='/src/assets/icons/magnifying-glass.svg' alt='Przycisk szukaj' />
+					</button>
+				</div>
+				<button className={styles.filtersBtn} type='button'>
+					<img src='/src/assets/icons/filters.svg' alt='Filtruj' />
+				</button>
+				<div className={styles.tagsBox}></div>
+			</div>
 			<ul>
 				{trips ? (
 					trips.map((trip) => <TripMini key={trip.id} {...trip} />)
