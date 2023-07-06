@@ -50,35 +50,40 @@ const AllTrips = () => {
 	}, []);
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.pageContent}>
 			<BackButton sectionTitle={'Podróżuj'} />
 
-			<div className={styles.filtersBox}>
-				<div className={styles.searchbarBox}>
-					<input
-						className={styles.searchbarInput}
-						onChange={(e) => handleInputSearch(e.target.value)}
-						type='text'
-						name='searchbar'
-						placeholder='Wpisz, czego szukasz'
-					/>
-					<div className={styles.searchbarInputIcon}>
-						<img src='/src/assets/icons/magnifying-glass.svg' alt='Przycisk szukaj' />
+			<div className={styles.container}>
+				<div className={styles.filtersBox}>
+					<div className={styles.searchbarBox}>
+						<input
+							className={styles.searchbarInput}
+							onChange={(e) => handleInputSearch(e.target.value)}
+							type='text'
+							name='searchbar'
+							placeholder='Wpisz, czego szukasz'
+						/>
+						<div className={styles.searchbarInputIcon}>
+							<img
+								src='/src/assets/icons/magnifying-glass.svg'
+								alt='Przycisk szukaj'
+							/>
+						</div>
 					</div>
+					<button className={styles.filtersBtn} type='button'>
+						<img src='/src/assets/icons/filters.svg' alt='Filtruj' />
+					</button>
+					<div className={styles.tagsBox}></div>
 				</div>
-				<button className={styles.filtersBtn} type='button'>
-					<img src='/src/assets/icons/filters.svg' alt='Filtruj' />
-				</button>
-				<div className={styles.tagsBox}></div>
-			</div>
 
-			<ul>
-				{filteredTrips ? (
-					filteredTrips.map((trip) => <TripMini key={trip.id} {...trip} />)
-				) : (
-					<p>Trwa ładowanie.</p>
-				)}
-			</ul>
+				<ul className={styles.tripsList}>
+					{filteredTrips ? (
+						filteredTrips.map((trip) => <TripMini key={trip.id} {...trip} />)
+					) : (
+						<p>Trwa ładowanie.</p>
+					)}
+				</ul>
+			</div>
 		</div>
 	);
 };

@@ -1,12 +1,22 @@
-.container {
+.pageContent {
 	width: 100vw;
 	padding: 10px;
+}
+
+.container {
+	padding: 10px;
 	background-color: var(--clr-main-light-transparent);
+	border: 1px solid var(--clr-main-dark);
+	border-radius: 10px;
 }
 
 .container p {
 	font-size: var(--fs-p);
 	margin-top: 0;
+}
+
+.tripsList {
+	list-style: none;
 }
 
 .filtersBox {
@@ -38,6 +48,8 @@
 
 .searchbarInputIcon,
 .filtersBtn {
+	display: flex;
+	justify-content: center;
 	height: 100%;
 	padding: 15px;
 	border: none;
@@ -45,9 +57,11 @@
 }
 
 .searchbarInputIcon {
+	width: 15%;
 	background-color: var(--clr-bg);
 }
 
 .filtersBtn {
+	width: 15%;
 	background-color: transparent;
 }

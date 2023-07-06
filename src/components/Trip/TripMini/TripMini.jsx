@@ -15,7 +15,7 @@ const TripMini = ({
 	maxParticipantsCount,
 	participants,
 }) => {
-	const [tripOwner, setTripOwner] = useState();
+	// const [tripOwner, setTripOwner] = useState();
 	const [tripDuration, setTripDuration] = useState('');
 	const { currentUser } = useAuth();
 
@@ -52,7 +52,7 @@ const TripMini = ({
 	};
 
 	useEffect(() => {
-		getUserData(owner, setTripOwner);
+		// getUserData(owner, setTripOwner);
 		getTripDuration();
 	}, []);
 
@@ -60,7 +60,7 @@ const TripMini = ({
 		<>
 			<li className={styles.tripBox}>
 				<Link to={`/trip/${id}`} className={styles.tripLink}>
-					<h4>{title}</h4>
+					<h4 className={styles.title}>{title}</h4>
 					<div className={styles.oneLine}>
 						<img
 							className={styles.icon}
@@ -77,15 +77,19 @@ const TripMini = ({
 						/>
 						<p>{tripDuration}</p>
 					</div>
-					{tripOwner ? (
+					{/* {tripOwner ? (
 						<p>
 							Owner: {tripOwner.firstName} {tripOwner.lastName}
 						</p>
-					) : null}
-					<p>
-						Wielkość grupy: {maxParticipantsCount ? maxParticipantsCount : '0'}{' '}
-						podrózników
-					</p>
+					) : null} */}
+					<div className={styles.oneLine}>
+						<img
+							className={styles.icon}
+							src='/src/assets/icons/people-group-solid.svg'
+							alt=''
+						/>
+						<p>max. {maxParticipantsCount ? maxParticipantsCount : '0'} osób</p>
+					</div>
 				</Link>
 			</li>
 		</>

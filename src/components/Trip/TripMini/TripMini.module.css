@@ -16,6 +16,10 @@
 	color: var(--clr-black);
 }
 
+.title {
+	text-align: left;
+}
+
 .oneLine {
 	display: flex;
 	align-items: center;
