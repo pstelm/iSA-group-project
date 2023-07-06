@@ -14,6 +14,7 @@ import { toast } from 'react-hot-toast';
 import { Popup } from 'reactjs-popup';
 import useAuth from '../../../contexts/AuthContext';
 import BackButton from '../../BackButton/BackButton';
+// import { getTripDuration } from '../../../utils/getTripDuration';
 
 const TripFullPage = () => {
 	const { tripID } = useParams();
@@ -130,6 +131,7 @@ const TripFullPage = () => {
 		if (users && trip) {
 			getParticipants();
 			getTripDuration();
+			// getTripDuration(trip, setTripDuration);
 		}
 	}, [users, trip]);
 
