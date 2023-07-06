@@ -11,6 +11,7 @@ import {
 } from '@firebase/storage';
 import { toast } from 'react-hot-toast';
 import BackButton from '../../BackButton/BackButton';
+import { Link } from 'react-router-dom';
 
 const UserProfile = () => {
 	const { currentUser } = useAuth();
@@ -79,13 +80,12 @@ const UserProfile = () => {
 					<BackButton sectionTitle={'Profil użytkownika'} />
 					<div className={styles.user_profile_container}>
 						<div className={styles.user_profile_content}>
-							{/* Link do edycji danych użytkownika? */}
-							<button type='button' className={styles.btn_edit}>
+							<Link to='/editprofile' className={styles.link_edit}>
 								<img
 									src='../../src/assets/icons/pen.png'
 									className={styles.icon_edit_profile}
 								/>
-							</button>
+							</Link>
 							{userProfileImgURL ? (
 								<img
 									src={userProfileImgURL}
