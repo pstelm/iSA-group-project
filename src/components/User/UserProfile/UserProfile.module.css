@@ -1,3 +1,7 @@
+.container {
+	padding: 10px;
+}
+
 .user_photo {
 	height: 140px;
 	width: 140px;
@@ -44,10 +48,10 @@
 }
 
 .btn_edit {
-    display: flex;
-    align-self: flex-end;
-    background: none;
-    border: none;
-    width: 35px;
-    height: 35px;
+	display: flex;
+	align-self: flex-end;
+	background: none;
+	border: none;
+	width: 35px;
+	height: 35px;
 }
