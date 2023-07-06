@@ -4,9 +4,18 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import TripMini from '../Trip/TripMini/TripMini';
 import { toast } from 'react-hot-toast';
+import useAuth from '../../contexts/AuthContext';
 
 const AllTrips = () => {
-	const [trips, setTrips] = useState([]);
+	const { currentUser } = useAuth();
+	const [allTrips, setAllTrips] = useState([]);
+	const [filteredTrips, setFilteredTrips] = useState([]);
+
+	// Pobieram referencję do wszystkich wycieczek, których aktualnie zalogowany user nie jest właścicielem
+	// const filteredTripsCollectionRef = query(
+	// 	collection(db, 'Trips'),
+	// 	where('owner', '!=', currentUser.uid)
+	// );
 
 	const getTrips = async () => {
 		try {
@@ -15,14 +24,33 @@ const AllTrips = () => {
 				id: doc.id,
 				...doc.data(),
 			}));
-			setTrips(tripsData);
+			setAllTrips(tripsData);
+			setFilteredTrips(tripsData);
 		} catch (error) {
 			toast.error('Ta podróż już nie istnieje');
 		}
 	};
 
-	const handleInputSearch = async (e) => {
-		const searchedTrips = e.target.searchbar.value;
+	const handleInputSearch = (searchedText) => {
+		if (!searchedText) {
+			console.log('pusty input');
+			getTrips();
+		} else {
+			console.log(allTrips);
+			const searchedTrips = allTrips.filter((trip) => {
+				return trip && trip.title.toLowerCase().includes(searchedText);
+			});
+			// const filteredTrips = trips.map((trip) => {
+			// 	trip && trip.title.toLowerCase().includes(searchedText)
+			// 		? {
+			// 				id: trip.id,
+			// 				...trip.data(),
+			// 		  }
+			// 		: null;
+			// });
+			setFilteredTrips(searchedTrips);
+			console.log(searchedTrips);
+		}
 	};
 
 	useEffect(() => {
@@ -35,14 +63,15 @@ const AllTrips = () => {
 			<div className={styles.filtersBox}>
 				<div className={styles.searchInputBox}>
 					<input
-						onChange={handleInputSearch}
+						className={styles.searchInput}
+						onChange={(e) => handleInputSearch(e.target.value)}
 						type='text'
 						name='searchbar'
 						placeholder='Wpisz, czego szukasz'
 					/>
-					<button className={styles.searchInputBtn} type='submit'>
+					<div className={styles.searchInputIcon}>
 						<img src='/src/assets/icons/magnifying-glass.svg' alt='Przycisk szukaj' />
-					</button>
+					</div>
 				</div>
 				<button className={styles.filtersBtn} type='button'>
 					<img src='/src/assets/icons/filters.svg' alt='Filtruj' />
@@ -50,8 +79,8 @@ const AllTrips = () => {
 				<div className={styles.tagsBox}></div>
 			</div>
 			<ul>
-				{trips ? (
-					trips.map((trip) => <TripMini key={trip.id} {...trip} />)
+				{filteredTrips ? (
+					filteredTrips.map((trip) => <TripMini key={trip.id} {...trip} />)
 				) : (
 					<p>Trwa ładowanie.</p>
 				)}

@@ -8,11 +8,54 @@
 	width: 100%;
 }
 
-h3 {
+/* h3 {
 	margin-bottom: 10px;
-}
+} */
 
 .container p {
 	font-size: var(--fs-p);
 	margin-top: 0;
+}
+
+.filtersBox {
+	display: flex;
+}
+
+.searchInputBox {
+	display: flex;
+	height: 50px;
+	width: 85%;
+	border: 1px solid var(--clr-main-dark);
+	border-radius: 8px;
+	font-size: var(--fs-p);
+	overflow: hidden;
+}
+
+.searchInput {
+	height: 100%;
+	width: 85%;
+	padding: 10px;
+	border: none;
+	font-family: var(--font-family);
+	font-size: var(--fs-p);
+}
+
+.searchInput:focus {
+	outline: none;
+}
+
+.searchInputIcon,
+.filtersBtn {
+	height: 100%;
+	padding: 15px;
+	border: none;
+	cursor: pointer;
+}
+
+.searchInputIcon {
+	background-color: var(--clr-bg);
+}
+
+.filtersBtn {
+	background-color: transparent;
 }
