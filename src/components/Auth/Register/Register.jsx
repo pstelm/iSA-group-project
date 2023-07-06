@@ -41,6 +41,7 @@ const Register = () => {
 			const firstName = formEvent.target?.firstName.value;
 			const lastName = formEvent.target?.lastName.value;
 			const sex = formEvent.target?.sexF.checked ? 'F' : 'M';
+			const birthDate = new Date (formEvent.target?.birthDate.value);
 
 			if (firstName === '') {
 				throw new Error('Imię nie może być puste');
@@ -69,6 +70,7 @@ const Register = () => {
 				firstName: firstName,
 				lastName: lastName,
 				sex: sex,
+				birthDate: birthDate,
 			};
 
 			addUserToCollection(newUserData);
@@ -121,7 +123,7 @@ const Register = () => {
 								id='lastName'
 								className={styles.input}
 							/>
-							<label htmlFor='password' className={styles.label}>
+							<label htmlFor='birthDate' className={styles.label}>
 								Data urodzenia
 							</label>
 							<input
