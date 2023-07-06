@@ -6,11 +6,14 @@ import TripMini from '../Trip/TripMini/TripMini';
 import { toast } from 'react-hot-toast';
 import useAuth from '../../contexts/AuthContext';
 import BackButton from '../BackButton/BackButton';
+import Tags from '../AddTrip/Tags/Tags';
+import tagsData from '../AddTrip/Tags/tags.json';
 
 const AllTrips = () => {
 	const { currentUser } = useAuth();
 	const [allTrips, setAllTrips] = useState([]);
 	const [filteredTrips, setFilteredTrips] = useState([]);
+	const [selectedTags, setSelectedTags] = useState([]);
 
 	// Pobieram referencję do wszystkich wycieczek, których aktualnie zalogowany user nie jest właścicielem
 	// const filteredTripsCollectionRef = query(
@@ -45,9 +48,24 @@ const AllTrips = () => {
 		}
 	};
 
+	const handleTagsSelection = () => {
+		if (selectedTags.length === 0) {
+			getTrips();
+		} else {
+			const searchedTrips = allTrips.filter((trip) => {
+				return selectedTags.every((selectedTag) => trip.tags.includes(selectedTag));
+			});
+			setFilteredTrips(searchedTrips);
+		}
+	};
+
 	useEffect(() => {
 		getTrips();
 	}, []);
+
+	useEffect(() => {
+		handleTagsSelection();
+	}, [selectedTags]);
 
 	return (
 		<div className={styles.pageContent}>
@@ -73,7 +91,13 @@ const AllTrips = () => {
 					<button className={styles.filtersBtn} type='button'>
 						<img src='/src/assets/icons/filters.svg' alt='Filtruj' />
 					</button>
-					<div className={styles.tagsBox}></div>
+					<div className={styles.tagsBox}>
+						<Tags
+							tags={tagsData}
+							selectedTags={selectedTags}
+							setSelectedTags={setSelectedTags}
+						/>
+					</div>
 				</div>
 
 				<ul className={styles.tripsList}>
