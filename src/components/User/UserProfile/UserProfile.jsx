@@ -1,5 +1,5 @@
-import useAuth from '../../contexts/AuthContext';
-import { db } from '../../config/firebase';
+import useAuth from '../../../contexts/AuthContext';
+import { db } from '../../../config/firebase';
 import { doc, getDoc } from '@firebase/firestore';
 import { useEffect, useState } from 'react';
 import styles from './userprofile.module.css';
@@ -37,7 +37,7 @@ const UserProfile = () => {
 					setUserProfileImgURL(url);
 				})
 				.catch((error) => {
-					console.log(error);
+					toast.error('Wystąpił błąd: ' + error.message);
 				});
 
 			const today = new Date();
@@ -76,13 +76,13 @@ const UserProfile = () => {
 			{user ? (
 				<div className={styles.user_profile_container}>
 					<div className={styles.user_profile_content}>
-            {/* Link do edycji danych użytkownika? */}
-            <button type="button" className={styles.btn_edit}>
-						<img
-							src='../../src/assets/icons/pen.png'
-							className={styles.icon_edit_profile}
-						/>
-            </button>
+						{/* Link do edycji danych użytkownika? */}
+						<button type='button' className={styles.btn_edit}>
+							<img
+								src='../../src/assets/icons/pen.png'
+								className={styles.icon_edit_profile}
+							/>
+						</button>
 						{userProfileImgURL ? (
 							<img
 								src={userProfileImgURL}
