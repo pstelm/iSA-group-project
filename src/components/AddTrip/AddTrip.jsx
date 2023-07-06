@@ -62,7 +62,7 @@ const AddTrip = () => {
 
 			toast.success('Pomyślnie dodano nową podróż');
 			//Wstępnie ustawiłam na mytrips - można później zmienić
-			navigate('/mytrips');
+			navigate('/mytrips/ownedtrips');
 		} catch (error) {
 			toast.error('Wystąpił błąd: ' + error.message);
 		}

@@ -5,6 +5,7 @@ import { db } from '../../config/firebase';
 import TripMini from '../Trip/TripMini/TripMini';
 import { toast } from 'react-hot-toast';
 import useAuth from '../../contexts/AuthContext';
+import BackButton from '../BackButton/BackButton';
 
 const AllTrips = () => {
 	const { currentUser } = useAuth();
@@ -78,6 +79,8 @@ const AllTrips = () => {
 				</button>
 				<div className={styles.tagsBox}></div>
 			</div>
+			<BackButton sectionTitle={'Podróżuj'} />
+
 			<ul>
 				{filteredTrips ? (
 					filteredTrips.map((trip) => <TripMini key={trip.id} {...trip} />)

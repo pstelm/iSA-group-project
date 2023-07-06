@@ -15,6 +15,7 @@ import { toast } from 'react-hot-toast';
 import { Popup } from 'reactjs-popup';
 import useAuth from '../../../contexts/AuthContext';
 import { async } from '@firebase/util';
+import BackButton from '../../BackButton/BackButton';
 
 const TripFullPage = () => {
 	const { tripID } = useParams();
@@ -138,7 +139,7 @@ const TripFullPage = () => {
 		<>
 			{participantsData ? (
 				<div className={styles.container}>
-					<h3>Podróże</h3>
+					<BackButton sectionTitle={'Podróże'} />
 
 					{/* Przyciski Dołącz do podróży oraz Usuń podróż wraz z logiką */}
 					{trip.owner === currentUser.uid ? (

@@ -3,6 +3,13 @@
 	padding: 10px 20px;
 }
 
+.titleBox {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	height: 50px;
+}
+
 .tripCard {
 	/* width: 90%; */
 	text-align: left;

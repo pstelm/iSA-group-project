@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
+import styles from './UserProfile.module.css';
+import BackButton from '../BackButton/BackButton';
 
 const UserProfile = () => {
-  return (
-    <div>UserProfile</div>
-  )
-}
+	return <BackButton sectionTitle={'Profil użytkownika'} />;
+};
 
-export default UserProfile
+export default UserProfile;
