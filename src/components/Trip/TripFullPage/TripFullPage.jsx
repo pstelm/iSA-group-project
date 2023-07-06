@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './TripFullPage.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
-// import { getUserData } from '../../../utils/getUserData';
 import {
 	collection,
 	deleteDoc,
@@ -14,7 +13,6 @@ import { db } from '../../../config/firebase';
 import { toast } from 'react-hot-toast';
 import { Popup } from 'reactjs-popup';
 import useAuth from '../../../contexts/AuthContext';
-import { async } from '@firebase/util';
 import BackButton from '../../BackButton/BackButton';
 
 const TripFullPage = () => {

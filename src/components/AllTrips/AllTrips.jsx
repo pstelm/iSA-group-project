@@ -60,7 +60,8 @@ const AllTrips = () => {
 
 	return (
 		<div className={styles.container}>
-			<h3>Podróżuj</h3>
+			<BackButton sectionTitle={'Podróżuj'} />
+
 			<div className={styles.filtersBox}>
 				<div className={styles.searchInputBox}>
 					<input
@@ -79,7 +80,6 @@ const AllTrips = () => {
 				</button>
 				<div className={styles.tagsBox}></div>
 			</div>
-			<BackButton sectionTitle={'Podróżuj'} />
 
 			<ul>
 				{filteredTrips ? (
