@@ -13,6 +13,7 @@ import { db } from '../../../config/firebase';
 import { toast } from 'react-hot-toast';
 import { Popup } from 'reactjs-popup';
 import useAuth from '../../../contexts/AuthContext';
+import BackButton from '../../BackButton/BackButton';
 
 const TripFullPage = () => {
 	const { tripID } = useParams();
@@ -90,7 +91,7 @@ const TripFullPage = () => {
 		<>
 			{participantsData ? (
 				<div className={styles.container}>
-					<h3>Podróże</h3>
+					<BackButton sectionTitle={'Podróże'} />
 
 					<div className={styles.tripCard}>
 						<h4 className={styles.title}>{trip.title}</h4>
