@@ -86,3 +86,91 @@
 	background-color: transparent;
 	cursor: default;
 }
+
+.deleteTripBtn {
+	padding: 4px 8px;
+	border: 2px solid var(--clr-dark-red);
+	border-radius: 8px;
+	color: var(--clr-dark-red);
+	font-family: var(--font-family);
+	font-size: var(--fs-p);
+	background-color: transparent;
+	cursor: pointer;
+	margin-left: 5px;
+}
+
+.overlay {
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--clr-shadow-transparent);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 12px;
+	background-color: var(--clr-bg);
+	width: 90%;
+	max-width: 400px;
+	text-align: center;
+	padding: 15px;
+	border-radius: 5px;
+}
+
+.close_sign {
+	cursor: pointer;
+	position: absolute;
+	padding: 2px 5px;
+	line-height: 20px;
+	right: 1px;
+	top: 1px;
+	font-size: 30px;
+	color: var(--clr-main-dark);
+	border: none;
+	background-color: transparent;
+}
+
+.modal_header {
+	margin-top: 10px;
+	font-size: var(--fs-h4);
+}
+
+.modal_additional_info {
+	margin: 20px 0;
+}
+
+.actions {
+	display: flex;
+	justify-content: space-between;
+}
+
+.actions_btn {
+	text-align: center;
+	cursor: pointer;
+	height: 40px;
+	width: 100px;
+	border: none;
+	border-radius: 5px;
+	font-size: var(--fs-p);
+	font-family: var(--font-family);
+	font-weight: var(--font-medium);
+}
+
+.actions_btn_confirm {
+	border: 2px solid var(--clr-main-dark);
+	background-color: transparent;
+	color: var(--clr-main-dark);
+	cursor: pointer;
+}
+
+.actions_btn_cancel {
+	color: var(--clr-bg);
+	background-color: var(--clr-main-dark);
+}
