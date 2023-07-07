@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './MyTrips.module.css';
 import { Outlet } from 'react-router-dom';
+import BackButton from '../BackButton/BackButton';
 
 const MyTrips = () => {
 	return (
 		<div className={styles.container}>
-			<h4>Moje podróże</h4>
+			<BackButton sectionTitle={'Moje podróże'} />
 			<Outlet />
 		</div>
 	);

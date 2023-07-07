@@ -4,6 +4,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import TripMini from '../Trip/TripMini/TripMini';
 import { toast } from 'react-hot-toast';
+import BackButton from '../BackButton/BackButton';
 
 const AllTrips = () => {
 	const [trips, setTrips] = useState([]);
@@ -27,7 +28,8 @@ const AllTrips = () => {
 
 	return (
 		<div className={styles.container}>
-			<h3>Podróżuj</h3>
+			<BackButton sectionTitle={'Podróżuj'} />
+
 			<ul>
 				{trips ? (
 					trips.map((trip) => <TripMini key={trip.id} {...trip} />)

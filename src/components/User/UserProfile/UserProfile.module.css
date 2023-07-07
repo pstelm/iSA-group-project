@@ -1,0 +1,53 @@
+.user_photo {
+	height: 140px;
+	width: 140px;
+	border-radius: 50%;
+}
+
+.user_profile_container {
+	height: 100%;
+	width: 100%;
+	display: grid;
+	justify-content: center;
+	align-content: flex-start;
+	margin-top: 20px;
+}
+
+.user_profile_content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 10px;
+	height: 100%;
+	font-size: var(--fs-h2);
+}
+
+.icon_edit_profile {
+	height: 25px;
+}
+
+.icon_edit_photo {
+	position: absolute;
+	height: 25px;
+	right: 130px;
+	top: 220px;
+}
+
+.user_city_content {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.icon_city {
+	height: 20px;
+}
+
+.btn_edit {
+    display: flex;
+    align-self: flex-end;
+    background: none;
+    border: none;
+    width: 35px;
+    height: 35px;
+}
