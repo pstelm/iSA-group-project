@@ -5,42 +5,51 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
 	return (
 		<div className={styles.footer}>
-			<Link to='/'>
+			<Link className={`{pathname === '/' ? styles.active : ''}`} to='/mytrips'>
 				<div className={styles.link}>
 					<img
 						className={styles.icon}
-						src='../../src/assets/icons/home-circle.svg'
-						alt='Home inside a circle'
+						src='../../src/assets/icons/home-circle-dark.svg'
+						alt='Ikona skrótu do Home'
 					/>
 					<span>Home</span>
 				</div>
 			</Link>
-			<Link to='/alltrips'>
+			<Link
+				className={`{pathname === '/alltrips' ? styles.active : ''}`}
+				to='/mytrips'
+			>
 				<div className={styles.link}>
 					<img
 						className={styles.icon}
-						src='../../src/assets/icons/airplane.svg'
-						alt='Airplane'
+						src='../../src/assets/icons/airplane-dark.svg'
+						alt='Ikona skrótu do Podróżuj'
 					/>
 					<span>Podróżuj</span>
 				</div>
 			</Link>
-			<Link to='/mytrips'>
+			<Link
+				className={`{pathname === '/mytrips/ownedtrips' ? styles.active : ''}`}
+				to='/mytrips/ownedtrips'
+			>
 				<div className={styles.link}>
 					<img
 						className={styles.icon}
-						src='../../src/assets/icons/auto-mode.svg'
-						alt='circle with arrow with cross inside'
+						src='../../src/assets/icons/auto-mode-dark.svg'
+						alt='Ikona skrótu do Moje Podróże'
 					/>
 					<span>Moje podróże</span>
 				</div>
 			</Link>
-			<Link to='/userprofile'>
+			<Link
+				className={`{pathname === '/userprofile' ? styles.active : ''}`}
+				to='/mytrips'
+			>
 				<div className={styles.link}>
 					<img
 						className={styles.icon}
-						src='../../src/assets/icons/account-circle.svg'
-						alt='Profile icon inside circle'
+						src='../../src/assets/icons/account-circle-dark.svg'
+						alt='Ikona skrótu do Profil'
 					/>
 					<span>Profil</span>
 				</div>
