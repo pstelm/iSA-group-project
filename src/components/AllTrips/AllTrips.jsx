@@ -40,22 +40,19 @@ const AllTrips = () => {
 		return selectedTags.every((selectedTag) => trip.tags.includes(selectedTag));
 	};
 
-	// const filterByInput = (trip) => {
-	// 	if (!searchedText) {
-	// 		return true;
-	// 	} else {
-	// 		return trip && trip.title.toLowerCase().includes(searchedText.toLowerCase());
-	// 	}
-	// };
+	const filterByInput = (trip, text) => {
+		if (!text) {
+			return true;
+		} else {
+			return trip && trip.title.toLowerCase().includes(text.toLowerCase());
+		}
+	};
 
 	const filterTrips = (text) => {
 		setSearchedText(text);
-		// const searchedTrips = allTrips
-		// 	.filter(filterByTags)
-		// 	.filter(filterByInput(text));
-		const searchedTrips = allTrips.filter(filterByTags).filter((trip) => {
-			return trip && trip.title.toLowerCase().includes(text.toLowerCase());
-		});
+		const searchedTrips = allTrips
+			.filter(filterByTags)
+			.filter((trip) => filterByInput(trip, text));
 		setFilteredTrips(searchedTrips);
 	};
 
