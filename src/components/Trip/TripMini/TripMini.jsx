@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './TripMini.module.css';
 import { getUserData } from '../../../utils/getUserData';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../contexts/AuthContext';
 
 const TripMini = ({
 	id,
@@ -15,32 +16,32 @@ const TripMini = ({
 	participants,
 }) => {
 	const [tripOwner, setTripOwner] = useState();
+	const { currentUser } = useAuth();
 
 	useEffect(() => {
 		getUserData(owner, setTripOwner);
-		// console.log(title, participants);
 	}, []);
 
-	// console.log('TripID: ', id);
-
 	return (
-		<li className={styles.tripBox}>
-			<Link to={`/trip/${id}`}>
-				<h4>{title}</h4>
-				<p>{endPlace}</p>
-				<p>Początek: {startDate.toDate().toLocaleDateString()}</p>
-				<p>Koniec: {endDate.toDate().toLocaleDateString()}</p>
-				{tripOwner ? (
+		<>
+			<li className={styles.tripBox}>
+				<Link to={`/trip/${id}`}>
+					<h4>{title}</h4>
+					<p>{endPlace}</p>
+					<p>Początek: {startDate.toDate().toLocaleDateString()}</p>
+					<p>Powrót: {endDate.toDate().toLocaleDateString()}</p>
+					{tripOwner ? (
+						<p>
+							Owner: {tripOwner.firstName} {tripOwner.lastName}
+						</p>
+					) : null}
 					<p>
-						Owner: {tripOwner.firstName} {tripOwner.lastName}
+						Wielkość grupy: {maxParticipantsCount ? maxParticipantsCount : '0'}{' '}
+						podrózników
 					</p>
-				) : null}
-				<p>
-					Wielkość grupy: {maxParticipantsCount ? maxParticipantsCount : '0'}{' '}
-					podrózników
-				</p>
-			</Link>
-		</li>
+				</Link>
+			</li>
+		</>
 	);
 };
 

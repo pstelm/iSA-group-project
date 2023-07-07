@@ -8,6 +8,7 @@ import {
 	doc,
 	getDoc,
 	getDocs,
+	updateDoc,
 } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import { toast } from 'react-hot-toast';
@@ -22,6 +23,7 @@ const TripFullPage = () => {
 
 	const [trip, setTrip] = useState();
 	const [users, setUsers] = useState();
+	const [tripDuration, setTripDuration] = useState('');
 	const [participantsData, setParticipantsData] = useState();
 
 	const tripRef = doc(db, 'Trips', tripID);
@@ -67,6 +69,50 @@ const TripFullPage = () => {
 		setParticipantsData(participantsFilteredArray);
 	};
 
+	const getTripDuration = () => {
+		let tripDurationText = '';
+		const startDay = trip.startDate.toDate().getDate();
+		const startMonth = trip.startDate.toDate().getMonth() + 1;
+		const startYear = trip.endDate.toDate().getFullYear();
+
+		const endDay = trip.endDate.toDate().getDate();
+		const endMonth = trip.endDate.toDate().getMonth() + 1;
+		const endYear = trip.endDate.toDate().getFullYear();
+
+		if (startYear === endYear && startMonth === endMonth) {
+			tripDurationText = startDay + '-' + endDay + '.' + endMonth + '.' + endYear;
+		} else if (startYear === endYear) {
+			tripDurationText =
+				startDay + '.' + startMonth + '-' + endDay + '.' + endMonth + '.' + endYear;
+		} else {
+			tripDurationText =
+				startDay +
+				'.' +
+				startMonth +
+				'.' +
+				startYear +
+				'-' +
+				endDay +
+				'.' +
+				endMonth +
+				'.' +
+				endYear;
+		}
+		setTripDuration(tripDurationText);
+	};
+
+	const handleAddToTrip = async () => {
+		try {
+			const participantsIdArray = [...trip.participants];
+			participantsIdArray.push(currentUser.uid);
+			await updateDoc(tripRef, { participants: participantsIdArray });
+			toast.success('Dodano do podróży');
+			navigate('/mytrips/joinedtrips');
+		} catch (error) {
+			toast.error('Błąd serwera');
+		}
+	};
+
 	const handleDeleteTripClick = async () => {
 		try {
 			await deleteDoc(tripRef);
@@ -84,6 +130,7 @@ const TripFullPage = () => {
 	useEffect(() => {
 		if (users && trip) {
 			getParticipants();
+			getTripDuration();
 		}
 	}, [users, trip]);
 
@@ -93,6 +140,60 @@ const TripFullPage = () => {
 				<div className={styles.container}>
 					<BackButton sectionTitle={'Podróże'} />
 
+					{/* Przyciski Dołącz do podróży oraz Usuń podróż wraz z logiką */}
+					{trip.owner === currentUser.uid ? (
+						<Popup
+							trigger={<button className={styles.deleteTripBtn}> Usuń podróż </button>}
+							modal
+							nested
+						>
+							{(close) => (
+								<div className={styles.overlay}>
+									<div className={styles.modal}>
+										<button className={styles.close_sign} onClick={close}>
+											&times;
+										</button>
+										<div className={styles.modal_header}>
+											Czy na pewno chcesz usunąć tę podróż?
+										</div>
+										<p className={styles.modal_additional_info}>
+											Spowoduje to trwałe usunięcie podróży.
+										</p>
+										<div className={styles.actions}>
+											<button
+												className={`${styles.actions_btn} + ${styles.actions_btn_cancel}`}
+												onClick={() => close()}
+											>
+												Powrót
+											</button>
+											<button
+												className={`${styles.actions_btn} + ${styles.actions_btn_confirm}`}
+												onClick={() => {
+													handleDeleteTripClick();
+													close();
+												}}
+											>
+												Potwierdź
+											</button>
+										</div>
+									</div>
+								</div>
+							)}
+						</Popup>
+					) : !participantsData.some((item) => item.id === currentUser.uid) ? (
+						participantsData &&
+						participantsData.length < trip.maxParticipantsCount ? (
+							<button className={styles.addToTripBtn} onClick={handleAddToTrip}>
+								Dołącz do podróży
+							</button>
+						) : (
+							<button className={styles.addToTripBtnDisabled} disabled>
+								Dołącz do podróży
+							</button>
+						)
+					) : null}
+
+					{/* Informacje dotyczące podróży */}
 					<div className={styles.tripCard}>
 						<h4 className={styles.title}>{trip.title}</h4>
 						<div className={styles.oneLine}>
@@ -109,60 +210,8 @@ const TripFullPage = () => {
 								src='/src/assets/icons/calendar-days-regular.svg'
 								alt=''
 							/>
-							<p>Termin podróży:</p>
+							<p>{tripDuration}</p>
 						</div>
-						<p>Początek: {trip.startDate.toDate().toLocaleDateString()}</p>
-						<p>Koniec: {trip.endDate.toDate().toLocaleDateString()}</p>
-						{participantsData &&
-						participantsData.length < trip.maxParticipantsCount ? (
-							<button className={styles.addToTripBtn}>Dołącz do podróży</button>
-						) : (
-							<button className={styles.addToTripBtnDisabled} disabled>
-								Mamy już komplet!
-							</button>
-						)}
-						{trip.owner === currentUser.uid ? (
-							<Popup
-								trigger={
-									<button className={styles.deleteTripBtn}> Usuń podróż </button>
-								}
-								modal
-								nested
-							>
-								{(close) => (
-									<div className={styles.overlay}>
-										<div className={styles.modal}>
-											<button className={styles.close_sign} onClick={close}>
-												&times;
-											</button>
-											<div className={styles.modal_header}>
-												Czy na pewno chcesz usunąć tę podróż?
-											</div>
-											<p className={styles.modal_additional_info}>
-												Spowoduje to trwałe usunięcie podróży.
-											</p>
-											<div className={styles.actions}>
-												<button
-													className={`${styles.actions_btn} + ${styles.actions_btn_cancel}`}
-													onClick={() => close()}
-												>
-													Powrót
-												</button>
-												<button
-													className={`${styles.actions_btn} + ${styles.actions_btn_confirm}`}
-													onClick={() => {
-														handleDeleteTripClick();
-														close();
-													}}
-												>
-													Potwierdź
-												</button>
-											</div>
-										</div>
-									</div>
-								)}
-							</Popup>
-						) : null}
 
 						<div className={styles.tagsBox}>
 							{trip.tags.map((tag) => {
@@ -196,11 +245,17 @@ const TripFullPage = () => {
 										}
 								  })
 								: null}
+							{/* {participantsData.length < trip.maxParticipantsCount ? <p>Wolne miejsca: </p> : null} */}
 						</div>
 
 						<div className={styles.box}>
 							<h4 className={styles.sectionTitle}>Opis podróży</h4>
 							<p>{trip.info}</p>
+						</div>
+
+						<div className={styles.box}>
+							<h4 className={styles.sectionTitle}>Budżet</h4>
+							<p>{trip.budget},00 zł</p>
 						</div>
 					</div>
 				</div>

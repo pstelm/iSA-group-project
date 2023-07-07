@@ -2,30 +2,23 @@ import React, { useEffect, useState } from 'react';
 import styles from './AllTrips.module.css';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
-import useAuth from '../../contexts/AuthContext';
 import TripMini from '../Trip/TripMini/TripMini';
+import { toast } from 'react-hot-toast';
 import BackButton from '../BackButton/BackButton';
 
 const AllTrips = () => {
-	const { currentUser } = useAuth();
 	const [trips, setTrips] = useState([]);
-
-	// Pobieram referencję do wszystkich wycieczek, których aktualnie zalogowany user nie jest właścicielem
-	const filteredTripsCollectionRef = query(
-		collection(db, 'Trips'),
-		where('owner', '!=', currentUser.uid)
-	);
 
 	const getTrips = async () => {
 		try {
-			const tripsSnapshot = await getDocs(filteredTripsCollectionRef);
+			const tripsSnapshot = await getDocs(collection(db, 'Trips'));
 			const tripsData = tripsSnapshot.docs.map((doc) => ({
 				id: doc.id,
 				...doc.data(),
 			}));
 			setTrips(tripsData);
 		} catch (error) {
-			console.log(error);
+			toast.error('Ta podróż już nie istnieje');
 		}
 	};
 
