@@ -14,6 +14,7 @@ const AllTrips = () => {
 	const [allTrips, setAllTrips] = useState([]);
 	const [filteredTrips, setFilteredTrips] = useState([]);
 	const [selectedTags, setSelectedTags] = useState([]);
+	const [searchedText, setSearchedText] = useState('');
 
 	// Pobieram referencję do wszystkich wycieczek, których aktualnie zalogowany user nie jest właścicielem
 	// const filteredTripsCollectionRef = query(
@@ -35,36 +36,36 @@ const AllTrips = () => {
 		}
 	};
 
-	const handleInputSearch = (searchedText) => {
-		if (!searchedText) {
-			getTrips();
-		} else {
-			const searchedTrips = allTrips.filter((trip) => {
-				return (
-					trip && trip.title.toLowerCase().includes(searchedText.toLowerCase())
-				);
-			});
-			setFilteredTrips(searchedTrips);
-		}
+	const filterByTags = (trip) => {
+		return selectedTags.every((selectedTag) => trip.tags.includes(selectedTag));
 	};
 
-	const handleTagsSelection = () => {
-		if (selectedTags.length === 0) {
-			getTrips();
-		} else {
-			const searchedTrips = allTrips.filter((trip) => {
-				return selectedTags.every((selectedTag) => trip.tags.includes(selectedTag));
-			});
-			setFilteredTrips(searchedTrips);
-		}
+	// const filterByInput = (trip) => {
+	// 	if (!searchedText) {
+	// 		return true;
+	// 	} else {
+	// 		return trip && trip.title.toLowerCase().includes(searchedText.toLowerCase());
+	// 	}
+	// };
+
+	const filterTrips = (text) => {
+		setSearchedText(text);
+		// const searchedTrips = allTrips
+		// 	.filter(filterByTags)
+		// 	.filter(filterByInput(text));
+		const searchedTrips = allTrips.filter(filterByTags).filter((trip) => {
+			return trip && trip.title.toLowerCase().includes(text.toLowerCase());
+		});
+		setFilteredTrips(searchedTrips);
 	};
 
 	useEffect(() => {
 		getTrips();
+		setSelectedTags([]);
 	}, []);
 
 	useEffect(() => {
-		handleTagsSelection();
+		filterTrips(searchedText);
 	}, [selectedTags]);
 
 	return (
@@ -76,7 +77,9 @@ const AllTrips = () => {
 					<div className={styles.searchbarBox}>
 						<input
 							className={styles.searchbarInput}
-							onChange={(e) => handleInputSearch(e.target.value)}
+							onChange={(e) => {
+								filterTrips(e.target.value);
+							}}
 							type='text'
 							name='searchbar'
 							placeholder='Wpisz, czego szukasz'
