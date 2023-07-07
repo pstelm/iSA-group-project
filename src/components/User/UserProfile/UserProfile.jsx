@@ -120,15 +120,15 @@ const UserProfile = () => {
 							<div className={styles.user_data_container}>
 								{user.firstName} {user.lastName}, {age}
 							</div>
-							<div className={styles.user_city_content}>
-								{/* wpisane na razie z palca "Poznań", normalnie dane powinny być z np user.city" */}
-								<img
-									src='../../src/assets/icons/location-dot-solid.svg'
-									className={styles.icon_city}
-								/>
-								Poznań
-								{/* {user.city} */}
-							</div>
+							{user.city ? (
+								<div className={styles.user_city_content}>
+									<img
+										src='../../src/assets/icons/location-dot-solid.svg'
+										className={styles.icon_city}
+									/>
+									{user.city}
+								</div>
+							) : null}
 						</div>
 					</div>
 				</div>
