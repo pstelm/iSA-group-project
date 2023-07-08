@@ -40,14 +40,18 @@ const Footer = () => {
 				</div>
 			</Link>
 			<Link
-				className={pathname === '/mytrips/ownedtrips' ? styles.active : ''}
+				className={
+					pathname === '/mytrips/ownedtrips' || pathname === '/mytrips/joinedtrips'
+						? styles.active
+						: ''
+				}
 				to='/mytrips/ownedtrips'
 			>
 				<div className={styles.link}>
 					<img
 						className={styles.icon}
 						src={
-							pathname === '/mytrips/ownedtrips'
+							pathname === '/mytrips/ownedtrips' || pathname === '/mytrips/joinedtrips'
 								? '../../src/assets/icons/auto-mode-light.svg'
 								: '../../src/assets/icons/auto-mode-dark.svg'
 						}
