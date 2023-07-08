@@ -15,11 +15,4 @@ export const getUserData = async (userId, setUser) => {
 		console.log(error);
 		toast.error('Błąd serwera');
 	}
-
-	// return await getDoc(userRef).then((userSnapshot) => {
-	// 	setUser({
-	// 		id: userId,
-	// 		...userSnapshot.data(),
-	// 	});
-	// });
 };

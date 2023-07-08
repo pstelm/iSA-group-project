@@ -8,9 +8,10 @@
 	--clr-white-transparent: hsla(0, 0%, 100%, 0.2);
 	--clr-shadow: hsl(0, 0%, 79%, 50%);
 	--clr-shadow-transparent: hsl(0, 0%, 79%, 50%);
-	--clr-dark-red: #922b48;
+	--clr-dark-red: hsl(343, 54%, 37%);
 	--clr-grey: hsla(0, 0%, 96%, 1);
 	--clr-grey-dark: hsla(0, 0%, 77%, 1);
+	--clr-black: hsl(0, 0%, 0%);
 
 	--font-family: 'Poppins', sans-serif;
 	--font-regular: 400;

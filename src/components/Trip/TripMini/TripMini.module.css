@@ -5,3 +5,27 @@
 	border-radius: 5px;
 	background-color: var(--clr-bg);
 }
+
+/* .ownedTrip {
+	color: var(--clr-main-dark-transparent);
+} */
+
+.tripLink,
+.tripLink:focus,
+.tripLink:active {
+	color: var(--clr-black);
+}
+
+.title {
+	text-align: left;
+}
+
+.oneLine {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.icon {
+	height: 20px;
+}
