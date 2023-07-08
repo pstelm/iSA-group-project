@@ -12,6 +12,7 @@
 	--clr-grey: hsla(0, 0%, 96%, 1);
 	--clr-grey-dark: hsla(0, 0%, 77%, 1);
 	--clr-black: hsl(0, 0%, 0%);
+	--clr-black-transparent: hsla(0, 0%, 0%, 50%);
 
 	--font-family: 'Poppins', sans-serif;
 	--font-regular: 400;
