@@ -8,7 +8,6 @@ import useAuth from '../../contexts/AuthContext';
 import BackButton from '../BackButton/BackButton';
 import Tags from '../AddTrip/Tags/Tags';
 import tagsData from '../AddTrip/Tags/tags.json';
-import BackButton from '../BackButton/BackButton';
 
 const AllTrips = () => {
 	const { currentUser } = useAuth();
