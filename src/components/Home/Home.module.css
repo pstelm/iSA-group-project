@@ -1,3 +1,15 @@
+.container {
+	width: 100%;
+	height: 100%;
+	padding: 2em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-image: url('../../src/assets/onboarding 1.png');
+	background-position-x: 35%;
+	background-position-y: 70%;
+}
+
 .greetingBox {
 	background-color: var(--clr-white-transparent);
 	width: 60%;
@@ -79,4 +91,13 @@
 	height: 100px;
 	justify-content: center;
 	align-items: center;
+	color: var(--clr-main-dark);
+}
+
+.linkshx img {
+	height: 90%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
 }

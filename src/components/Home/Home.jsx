@@ -17,7 +17,7 @@ const Home = () => {
 	return (
 		<>
 			{user ? (
-				<div>
+				<div className={styles.container}>
 					<div className={styles.greetingBox}>
 						<h2 className={styles.greeting}>
 							<span>Witaj,</span>
@@ -32,13 +32,15 @@ const Home = () => {
 								<div className={styles.hexagontent}>
 									<Link to='/userprofile' className={styles.linkshx}>
 										Mój profil
+										<img src='../../src/assets/icons/account-circle-dark.svg' />
 									</Link>
 								</div>
 							</div>
 							<div className={styles.hexagon}>
 								<div className={styles.hexagontent}>
 									<Link to='/mytrips/ownedtrips' className={styles.linkshx}>
-										Moje podróże
+										Dołączone podróże
+										<img src='../../src/assets/icons/auto-mode-dark.svg' />
 									</Link>
 								</div>
 							</div>
@@ -46,6 +48,7 @@ const Home = () => {
 								<div className={styles.hexagontent}>
 									<Link to='/addtrip' className={styles.linkshx}>
 										Stwórz podróż
+										<img src='../../src/assets/icons/airplane-dark.svg' />
 									</Link>
 								</div>
 							</div>
@@ -54,23 +57,6 @@ const Home = () => {
 									<Link to='/alltrips' className={styles.linkshx}>
 										Szukaj podróży
 									</Link>
-								</div>
-							</div>
-							<div className={styles.ibwsfix}>
-								<div className={styles.hexagon}>
-									<div className={styles.hexagontent}>
-										<span>+</span>
-									</div>
-								</div>
-								<div className={styles.hexagon}>
-									<div className={styles.hexagontent}>
-										<span>+</span>
-									</div>
-								</div>
-								<div className={styles.hexagon}>
-									<div className={styles.hexagontent}>
-										<span>+</span>
-									</div>
 								</div>
 							</div>
 						</div>
