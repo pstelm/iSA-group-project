@@ -57,7 +57,9 @@ const JoinedTrips = () => {
 			<div className={styles.container}>
 				<ul className={styles.trip}>
 					{joinedTrips
-						? joinedTrips.map((trip) => <TripMini key={trip.id} {...trip} />)
+						? joinedTrips.map((trip) => (
+								<TripMini key={trip.id} {...trip} filterOwnership={false} />
+						  ))
 						: null}
 				</ul>
 			</div>

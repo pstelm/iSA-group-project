@@ -13,6 +13,8 @@
 .navbar {
 	grid-area: navbar;
 	background-color: var(--clr-main-light);
+	background-color: var(--clr-bg);
+	box-shadow: 0 3px 5px var(--clr-shadow);
 }
 
 .page_content {

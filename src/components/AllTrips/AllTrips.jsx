@@ -102,7 +102,9 @@ const AllTrips = () => {
 
 				<ul className={styles.tripsList}>
 					{filteredTrips ? (
-						filteredTrips.map((trip) => <TripMini key={trip.id} {...trip} />)
+						filteredTrips.map((trip) => (
+							<TripMini key={trip.id} {...trip} filterOwnership={true} />
+						))
 					) : (
 						<p>Trwa ładowanie.</p>
 					)}

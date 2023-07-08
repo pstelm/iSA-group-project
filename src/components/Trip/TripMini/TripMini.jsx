@@ -14,6 +14,7 @@ const TripMini = ({
 	owner,
 	maxParticipantsCount,
 	participants,
+	filterOwnership,
 }) => {
 	// const [tripOwner, setTripOwner] = useState();
 	const [tripDuration, setTripDuration] = useState('');
@@ -59,12 +60,23 @@ const TripMini = ({
 	return (
 		<>
 			<li className={styles.tripBox}>
-				<Link to={`/trip/${id}`} className={styles.tripLink}>
+				<Link
+					to={`/trip/${id}`}
+					className={
+						filterOwnership === true && owner === currentUser.uid
+							? styles.tripLinkOwned
+							: styles.tripLink
+					}
+				>
 					<h4 className={styles.title}>{title}</h4>
 					<div className={styles.oneLine}>
 						<img
 							className={styles.icon}
-							src='/src/assets/icons/location-dot-solid.svg'
+							src={
+								filterOwnership === true && owner === currentUser.uid
+									? '/src/assets/icons/location-dot-grey.svg'
+									: '/src/assets/icons/location-dot-solid.svg'
+							}
 							alt=''
 						/>
 						<p>{endPlace}</p>
@@ -72,7 +84,11 @@ const TripMini = ({
 					<div className={styles.oneLine}>
 						<img
 							className={styles.icon}
-							src='/src/assets/icons/calendar-days-regular.svg'
+							src={
+								filterOwnership === true && owner === currentUser.uid
+									? '/src/assets/icons/calendar-days-grey.svg'
+									: '/src/assets/icons/calendar-days-regular.svg'
+							}
 							alt=''
 						/>
 						<p>{tripDuration}</p>
@@ -85,7 +101,11 @@ const TripMini = ({
 					<div className={styles.oneLine}>
 						<img
 							className={styles.icon}
-							src='/src/assets/icons/people-group-solid.svg'
+							src={
+								filterOwnership === true && owner === currentUser.uid
+									? '/src/assets/icons/people-group-grey.svg'
+									: '/src/assets/icons/people-group-solid.svg'
+							}
 							alt=''
 						/>
 						<p>max. {maxParticipantsCount ? maxParticipantsCount : '0'} osób</p>
