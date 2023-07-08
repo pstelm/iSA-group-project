@@ -215,6 +215,7 @@ const AddTrip = () => {
 							name='maxParticipantsCount'
 							id='maxParticipantsCount'
 							placeholder='Podaj liczbę'
+							onWheel={(e) => e.target.blur()}
 							required
 						/>
 					</div>
@@ -229,6 +230,7 @@ const AddTrip = () => {
 							name='budget'
 							id='budget'
 							placeholder='Podaj koszt'
+							onWheel={(e) => e.target.blur()}
 							required
 						/>
 					</div>
