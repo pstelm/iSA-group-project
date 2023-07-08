@@ -26,12 +26,13 @@
 }
 
 .input {
-	border-bottom: 3px solid var(--clr-main-dark);
+	border-bottom: 1px solid var(--clr-main-dark);
 	border-top: none;
 	border-right: none;
 	border-left: none;
 	padding: 5px;
 	margin-bottom: 20px;
+	font-family: var(--font-family);
 }
 
 .checkBox {
