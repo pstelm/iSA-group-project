@@ -26,8 +26,8 @@ const EditUser = () => {
 		const { firstName, lastName, city, aboutMe } = e.currentTarget.elements;
 
 		const user = {
-			firstName: firstName?.value,
-			lastName: lastName?.value,
+			firstName: firstName.value,
+			lastName: lastName.value,
 			city: city?.value,
 			aboutMe: aboutMe?.value,
 		};
@@ -65,7 +65,7 @@ const EditUser = () => {
 								name='firstName'
 								id='firstName'
 								className={styles.input}
-								defaultValue={user?.firstName}
+								defaultValue={user.firstName}
 								required
 							/>
 							<label htmlFor='lastName' className={styles.label}>
@@ -76,7 +76,7 @@ const EditUser = () => {
 								name='lastName'
 								id='lastName'
 								className={styles.input}
-								defaultValue={user?.lastName}
+								defaultValue={user.lastName}
 								required
 							/>
 							<label htmlFor='city' className={styles.label}>
@@ -87,7 +87,7 @@ const EditUser = () => {
 								name='city'
 								id='city'
 								className={styles.input}
-								defaultValue={user?.city}
+								defaultValue={user.city}
 							/>
 							<h3 className={styles.title}>O mnie</h3>
 							<textarea
@@ -96,7 +96,7 @@ const EditUser = () => {
 								name='aboutMe'
 								id='aboutMe'
 								placeholder='Napisz coś o sobie...'
-								defaultValue={user?.aboutMe}
+								defaultValue={user.aboutMe}
 							></textarea>
 							<div className={styles.btn_container}>
 								<Popup
