@@ -38,7 +38,7 @@ const Home = () => {
 							</div>
 							<div className={styles.hexagon}>
 								<div className={styles.hexagontent}>
-									<Link to='/mytrips/ownedtrips' className={styles.linkshx}>
+									<Link to='/mytrips/joinedtrips' className={styles.linkshx}>
 										Dołączone podróże
 										<img src='../../src/assets/icons/auto-mode-dark.svg' />
 									</Link>
