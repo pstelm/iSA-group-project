@@ -23,14 +23,18 @@ const EditUser = () => {
 	}, [currentUser]);
 
 	const getUpdatedUserData = (e) => {
-		const { firstName, lastName, city, aboutMe } = e.currentTarget.elements;
+		const { firstName, lastName, birthDate, city, aboutMe } =
+			e.currentTarget.elements;
 
 		const user = {
 			firstName: firstName.value,
 			lastName: lastName.value,
+			birthDate: new Date(birthDate.value),
+			sex: e.currentTarget.sexF.checked ? 'F' : 'M',
 			city: city?.value,
 			aboutMe: aboutMe?.value,
 		};
+
 		return user;
 	};
 
@@ -44,6 +48,22 @@ const EditUser = () => {
 		} catch (error) {
 			toast.error('Błąd serwera');
 		}
+	};
+
+	const firebaseDateToInputDate = (date) => {
+		let day = date.toDate().getDate();
+		let month = date.toDate().getMonth() + 1;
+		const year = date.toDate().getFullYear();
+
+		if (day < 10) {
+			day = '0' + day;
+		}
+
+		if (month < 10) {
+			month = '0' + month;
+		}
+
+		return `${year}-${month}-${day}`;
 	};
 
 	return (
@@ -89,6 +109,53 @@ const EditUser = () => {
 								className={styles.input}
 								defaultValue={user.city}
 							/>
+							<label htmlFor='birthDate' className={styles.label}>
+								Data urodzenia
+							</label>
+							<input
+								type='date'
+								name='birthDate'
+								id='birthDate'
+								className={styles.input}
+								defaultValue={firebaseDateToInputDate(user.birthDate)}
+								required
+							/>
+							<p className={styles.label}>Płeć</p>
+							{user.sex === 'F' ? (
+								<div className={styles.checkBox}>
+									<input
+										type='radio'
+										name='sex'
+										id='sexF'
+										className={styles.input}
+										defaultChecked={true}
+									/>
+									<label htmlFor='sexF' className={styles.gender}>
+										Kobieta
+									</label>
+									<input type='radio' name='sex' id='sexM' className={styles.input} />
+									<label htmlFor='sexM' className={styles.gender}>
+										Mężczyzna
+									</label>
+								</div>
+							) : (
+								<div className={styles.checkBox}>
+									<input type='radio' name='sex' id='sexF' className={styles.input} />
+									<label htmlFor='sexF' className={styles.gender}>
+										Kobieta
+									</label>
+									<input
+										type='radio'
+										name='sex'
+										id='sexM'
+										className={styles.input}
+										defaultChecked={true}
+									/>
+									<label htmlFor='sexM' className={styles.gender}>
+										Mężczyzna
+									</label>
+								</div>
+							)}
 							<h3 className={styles.title}>O mnie</h3>
 							<textarea
 								className={styles.textarea}
