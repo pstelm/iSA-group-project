@@ -7,21 +7,15 @@ const Filters = () => {
 	const [showBudgetFilters, setShowBudgetFilters] = useState(false);
 
 	const handleShowLocationFilters = () => {
-		showLocationFilters === false
-			? setShowLocationFilters(true)
-			: setShowLocationFilters(false);
+		setShowLocationFilters(!showLocationFilters);
 	};
 
 	const handleShowDatesFilters = () => {
-		showDatesFilters === false
-			? setShowDatesFilters(true)
-			: setShowDatesFilters(false);
+		setShowDatesFilters(!showDatesFilters);
 	};
 
 	const handleShowBudgetFilters = () => {
-		showBudgetFilters === false
-			? setShowBudgetFilters(true)
-			: setShowBudgetFilters(false);
+		setShowBudgetFilters(!showBudgetFilters);
 	};
 
 	return (
