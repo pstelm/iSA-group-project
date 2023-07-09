@@ -17,10 +17,8 @@ const EditUser = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (currentUser) {
-			getUserData(currentUser.uid, setUser);
-		}
-	}, [currentUser]);
+		getUserData(currentUser.uid, setUser);
+	}, []);
 
 	const getUpdatedUserData = (e) => {
 		const { firstName, lastName, birthDate, city, aboutMe } =
