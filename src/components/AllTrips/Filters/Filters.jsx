@@ -38,7 +38,7 @@ const Filters = () => {
 					</button>
 				</div>
 				{showLocationFilters && (
-					<div className={styles.filtersGroup}>LOCATION FILTERS</div>
+					<div className={styles.filtersGroup}>FILTR LOKALIZACJI</div>
 				)}
 			</div>
 			<div className={styles.filtersGroupBox}>
@@ -53,7 +53,7 @@ const Filters = () => {
 					</button>
 				</div>
 				{showBudgetFilters && (
-					<div className={styles.filtersGroup}>BUDGET FILTERS</div>
+					<div className={styles.filtersGroup}>FILTR BUDŻETU</div>
 				)}
 			</div>
 			<div className={styles.filtersGroupBox}>
