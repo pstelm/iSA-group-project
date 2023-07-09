@@ -31,7 +31,7 @@ const Home = () => {
 							<div className={styles.hexagon}>
 								<div className={styles.hexagontent}>
 									<Link to='/userprofile' className={styles.linkshx}>
-										Mój profil
+										Mój <br /> profil
 										<img src='../../src/assets/icons/account-circle-dark.svg' />
 									</Link>
 								</div>
@@ -47,7 +47,7 @@ const Home = () => {
 							<div className={styles.hexagon}>
 								<div className={styles.hexagontent}>
 									<Link to='/addtrip' className={styles.linkshx}>
-										Stwórz podróż
+										Stwórz <br /> podróż
 										<img src='../../src/assets/icons/airplane-dark.svg' />
 									</Link>
 								</div>
@@ -55,7 +55,8 @@ const Home = () => {
 							<div className={styles.hexagon}>
 								<div className={styles.hexagontent}>
 									<Link to='/alltrips' className={styles.linkshx}>
-										Szukaj podróży
+										Szukaj <br /> podróży
+										<img src='../../src/assets/icons/search-airplane.svg' />
 									</Link>
 								</div>
 							</div>
