@@ -7,12 +7,13 @@ import {
 	MyTrips,
 	Register,
 	UserProfile,
+	EditUser,
 	AddTrip,
 	AllTrips,
 	OwnedTrips,
 	JoinedTrips,
 	TripFullPage,
-	PasswordReminder
+	PasswordReminder,
 } from './components';
 
 export const App = () => {
@@ -28,6 +29,7 @@ export const App = () => {
 				<Route element={<PrivateRoute />}>
 					<Route path='/' element={<Home />} />
 					<Route path='/userprofile' element={<UserProfile />} />
+					<Route path='/editprofile' element={<EditUser />} />
 					<Route path='/mytrips' element={<MyTrips />}>
 						<Route path='/mytrips/ownedtrips' element={<OwnedTrips />} />
 						<Route path='/mytrips/joinedtrips' element={<JoinedTrips />} />

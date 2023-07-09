@@ -11,6 +11,7 @@ import {
 } from '@firebase/storage';
 import { toast } from 'react-hot-toast';
 import BackButton from '../../BackButton/BackButton';
+import { Link } from 'react-router-dom';
 
 const UserProfile = () => {
 	const { currentUser } = useAuth();
@@ -75,58 +76,59 @@ const UserProfile = () => {
 	return (
 		<>
 			{user ? (
-				<div className={styles.user_profile_container}>
+				<div className={styles.container}>
 					<BackButton sectionTitle={'Profil użytkownika'} />
-					<div className={styles.user_profile_content}>
-						{/* Link do edycji danych użytkownika? */}
-						<button type='button' className={styles.btn_edit}>
-							<img
-								src='../../src/assets/icons/pen.png'
-								className={styles.icon_edit_profile}
-							/>
-						</button>
-						{userProfileImgURL ? (
-							<img
-								src={userProfileImgURL}
-								alt='user profile'
-								id='userProfilePhoto'
-								className={styles.user_photo}
-							/>
-						) : (
-							<img
-								src='../../src/assets/icons/empty-avatar.png'
-								alt='empty user profile'
-								id='emptyUserProfilePhoto'
-								className={styles.user_photo}
-							/>
-						)}
-						<div>
-							<label onChange={handleEditAvatar} htmlFor='editAvatarInput'>
-								<input
-									type='file'
-									id='editAvatarInput'
-									className={styles.edit_avatar_input}
-									accept='.jpg'
-									multiple={false}
-									hidden
-								/>
+					<div className={styles.user_profile_container}>
+						<div className={styles.user_profile_content}>
+							<Link to='/editprofile' className={styles.link_edit}>
 								<img
-									src='../../src/assets/icons/plus.png'
-									className={styles.icon_edit_photo}
+									src='../../src/assets/icons/pen.png'
+									className={styles.icon_edit_profile}
 								/>
-							</label>
-						</div>
-						<div className={styles.user_data_container}>
-							{user.firstName} {user.lastName}, {age}
-						</div>
-						<div className={styles.user_city_content}>
-							{/* wpisane na razie z palca "Poznań", normalnie dane powinny być z np user.city" */}
-							<img
-								src='../../src/assets/icons/location-dot-solid.svg'
-								className={styles.icon_city}
-							/>
-							Poznań
-							{/* {user.city} */}
+							</Link>
+							{userProfileImgURL ? (
+								<img
+									src={userProfileImgURL}
+									alt='user profile'
+									id='userProfilePhoto'
+									className={styles.user_photo}
+								/>
+							) : (
+								<img
+									src='../../src/assets/icons/empty-avatar.png'
+									alt='empty user profile'
+									id='emptyUserProfilePhoto'
+									className={styles.user_photo}
+								/>
+							)}
+							<div>
+								<label onChange={handleEditAvatar} htmlFor='editAvatarInput'>
+									<input
+										type='file'
+										id='editAvatarInput'
+										className={styles.edit_avatar_input}
+										accept='.jpg'
+										multiple={false}
+										hidden
+									/>
+									<img
+										src='../../src/assets/icons/plus.png'
+										className={styles.icon_edit_photo}
+									/>
+								</label>
+							</div>
+							<div className={styles.user_data_container}>
+								{user.firstName} {user.lastName}, {age}
+							</div>
+							{user.city ? (
+								<div className={styles.user_city_content}>
+									<img
+										src='../../src/assets/icons/location-dot-solid.svg'
+										className={styles.icon_city}
+									/>
+									{user.city}
+								</div>
+							) : null}
 						</div>
 					</div>
 				</div>
