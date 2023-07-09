@@ -66,5 +66,6 @@
 .filtersBtn {
 	height: 50px;
 	width: 15%;
+	padding-right: 5px;
 	background-color: transparent;
 }

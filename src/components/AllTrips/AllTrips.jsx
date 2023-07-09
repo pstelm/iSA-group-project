@@ -40,7 +40,6 @@ const AllTrips = () => {
 
 	const handleShowFilters = () => {
 		showFilters === false ? setShowFilters(true) : setShowFilters(false);
-		console.log(showFilters);
 	};
 
 	const filterByTags = (trip) => {
