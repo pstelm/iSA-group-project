@@ -33,7 +33,7 @@ img {
 	/* border-radius: 5px; */
 
 	font-family: var(--font-family);
-	font-size: var(--fs-p);
+	font-size: var(--fs-small-text);
 	line-height: var(--fs-h1);
 	/* font-weight: var(--font-medium); */
 }
