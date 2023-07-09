@@ -11,18 +11,11 @@ import tagsData from '../AddTrip/Tags/tags.json';
 import Filters from './Filters/Filters';
 
 const AllTrips = () => {
-	const { currentUser } = useAuth();
 	const [allTrips, setAllTrips] = useState([]);
 	const [filteredTrips, setFilteredTrips] = useState([]);
 	const [selectedTags, setSelectedTags] = useState([]);
 	const [searchedText, setSearchedText] = useState('');
 	const [showFilters, setShowFilters] = useState(false);
-
-	// Pobieram referencję do wszystkich wycieczek, których aktualnie zalogowany user nie jest właścicielem
-	// const filteredTripsCollectionRef = query(
-	// 	collection(db, 'Trips'),
-	// 	where('owner', '!=', currentUser.uid)
-	// );
 
 	const getTrips = async () => {
 		try {
@@ -55,7 +48,6 @@ const AllTrips = () => {
 	};
 
 	const filterTrips = (text) => {
-		setSearchedText(text);
 		const searchedTrips = allTrips
 			.filter(filterByTags)
 			.filter((trip) => filterByInput(trip, text));
@@ -69,7 +61,7 @@ const AllTrips = () => {
 
 	useEffect(() => {
 		filterTrips(searchedText);
-	}, [selectedTags]);
+	}, [selectedTags, searchedText]);
 
 	return (
 		<div className={styles.pageContent}>
@@ -81,7 +73,8 @@ const AllTrips = () => {
 						<input
 							className={styles.searchbarInput}
 							onChange={(e) => {
-								filterTrips(e.target.value);
+								setSearchedText(e.target.value);
+								// filterTrips(e.target.value);
 							}}
 							type='text'
 							name='searchbar'
