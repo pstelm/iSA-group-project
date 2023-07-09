@@ -8,6 +8,7 @@ import useAuth from '../../contexts/AuthContext';
 import BackButton from '../BackButton/BackButton';
 import Tags from '../AddTrip/Tags/Tags';
 import tagsData from '../AddTrip/Tags/tags.json';
+import Filters from './Filters/Filters';
 
 const AllTrips = () => {
 	const { currentUser } = useAuth();
@@ -15,6 +16,7 @@ const AllTrips = () => {
 	const [filteredTrips, setFilteredTrips] = useState([]);
 	const [selectedTags, setSelectedTags] = useState([]);
 	const [searchedText, setSearchedText] = useState('');
+	const [showFilters, setShowFilters] = useState(false);
 
 	// Pobieram referencję do wszystkich wycieczek, których aktualnie zalogowany user nie jest właścicielem
 	// const filteredTripsCollectionRef = query(
@@ -34,6 +36,11 @@ const AllTrips = () => {
 		} catch (error) {
 			toast.error('Ta podróż już nie istnieje');
 		}
+	};
+
+	const handleShowFilters = () => {
+		showFilters === false ? setShowFilters(true) : setShowFilters(false);
+		console.log(showFilters);
 	};
 
 	const filterByTags = (trip) => {
@@ -88,9 +95,16 @@ const AllTrips = () => {
 							/>
 						</div>
 					</div>
-					<button className={styles.filtersBtn} type='button'>
+					<button
+						className={styles.filtersBtn}
+						type='button'
+						onClick={handleShowFilters}
+					>
 						<img src='/src/assets/icons/filters.svg' alt='Filtruj' />
 					</button>
+
+					{showFilters && <Filters />}
+
 					<div className={styles.tagsBox}>
 						<Tags
 							tags={tagsData}
