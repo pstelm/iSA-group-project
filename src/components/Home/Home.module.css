@@ -1,7 +1,18 @@
+.container {
+	width: 100%;
+	height: 100%;
+	padding: 2em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-image: url('../../src/assets/onboarding 1.png');
+	background-position-x: 35%;
+	background-position-y: 70%;
+}
+
 .greetingBox {
 	background-color: var(--clr-white-transparent);
-	width: 60%;
-	margin-left: 20px;
+	width: 100%;
 	padding: 5px 10px;
 	border-radius: 15px;
 }
@@ -17,17 +28,19 @@
 .hexagon {
 	position: relative;
 	display: inline-block;
-	margin: 1px 18px;
-	background-color: rgb(217, 208, 208);
+	margin: 2px 19px;
+	background-color: var(--clr-0);
 	text-align: center;
 }
+
 .hexagon,
 .hexagon::before,
 .hexagon::after {
 	width: 67px;
 	height: 116px;
-	border-radius: 20/0;
+	border-radius: 0.5rem/0.25rem;
 }
+
 .hexagon::before {
 	background-color: inherit;
 	content: '';
@@ -79,4 +92,12 @@
 	height: 100px;
 	justify-content: center;
 	align-items: center;
+	color: var(--clr-main-dark);
+}
+
+.linkshx img {
+	height: 45px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
