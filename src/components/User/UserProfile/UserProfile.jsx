@@ -39,7 +39,9 @@ const UserProfile = () => {
 					setUserProfileImgURL(url);
 				})
 				.catch((error) => {
-					toast.error('Wystąpił błąd: ' + error.message);
+					if (error.code !== 'storage/object-not-found') {
+						toast.error('Wystąpił błąd: ' + error.message);
+					}
 				});
 
 			const today = new Date();

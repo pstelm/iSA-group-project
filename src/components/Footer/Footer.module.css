@@ -4,6 +4,7 @@
 	justify-content: space-around;
 	align-items: center;
 	font-size: var(--fs-link);
+	font-weight: var(--font-bold);
 }
 
 .footer span {
@@ -24,4 +25,16 @@
 
 .active img {
 	color: var(--clr-main-light) !important;
+	height: 75px;
+	border-radius: 25px;
+	padding: 10px;
+	transition: all 0.3s;
+}
+
+.active span {
+	display: none;
+}
+
+.icon {
+	height: 30px;
 }
