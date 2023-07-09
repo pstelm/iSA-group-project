@@ -34,7 +34,11 @@ const Filters = () => {
 						type='button'
 						onClick={handleShowLocationFilters}
 					>
-						+
+						{showLocationFilters ? (
+							<img src='/src/assets/icons/minus-solid.svg' />
+						) : (
+							<img src='/src/assets/icons/plus-solid.svg' />
+						)}
 					</button>
 				</div>
 				{showLocationFilters && (
@@ -49,7 +53,11 @@ const Filters = () => {
 						type='button'
 						onClick={handleShowBudgetFilters}
 					>
-						+
+						{showBudgetFilters ? (
+							<img src='/src/assets/icons/minus-solid.svg' />
+						) : (
+							<img src='/src/assets/icons/plus-solid.svg' />
+						)}
 					</button>
 				</div>
 				{showBudgetFilters && (
@@ -64,7 +72,11 @@ const Filters = () => {
 						type='button'
 						onClick={handleShowDatesFilters}
 					>
-						+
+						{showDatesFilters ? (
+							<img src='/src/assets/icons/minus-solid.svg' />
+						) : (
+							<img src='/src/assets/icons/plus-solid.svg' />
+						)}
 					</button>
 				</div>
 				{showDatesFilters && <div className={styles.filtersGroup}>FILTR DAT</div>}
