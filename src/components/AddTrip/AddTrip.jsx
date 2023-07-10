@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './AddTrip.module.css';
 import { db } from '../../config/firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../contexts/AuthContext';
 import { toast } from 'react-hot-toast';
@@ -9,11 +9,18 @@ import { Popup } from 'reactjs-popup';
 import tagsData from './Tags/tags.json';
 import Tags from './Tags/Tags';
 import { useState } from 'react';
+import {
+	getStorage,
+	ref,
+	getDownloadURL,
+	uploadBytes,
+} from '@firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
 
 const AddTrip = () => {
-	const tripsCollectionRef = collection(db, 'Trips');
 
 	const [selectedTags, setSelectedTags] = useState([]);
+	const [tripID, setTripID] = useState(uuidv4());
 
 	const { currentUser } = useAuth();
 
@@ -51,7 +58,9 @@ const AddTrip = () => {
 				throw new Error('Budżet nie może być mniejszy niż 1 zł');
 			}
 
-			await addDoc(tripsCollectionRef, {
+			const newTripRef = doc(db, 'Trips', tripID);
+
+			await setDoc(newTripRef, {
 				title: title,
 				info: info,
 				startDate: startDate,
@@ -71,6 +80,34 @@ const AddTrip = () => {
 			toast.error('Wystąpił błąd: ' + error.message);
 		}
 	};
+
+	const storage = getStorage();
+	const [tripPhotoURL, setTripPhotoURL] = useState();
+
+	const handlePhotoAdd = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			try {
+				const pathReference = ref(storage, `tripsPhoto/${tripID}.jpg`);
+				uploadBytes(pathReference, file).then(() => {
+					const pathReference = ref(storage, `tripsPhoto/${tripID}.jpg`);
+					getDownloadURL(pathReference)
+						.then((url) => {
+							setTripPhotoURL(url);
+						})
+						.catch((error) => {
+							if (error.code !== 'storage/object-not-found') {
+								toast.error('Wystąpił błąd: ' + error.message);
+							}
+						});
+					toast.success('Zdjęcie zostało dodane');
+				});
+			} catch (error) {
+				toast.error('Wystąpił błąd: ' + error.message);
+			}
+		}
+	};
+
 
 	const handleCancel = (e) => {
 		e.preventDefault();
@@ -122,6 +159,38 @@ const AddTrip = () => {
 					</div>
 				)}
 			</Popup>
+
+			{tripPhotoURL ? (
+				<img
+					src={tripPhotoURL}
+					alt='zdjęcie opisujące podróż'
+					id='tripPhoto'
+					className={styles.trip_photo}
+				/>
+			) : (
+				<img
+					src='../../src/assets/icons/empty-avatar.png'
+					alt='w tym miejscu pojawi się zdjęcie opisujące podróż'
+					id='emptyTripPhoto'
+					className={styles.trip_photo}
+				/>
+			)}
+			<div>
+				<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
+					<input
+						type='file'
+						id='editTripPhoto'
+						className={styles.edit_trip_photo}
+						accept='.jpg'
+						multiple={false}
+						hidden
+					/>
+					<img
+						src='../../src/assets/icons/plus.png'
+						className={styles.icon_trip_photo}
+					/>
+				</label>
+			</div>
 
 			<div className={styles.container}>
 				<form className={styles.form} onSubmit={handleSubmit}>
