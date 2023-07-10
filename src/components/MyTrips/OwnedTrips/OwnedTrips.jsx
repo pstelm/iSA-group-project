@@ -69,8 +69,7 @@ const OwnedTrips = () => {
 				<ul className={styles.trip}>
 					{ownedTrips
 						? ownedTrips.map((trip) => (
-								<TripMini key={trip.id} {...trip} filterOwnership={false} />
-						  ))
+								<TripMini key={trip.id} {...trip} filterOwnership={false} />))
 						: null}
 				</ul>
 			</div>
