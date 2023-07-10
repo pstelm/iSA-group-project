@@ -12,13 +12,11 @@ import { useState } from 'react';
 import {
 	getStorage,
 	ref,
-	getDownloadURL,
 	uploadBytes,
 } from '@firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 
 const AddTrip = () => {
-
 	const [selectedTags, setSelectedTags] = useState([]);
 	const [tripID, setTripID] = useState(uuidv4());
 
@@ -74,6 +72,11 @@ const AddTrip = () => {
 				owner: owner,
 			});
 
+			if (tripPhoto) {
+				const pathReference = ref(storage, `tripsPhoto/${tripID}.jpg`);
+				await uploadBytes(pathReference, tripPhoto);
+			}
+
 			toast.success('Pomyślnie dodano nową podróż');
 			navigate('/mytrips/ownedtrips');
 		} catch (error) {
@@ -82,32 +85,15 @@ const AddTrip = () => {
 	};
 
 	const storage = getStorage();
-	const [tripPhotoURL, setTripPhotoURL] = useState();
+	const [tripPhoto, setTripPhoto] = useState();
 
-	const handlePhotoAdd = (e) => {
+	const handlePhotoAdd = async (e) => {
 		const file = e.target.files[0];
 		if (file) {
-			try {
-				const pathReference = ref(storage, `tripsPhoto/${tripID}.jpg`);
-				uploadBytes(pathReference, file).then(() => {
-					const pathReference = ref(storage, `tripsPhoto/${tripID}.jpg`);
-					getDownloadURL(pathReference)
-						.then((url) => {
-							setTripPhotoURL(url);
-						})
-						.catch((error) => {
-							if (error.code !== 'storage/object-not-found') {
-								toast.error('Wystąpił błąd: ' + error.message);
-							}
-						});
-					toast.success('Zdjęcie zostało dodane');
-				});
-			} catch (error) {
-				toast.error('Wystąpił błąd: ' + error.message);
-			}
+			setTripPhoto(file);
+			toast.success('Pomyślnie dodano zdjęcie');
 		}
 	};
-
 
 	const handleCancel = (e) => {
 		e.preventDefault();
@@ -160,9 +146,9 @@ const AddTrip = () => {
 				)}
 			</Popup>
 
-			{tripPhotoURL ? (
+			{tripPhoto ? (
 				<img
-					src={tripPhotoURL}
+					src={URL.createObjectURL(tripPhoto)}
 					alt='zdjęcie opisujące podróż'
 					id='tripPhoto'
 					className={styles.trip_photo}
