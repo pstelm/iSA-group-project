@@ -41,7 +41,7 @@ const Register = () => {
 			const firstName = formEvent.target?.firstName.value;
 			const lastName = formEvent.target?.lastName.value;
 			const sex = formEvent.target?.sexF.checked ? 'F' : 'M';
-			const birthDate = new Date (formEvent.target?.birthDate.value);
+			const birthDate = new Date(formEvent.target?.birthDate.value);
 
 			if (firstName === '') {
 				throw new Error('Imię nie może być puste');
@@ -93,7 +93,7 @@ const Register = () => {
 					<Link to='/login'>
 						<img
 							className={styles.arrow}
-							src='../../src/assets/arrow.svg'
+							src='/assets/arrow.svg'
 							alt='Arrow pointing left'
 						/>
 					</Link>
