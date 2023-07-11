@@ -30,7 +30,7 @@ const PasswordReminder = () => {
 				<Link to='/login'>
 					<img
 						className={styles.arrow}
-						src='../../src/assets/arrow.svg'
+						src='/assets/arrow.svg'
 						alt='Arrow pointing left'
 					/>
 				</Link>
