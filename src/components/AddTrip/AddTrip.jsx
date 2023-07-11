@@ -9,11 +9,14 @@ import { Popup } from 'reactjs-popup';
 import tagsData from './Tags/tags.json';
 import Tags from './Tags/Tags';
 import { useState } from 'react';
+import countriesData from '../../components/Countries/countries.json';
+import Countries from '../../components/Countries/Countries.jsx';
 
 const AddTrip = () => {
 	const tripsCollectionRef = collection(db, 'Trips');
 
 	const [selectedTags, setSelectedTags] = useState([]);
+	const [selectedCountry, setSelectedCountry] = useState([]);
 
 	const { currentUser } = useAuth();
 
@@ -28,7 +31,7 @@ const AddTrip = () => {
 			const startDate = new Date(e.target.startDate.value);
 			const endDate = new Date(e.target.endDate.value);
 			const startPlace = e.target.startPlace.value;
-			const endPlace = e.target.endPlace.value;
+			const endPlace = selectedCountry;
 			const maxParticipantsCount = Number(e.target.maxParticipantsCount.value);
 			const participants = [currentUser.uid];
 			const budget = Number(e.target.budget.value);
@@ -165,14 +168,10 @@ const AddTrip = () => {
 								placeholder='Z'
 								required
 							/>
-
-							<input
-								className={styles.input_add_trip}
-								type='text'
-								name='endPlace'
-								id='endPlace'
-								placeholder='Do'
-								required
+							<Countries
+								countriesData={countriesData}
+								selectedCountry={selectedCountry}
+								setSelectedCountry={setSelectedCountry}
 							/>
 						</div>
 					</div>
