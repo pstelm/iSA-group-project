@@ -97,7 +97,7 @@ const UserProfile = () => {
 								/>
 							) : (
 								<img
-									src='../../src/assets/icons/empty-avatar.png'
+									src='../../src/assets/icons/account-circle-dark.svg'
 									alt='empty user profile'
 									id='emptyUserProfilePhoto'
 									className={styles.user_photo}
@@ -131,6 +131,11 @@ const UserProfile = () => {
 									{user.city}
 								</div>
 							) : null}
+							<legend className={styles.legend}>O mnie</legend>
+							<div className={styles.user_about}>
+								{user.aboutMe}
+							</div>
+						
 						</div>
 					</div>
 				</div>
