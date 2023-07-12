@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import styles from './Filters.module.css';
 
-const Filters = ({ additionalFilters, setAdditionalFilters }) => {
+const Filters = ({
+	additionalFilters,
+	setAdditionalFilters,
+	topBudgetOfAllTrips,
+}) => {
 	const [showLocationFilters, setShowLocationFilters] = useState(false);
 	const [showDatesFilters, setShowDatesFilters] = useState(false);
 	const [showBudgetFilters, setShowBudgetFilters] = useState(false);
@@ -18,10 +22,38 @@ const Filters = ({ additionalFilters, setAdditionalFilters }) => {
 		setShowBudgetFilters(!showBudgetFilters);
 	};
 
+	const handleSetAdditionalFilters = (e) => {
+		e.preventDefault();
+		try {
+			const newMinBudget =
+				e.target.minBudget.value === ''
+					? additionalFilters.minBudget
+					: parseInt(e.target.minBudget.value);
+
+			const newMaxBudget =
+				e.target.maxBudget.value === ''
+					? topBudgetOfAllTrips
+					: parseInt(e.target.maxBudget.value);
+
+			setAdditionalFilters({
+				countries: [],
+				minBudget: newMinBudget,
+				maxBudget: newMaxBudget,
+			});
+
+			console.log('---FILTERS', additionalFilters);
+		} catch (error) {
+			console.error();
+		}
+	};
+
 	// console.log(additionalFilters);
 
 	return (
-		<div className={styles.additionalFiltersContainer}>
+		<form
+			onSubmit={handleSetAdditionalFilters}
+			className={styles.additionalFiltersContainer}
+		>
 			<div className={styles.filtersGroupBox}>
 				<div className={styles.filtersGroupTitle}>
 					<h4>Lokalizacja</h4>
@@ -64,17 +96,17 @@ const Filters = ({ additionalFilters, setAdditionalFilters }) => {
 							<input
 								name='minBudget'
 								type='number'
-								defaultValue={additionalFilters.minBudget}
+								placeholder={additionalFilters.minBudget}
 								// placeholder='0'
 							/>
 							<p className={styles.inputBoxInfo}>zł</p>
 						</div>
-						<label htmlFor='minBudget'>Do: </label>
+						<label htmlFor='maxBudget'>Do: </label>
 						<div className={styles.inputBox}>
 							<input
-								name='minBudget'
+								name='maxBudget'
 								type='number'
-								defaultValue={additionalFilters.maxBudget}
+								placeholder={additionalFilters.maxBudget}
 							/>
 							<p className={styles.inputBoxInfo}>zł</p>
 						</div>
@@ -98,10 +130,8 @@ const Filters = ({ additionalFilters, setAdditionalFilters }) => {
 				</div>
 				{showDatesFilters && <div className={styles.filtersGroup}>FILTR DAT</div>}
 			</div>
-			<button className={styles.confirmBtn} type='button'>
-				Zatwierdź
-			</button>
-		</div>
+			<button className={styles.confirmBtn}>Zatwierdź</button>
+		</form>
 	);
 };
 

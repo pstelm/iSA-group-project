@@ -15,8 +15,10 @@ const AllTrips = () => {
 	const [filteredTrips, setFilteredTrips] = useState([]);
 	const [selectedTags, setSelectedTags] = useState([]);
 	const [searchedText, setSearchedText] = useState('');
-	const [additionalFilters, setAdditionalFilters] = useState({});
 	const [showFilters, setShowFilters] = useState(false);
+	const [additionalFilters, setAdditionalFilters] = useState({});
+	// dodałam state topBudgetOfAllTrips, żeby móc wyświetlać max kwotę za wycieczkę w inpucie filtra budżetu; czyli dałoby się filtrowac bez tego (musiałabym nieco zmienić logikę filtrowania), ale wydaje mi się, że tak jest ładniej :)
+	const [topBudgetOfAllTrips, setTopBudgetOfAllTrips] = useState();
 
 	const getTrips = async () => {
 		try {
@@ -48,12 +50,31 @@ const AllTrips = () => {
 		}
 	};
 
+	const filterByCountry = (trip) => {
+		if (additionalFilters.countries.length === 0) {
+			return true;
+		} else {
+			return additionalFilters.countries.includes(trip.endPlace);
+		}
+	};
+
+	const filterByBudget = (trip) => {
+		if (
+			trip.budget >= additionalFilters.minBudget &&
+			trip.budget <= additionalFilters.maxBudget
+		) {
+			return true;
+		}
+	};
+
 	const filterTrips = (text) => {
 		const searchedTrips = allTrips
 			.filter(filterByTags)
-			.filter((trip) => filterByInput(trip, text));
+			.filter((trip) => filterByInput(trip, text))
+			.filter((trip) => filterByCountry(trip))
+			.filter((trip) => filterByBudget(trip));
 		setFilteredTrips(searchedTrips);
-		// console.log(additionalFilters);
+		// console.log('filtrowanie w AllTrips', additionalFilters);
 	};
 
 	useEffect(() => {
@@ -62,6 +83,12 @@ const AllTrips = () => {
 	}, []);
 
 	useEffect(() => {
+		setTopBudgetOfAllTrips(
+			allTrips.reduce(function (acc, trip) {
+				return acc > trip.budget ? acc : trip.budget;
+			}, 0)
+		);
+
 		setAdditionalFilters({
 			countries: [],
 			minBudget: 0,
@@ -69,7 +96,7 @@ const AllTrips = () => {
 				return acc > trip.budget ? acc : trip.budget;
 			}, 0),
 		});
-		console.log('Z useEffect w AllTrips', additionalFilters);
+		console.log('start: ', additionalFilters);
 	}, [allTrips]);
 
 	useEffect(() => {
@@ -108,6 +135,7 @@ const AllTrips = () => {
 						<Filters
 							additionalFilters={additionalFilters}
 							setAdditionalFilters={setAdditionalFilters}
+							topBudgetOfAllTrips={topBudgetOfAllTrips}
 						/>
 					)}
 
