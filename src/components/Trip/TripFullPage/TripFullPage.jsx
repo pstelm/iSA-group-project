@@ -131,7 +131,6 @@ const TripFullPage = () => {
 		if (users && trip) {
 			getParticipants();
 			getTripDuration();
-			// getTripDuration(trip, setTripDuration);
 		}
 	}, [users, trip]);
 

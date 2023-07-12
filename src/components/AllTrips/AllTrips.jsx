@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styles from './AllTrips.module.css';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import TripMini from '../Trip/TripMini/TripMini';
 import { toast } from 'react-hot-toast';
-import useAuth from '../../contexts/AuthContext';
 import BackButton from '../BackButton/BackButton';
 import Tags from '../AddTrip/Tags/Tags';
 import tagsData from '../AddTrip/Tags/tags.json';
@@ -67,14 +66,43 @@ const AllTrips = () => {
 		}
 	};
 
+	const filterByDate = (trip) => {
+		if ((additionalFilters.fromDate === '') & (additionalFilters.toDate === '')) {
+			return true;
+		} else if (
+			(additionalFilters.fromDate !== '') &
+			(additionalFilters.toDate === '')
+		) {
+			return trip.startDate.toDate().getTime() >=
+				additionalFilters.fromDate.getTime()
+				? true
+				: false;
+		} else if (
+			(additionalFilters.fromDate === '') &
+			(additionalFilters.toDate !== '')
+		) {
+			return trip.endDate.toDate().getTime() <= additionalFilters.toDate.getTime()
+				? true
+				: false;
+		} else {
+			return (trip.startDate.toDate().getTime() >=
+				additionalFilters.fromDate.getTime()) &
+				(trip.endDate.toDate().getTime() <= additionalFilters.toDate.getTime())
+				? true
+				: false;
+		}
+	};
+
 	const filterTrips = (text) => {
+		console.log('FILTERS', additionalFilters, selectedTags, searchedText);
+
 		const searchedTrips = allTrips
 			.filter(filterByTags)
 			.filter((trip) => filterByInput(trip, text))
 			.filter((trip) => filterByCountry(trip))
-			.filter((trip) => filterByBudget(trip));
+			.filter((trip) => filterByBudget(trip))
+			.filter((trip) => filterByDate(trip));
 		setFilteredTrips(searchedTrips);
-		// console.log('filtrowanie w AllTrips', additionalFilters);
 	};
 
 	useEffect(() => {
@@ -95,8 +123,10 @@ const AllTrips = () => {
 			maxBudget: allTrips.reduce(function (acc, trip) {
 				return acc > trip.budget ? acc : trip.budget;
 			}, 0),
+			fromDate: '',
+			toDate: '',
 		});
-		console.log('start: ', additionalFilters);
+		// console.log('start: ', additionalFilters);
 	}, [allTrips]);
 
 	useEffect(() => {

@@ -4,7 +4,6 @@
 	align-items: center;
 	width: 100%;
 	margin: 10px 0;
-	/* background-color: var(--clr-bg); */
 	border-radius: 8px;
 }
 
@@ -23,11 +22,6 @@
 .filtersGroupBtn {
 	width: 24px;
 	padding: 4px;
-	/* display: flex;
-	justify-content: center;
-	align-items: center; */
-	/* width: 26px;
-	height: 26px; */
 	color: var(--clr-bg);
 	background-color: var(--clr-orange);
 	border: 1px solid var(--clr-orange);
@@ -51,19 +45,27 @@
 	height: 35px;
 	display: flex;
 	align-items: center;
-	/* width: 100%; */
 }
 
-.inputBox input {
-	width: 85%;
+.budgetInput,
+.dateInput {
 	padding: 5px 10px;
 	border: none;
 	font-family: var(--font-family);
 	font-size: var(--fs-p);
 }
 
-.inputBox input:focus {
+.budgetInput:focus,
+.dateInput:focus {
 	outline: none;
+}
+
+.budgetInput {
+	width: 85%;
+}
+
+.dateInput {
+	width: 100%;
 }
 
 .inputBox p {
@@ -73,19 +75,7 @@
 	padding: 5px;
 	background-color: var(--clr-bg);
 	text-align: center;
-	/* vertical-align: baseline; */
-	/* line-height: var(--fs-p); */
 }
-
-/* .inputBoxInfo {
-	display: inline;
-	width: 10%;
-} */
-
-/* .inputBux input,
-.inputBux p {
-	display: inline;
-} */
 
 .confirmBtn {
 	width: 100%;

@@ -25,35 +25,59 @@ const Filters = ({
 	const handleSetAdditionalFilters = (e) => {
 		e.preventDefault();
 		try {
-			const newMinBudget =
-				e.target.minBudget.value === ''
+			const newMinBudget = e.target.minBudget
+				? e.target.minBudget.value === ''
 					? additionalFilters.minBudget
-					: parseInt(e.target.minBudget.value);
+					: parseInt(e.target.minBudget.value)
+				: additionalFilters.minBudget;
 
-			const newMaxBudget =
-				e.target.maxBudget.value === ''
+			// To powyżej to skrócone to poniżej. Musiałam dodać sprawdzanie, czy pola w ogóle są widoczne na stronie, przez akcje an pomarańczowym plusie
+			// let newMinBudget = '';
+			// if (e.target.minBudget) {
+			// 	newMinBudget =
+			// 		e.target.minBudget.value === ''
+			// 			? additionalFilters.minBudget
+			// 			: parseInt(e.target.minBudget.value);
+			// } else {
+			// 	newMinBudget = additionalFilters.minBudget;
+			// }
+
+			const newMaxBudget = e.target.maxBudget
+				? e.target.maxBudget.value === ''
 					? topBudgetOfAllTrips
-					: parseInt(e.target.maxBudget.value);
+					: parseInt(e.target.maxBudget.value)
+				: topBudgetOfAllTrips;
+
+			const newFromDate = e.target.fromDate
+				? e.target.fromDate.value === ''
+					? ''
+					: new Date(e.target.fromDate.value)
+				: '';
+
+			const newToDate = e.target.toDate
+				? e.target.toDate.value === ''
+					? ''
+					: new Date(e.target.toDate.value)
+				: '';
 
 			setAdditionalFilters({
 				countries: [],
 				minBudget: newMinBudget,
 				maxBudget: newMaxBudget,
+				fromDate: newFromDate,
+				toDate: newToDate,
 			});
-
-			console.log('---FILTERS', additionalFilters);
 		} catch (error) {
 			console.error();
 		}
 	};
-
-	// console.log(additionalFilters);
 
 	return (
 		<form
 			onSubmit={handleSetAdditionalFilters}
 			className={styles.additionalFiltersContainer}
 		>
+			{/* countires filter */}
 			<div className={styles.filtersGroupBox}>
 				<div className={styles.filtersGroupTitle}>
 					<h4>Lokalizacja</h4>
@@ -73,6 +97,7 @@ const Filters = ({
 					<div className={styles.filtersGroup}>FILTR LOKALIZACJI</div>
 				)}
 			</div>
+			{/* budget filter */}
 			<div className={styles.filtersGroupBox}>
 				<div className={styles.filtersGroupTitle}>
 					<h4>Budżet</h4>
@@ -90,14 +115,13 @@ const Filters = ({
 				</div>
 				{showBudgetFilters && (
 					<div className={styles.filtersGroup}>
-						{/* <div className={styles.filtersLine}></div> */}
 						<label htmlFor='minBudget'>Od: </label>
 						<div className={styles.inputBox}>
 							<input
 								name='minBudget'
 								type='number'
 								placeholder={additionalFilters.minBudget}
-								// placeholder='0'
+								className={styles.budgetInput}
 							/>
 							<p className={styles.inputBoxInfo}>zł</p>
 						</div>
@@ -107,12 +131,14 @@ const Filters = ({
 								name='maxBudget'
 								type='number'
 								placeholder={additionalFilters.maxBudget}
+								className={styles.budgetInput}
 							/>
 							<p className={styles.inputBoxInfo}>zł</p>
 						</div>
 					</div>
 				)}
 			</div>
+			{/* dates filter */}
 			<div className={styles.filtersGroupBox}>
 				<div className={styles.filtersGroupTitle}>
 					<h4>Daty</h4>
@@ -128,7 +154,18 @@ const Filters = ({
 						)}
 					</button>
 				</div>
-				{showDatesFilters && <div className={styles.filtersGroup}>FILTR DAT</div>}
+				{showDatesFilters && (
+					<div className={styles.filtersGroup}>
+						<label htmlFor='fromDate'>Od: </label>
+						<div className={styles.inputBox}>
+							<input name='fromDate' type='date' className={styles.dateInput} />
+						</div>
+						<label htmlFor='toDate'>Do: </label>
+						<div className={styles.inputBox}>
+							<input name='toDate' type='date' className={styles.dateInput} />
+						</div>
+					</div>
+				)}
 			</div>
 			<button className={styles.confirmBtn}>Zatwierdź</button>
 		</form>
