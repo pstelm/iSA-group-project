@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Filters.module.css';
 
-const Filters = () => {
+const Filters = ({ additionalFilters, setAdditionalFilters }) => {
 	const [showLocationFilters, setShowLocationFilters] = useState(false);
 	const [showDatesFilters, setShowDatesFilters] = useState(false);
 	const [showBudgetFilters, setShowBudgetFilters] = useState(false);
@@ -17,6 +17,8 @@ const Filters = () => {
 	const handleShowBudgetFilters = () => {
 		setShowBudgetFilters(!showBudgetFilters);
 	};
+
+	// console.log(additionalFilters);
 
 	return (
 		<div className={styles.additionalFiltersContainer}>
@@ -55,7 +57,28 @@ const Filters = () => {
 					</button>
 				</div>
 				{showBudgetFilters && (
-					<div className={styles.filtersGroup}>FILTR BUDŻETU</div>
+					<div className={styles.filtersGroup}>
+						{/* <div className={styles.filtersLine}></div> */}
+						<label htmlFor='minBudget'>Od: </label>
+						<div className={styles.inputBox}>
+							<input
+								name='minBudget'
+								type='number'
+								defaultValue={additionalFilters.minBudget}
+								// placeholder='0'
+							/>
+							<p className={styles.inputBoxInfo}>zł</p>
+						</div>
+						<label htmlFor='minBudget'>Do: </label>
+						<div className={styles.inputBox}>
+							<input
+								name='minBudget'
+								type='number'
+								defaultValue={additionalFilters.maxBudget}
+							/>
+							<p className={styles.inputBoxInfo}>zł</p>
+						</div>
+					</div>
 				)}
 			</div>
 			<div className={styles.filtersGroupBox}>
@@ -75,9 +98,9 @@ const Filters = () => {
 				</div>
 				{showDatesFilters && <div className={styles.filtersGroup}>FILTR DAT</div>}
 			</div>
-			{/* <button className={styles.confirmBtn} type='button'>
+			<button className={styles.confirmBtn} type='button'>
 				Zatwierdź
-			</button> */}
+			</button>
 		</div>
 	);
 };

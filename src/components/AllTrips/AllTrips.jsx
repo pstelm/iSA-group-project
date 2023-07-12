@@ -15,6 +15,7 @@ const AllTrips = () => {
 	const [filteredTrips, setFilteredTrips] = useState([]);
 	const [selectedTags, setSelectedTags] = useState([]);
 	const [searchedText, setSearchedText] = useState('');
+	const [additionalFilters, setAdditionalFilters] = useState({});
 	const [showFilters, setShowFilters] = useState(false);
 
 	const getTrips = async () => {
@@ -52,6 +53,7 @@ const AllTrips = () => {
 			.filter(filterByTags)
 			.filter((trip) => filterByInput(trip, text));
 		setFilteredTrips(searchedTrips);
+		// console.log(additionalFilters);
 	};
 
 	useEffect(() => {
@@ -60,8 +62,19 @@ const AllTrips = () => {
 	}, []);
 
 	useEffect(() => {
+		setAdditionalFilters({
+			countries: [],
+			minBudget: 0,
+			maxBudget: allTrips.reduce(function (acc, trip) {
+				return acc > trip.budget ? acc : trip.budget;
+			}, 0),
+		});
+		console.log('Z useEffect w AllTrips', additionalFilters);
+	}, [allTrips]);
+
+	useEffect(() => {
 		filterTrips(searchedText);
-	}, [selectedTags, searchedText]);
+	}, [selectedTags, searchedText, additionalFilters]);
 
 	return (
 		<div className={styles.pageContent}>
@@ -74,17 +87,13 @@ const AllTrips = () => {
 							className={styles.searchbarInput}
 							onChange={(e) => {
 								setSearchedText(e.target.value);
-								// filterTrips(e.target.value);
 							}}
 							type='text'
 							name='searchbar'
 							placeholder='Wpisz, czego szukasz'
 						/>
 						<div className={styles.searchbarInputIcon}>
-							<img
-								src='/src/assets/icons/magnifying-glass.svg'
-								alt='Przycisk szukaj'
-							/>
+							<img src='/src/assets/icons/magnifying-glass.svg' alt='' />
 						</div>
 					</div>
 					<button
@@ -95,7 +104,12 @@ const AllTrips = () => {
 						<img src='/src/assets/icons/filters.svg' alt='Filtruj' />
 					</button>
 
-					{showFilters && <Filters />}
+					{showFilters && (
+						<Filters
+							additionalFilters={additionalFilters}
+							setAdditionalFilters={setAdditionalFilters}
+						/>
+					)}
 
 					<div className={styles.tagsBox}>
 						<Tags

@@ -36,11 +36,62 @@
 	font-weight: 500;
 }
 
-.confirmBtn {
-	width: 50%;
-	height: 50px;
+.filtersGroup {
+	display: grid;
+	grid-template-columns: 20% 1fr;
+	align-items: center;
+	row-gap: 5px;
+	margin-top: 5px;
 	margin-bottom: 10px;
-	padding: 4px 8px;
+}
+
+.inputBox {
+	border-radius: 8px;
+	overflow: hidden;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	/* width: 100%; */
+}
+
+.inputBox input {
+	width: 85%;
+	padding: 5px 10px;
+	border: none;
+	font-family: var(--font-family);
+	font-size: var(--fs-p);
+}
+
+.inputBox input:focus {
+	outline: none;
+}
+
+.inputBox p {
+	display: inline-block;
+	width: 15%;
+	height: 100%;
+	padding: 5px;
+	background-color: var(--clr-bg);
+	text-align: center;
+	/* vertical-align: baseline; */
+	/* line-height: var(--fs-p); */
+}
+
+/* .inputBoxInfo {
+	display: inline;
+	width: 10%;
+} */
+
+/* .inputBux input,
+.inputBux p {
+	display: inline;
+} */
+
+.confirmBtn {
+	width: 100%;
+	height: 50px;
+	margin-top: 10px;
+	padding: 3px 6px;
 	border-radius: 8px;
 	font-family: var(--font-family);
 	font-size: var(--fs-p);
