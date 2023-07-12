@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Filters.module.css';
+import { toast } from 'react-hot-toast';
 
 const Filters = ({
 	additionalFilters,
@@ -59,6 +60,14 @@ const Filters = ({
 					? ''
 					: new Date(e.target.toDate.value)
 				: '';
+
+			// if (startDate > endDate) {
+			// 	throw new Error('Data powrotu nie może być wcześniejsza niż data wylotu');
+			// }
+
+			// if (startDate < new Date()) {
+			// 	throw new Error('Data wylotu nie może być w przeszłości');
+			// }
 
 			setAdditionalFilters({
 				countries: [],
