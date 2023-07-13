@@ -1,0 +1,8 @@
+.country_list {
+    border: 2px solid var(--clr-2);
+	border-radius: 4px;
+	font-family: var(--font-family);
+	box-shadow: var(--shadowColor);
+	text-indent: 3px;
+    width: 160px;
+}

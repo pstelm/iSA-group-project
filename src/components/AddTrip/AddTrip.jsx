@@ -9,12 +9,17 @@ import { Popup } from 'reactjs-popup';
 import tagsData from './Tags/tags.json';
 import Tags from './Tags/Tags';
 import { useState } from 'react';
+import countriesData from '../../components/Countries/countries.json';
+import Countries from '../../components/Countries/Countries.jsx';
 import { getStorage, ref, uploadBytes } from '@firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 
 const AddTrip = () => {
 	const [selectedTags, setSelectedTags] = useState([]);
 	const tripID = uuidv4();
+
+	const [selectedFromCountry, setSelectedFromCountry] = useState([]);
+	const [selectedToCountry, setSelectedToCountry] = useState([]);
 
 	const { currentUser } = useAuth();
 
@@ -28,8 +33,10 @@ const AddTrip = () => {
 			const info = e.target.info.value;
 			const startDate = new Date(e.target.startDate.value);
 			const endDate = new Date(e.target.endDate.value);
-			const startPlace = e.target.startPlace.value;
-			const endPlace = e.target.endPlace.value;
+			const fromCity = e.target.fromCity.value;
+			const fromCountry = selectedFromCountry;
+			const toCity = e.target.toCity.value;
+			const toCountry = selectedToCountry;
 			const maxParticipantsCount = Number(e.target.maxParticipantsCount.value);
 			const participants = [currentUser.uid];
 			const budget = Number(e.target.budget.value);
@@ -59,8 +66,10 @@ const AddTrip = () => {
 				info: info,
 				startDate: startDate,
 				endDate: endDate,
-				startPlace: startPlace,
-				endPlace: endPlace,
+				fromCity: fromCity,
+				fromCountry: fromCountry,
+				toCity: toCity,
+				toCountry: toCountry,
 				maxParticipantsCount: maxParticipantsCount,
 				participants: participants,
 				budget: budget,
@@ -211,24 +220,37 @@ const AddTrip = () => {
 					</div>
 
 					<div className={styles.places_container}>
+						<legend className={styles.labels}>Miejsce wyjazdu*</legend>
+						<div className={styles.places}>
+							<input
+								className={styles.input_add_trip}
+								type='text'
+								name='fromCity'
+								id='fromCity'
+								placeholder='Z'
+								required
+							/>
+							<Countries
+								countriesData={countriesData}
+								setSelectedCountry={setSelectedFromCountry}
+							/>
+						</div>
+					</div>
+
+					<div className={styles.places_container}>
 						<legend className={styles.labels}>Miejsce docelowe*</legend>
 						<div className={styles.places}>
 							<input
 								className={styles.input_add_trip}
 								type='text'
-								name='startPlace'
-								id='startPlace'
-								placeholder='Z'
-								required
-							/>
-
-							<input
-								className={styles.input_add_trip}
-								type='text'
-								name='endPlace'
-								id='endPlace'
+								name='toCity'
+								id='toCity'
 								placeholder='Do'
 								required
+							/>
+							<Countries
+								countriesData={countriesData}
+								setSelectedCountry={setSelectedToCountry}
 							/>
 						</div>
 					</div>
