@@ -104,7 +104,7 @@ const AddTrip = () => {
 			<Popup
 				trigger={
 					<button type='button' className={styles.button_back}>
-						<img src='../../src/assets/icons/chevron-left-solid.svg' alt='arrow' />
+						<img src='/assets/icons/chevron-left-solid.svg' alt='arrow' />
 					</button>
 				}
 				modal
@@ -157,7 +157,7 @@ const AddTrip = () => {
 			) : (
 				<div className={styles.photo_container}>
 					<div className={styles.add_photo}>
-						<img src='../src/assets/icons/camera.png ' alt='ikonka aparatu fotograficznego' className={styles.add_photo_icon} 
+						<img src='/assets/icons/camera.png' alt='ikonka aparatu fotograficznego' className={styles.add_photo_icon} 
 						/>
 					</div>
 				</div>
