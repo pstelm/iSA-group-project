@@ -61,10 +61,10 @@ const TripMini = ({
 				setTripImgURL(url);
 			})
 			.catch((error) => {
-				if (error.code !== 'storage/object-not-found') {
-					// setTripImgURL()
-					console.log(error.message);
-				}
+				// if (error.code !== 'storage/object-not-found') {
+				// 	// setTripImgURL()
+				// 	console.log(error.message);
+				// }
 			});
 	};
 
@@ -141,7 +141,7 @@ const TripMini = ({
 							}
 							alt=''
 						/>
-						<p>max. {maxParticipantsCount ? maxParticipantsCount : '0'} osób</p>
+						<p>{maxParticipantsCount ? maxParticipantsCount : '0'} podróżników</p>
 					</div>
 				</Link>
 			</li>
