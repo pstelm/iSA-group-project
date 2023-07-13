@@ -9,16 +9,12 @@ import { Popup } from 'reactjs-popup';
 import tagsData from './Tags/tags.json';
 import Tags from './Tags/Tags';
 import { useState } from 'react';
-import {
-	getStorage,
-	ref,
-	uploadBytes,
-} from '@firebase/storage';
+import { getStorage, ref, uploadBytes } from '@firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 
 const AddTrip = () => {
 	const [selectedTags, setSelectedTags] = useState([]);
-	const [tripID, setTripID] = useState(uuidv4());
+	const tripID = uuidv4();
 
 	const { currentUser } = useAuth();
 
@@ -102,11 +98,13 @@ const AddTrip = () => {
 
 	return (
 		<>
+		<div className={styles.containter_add_trip}>
+			<div className={styles.header_container}>
 			<h4 className={styles.add_trip_header}>Dane podróży</h4>
 			<Popup
 				trigger={
 					<button type='button' className={styles.button_back}>
-						<img src='/src/assets/arrow.svg' alt='arrow' />
+						<img src='../../src/assets/icons/chevron-left-solid.svg' alt='arrow' />
 					</button>
 				}
 				modal
@@ -145,38 +143,41 @@ const AddTrip = () => {
 					</div>
 				)}
 			</Popup>
+			</div>
 
 			{tripPhoto ? (
+				<div className={styles.photo_container}>
 				<img
 					src={URL.createObjectURL(tripPhoto)}
 					alt='zdjęcie opisujące podróż'
 					id='tripPhoto'
 					className={styles.trip_photo}
 				/>
+				</div>
 			) : (
-				<img
-					src='../../src/assets/icons/empty-avatar.png'
-					alt='w tym miejscu pojawi się zdjęcie opisujące podróż'
-					id='emptyTripPhoto'
-					className={styles.trip_photo}
-				/>
+				<div className={styles.photo_container}>
+					<div className={styles.add_photo}>
+						<img src='../src/assets/icons/camera.png ' alt='ikonka aparatu fotograficznego' className={styles.add_photo_icon} 
+						/>
+					</div>
+				</div>
 			)}
-			<div>
-				<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
-					<input
-						type='file'
-						id='editTripPhoto'
-						className={styles.edit_trip_photo}
-						accept='.jpg'
-						multiple={false}
-						hidden
-					/>
-					<img
-						src='../../src/assets/icons/plus.png'
-						className={styles.icon_trip_photo}
-					/>
-				</label>
-			</div>
+
+			<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
+				<input
+					type='file'
+					id='editTripPhoto'
+					className={styles.edit_trip_photo}
+					accept='.jpg'
+					multiple={false}
+					hidden
+				/>
+				<div className={styles.add_photo_plus}>
+					
+				+
+				
+				</div>
+			</label>
 
 			<div className={styles.container}>
 				<form className={styles.form} onSubmit={handleSubmit}>
@@ -349,6 +350,7 @@ const AddTrip = () => {
 					</div>
 				</form>
 			</div>
+		</div>
 		</>
 	);
 };
