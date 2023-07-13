@@ -32,7 +32,7 @@ const Home = () => {
 								<div className={styles.hexagontent}>
 									<Link to='/userprofile' className={styles.linkshx}>
 										Mój <br /> profil
-										<img src='/assets/icons/account-circle-dark.svg' />
+										<img src='./assets/icons/account-circle-dark.svg' />
 									</Link>
 								</div>
 							</div>
@@ -40,7 +40,7 @@ const Home = () => {
 								<div className={styles.hexagontent}>
 									<Link to='/mytrips/joinedtrips' className={styles.linkshx}>
 										Dołączone podróże
-										<img src='/assets/icons/auto-mode-dark.svg' />
+										<img src='./assets/icons/auto-mode-dark.svg' />
 									</Link>
 								</div>
 							</div>
@@ -48,7 +48,7 @@ const Home = () => {
 								<div className={styles.hexagontent}>
 									<Link to='/addtrip' className={styles.linkshx}>
 										Stwórz <br /> podróż
-										<img src='/assets/icons/airplane-dark.svg' />
+										<img src='./assets/icons/airplane-dark.svg' />
 									</Link>
 								</div>
 							</div>
@@ -56,7 +56,7 @@ const Home = () => {
 								<div className={styles.hexagontent}>
 									<Link to='/alltrips' className={styles.linkshx}>
 										Szukaj <br /> podróży
-										<img src='/assets/icons/search-airplane.svg' />
+										<img src='./assets/icons/search-airplane.svg' />
 									</Link>
 								</div>
 							</div>
