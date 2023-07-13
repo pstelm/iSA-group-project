@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Filters.module.css';
-import { toast } from 'react-hot-toast';
+import { Toaster, toast } from 'react-hot-toast';
 
 const Filters = ({
 	additionalFilters,
@@ -61,13 +61,16 @@ const Filters = ({
 					: new Date(e.target.toDate.value)
 				: '';
 
-			// if (startDate > endDate) {
-			// 	throw new Error('Data powrotu nie może być wcześniejsza niż data wylotu');
-			// }
+			if ((newFromDate != '') & (newToDate != '') & (newFromDate > newToDate)) {
+				throw new Error(
+					'Data powrotu nie może być wcześniejsza niż data rozpoczęcia wycieczki'
+				);
+			}
 
-			// if (startDate < new Date()) {
-			// 	throw new Error('Data wylotu nie może być w przeszłości');
-			// }
+			if ((newFromDate != '') & (newFromDate < new Date())) {
+				console.log('error');
+				throw new Error('Początek wycieczki nie może być w przeszłości');
+			}
 
 			setAdditionalFilters({
 				countries: [],
@@ -77,107 +80,110 @@ const Filters = ({
 				toDate: newToDate,
 			});
 		} catch (error) {
-			console.error();
+			toast.error(error.message);
 		}
 	};
 
 	return (
-		<form
-			onSubmit={handleSetAdditionalFilters}
-			className={styles.additionalFiltersContainer}
-		>
-			{/* countires filter */}
-			<div className={styles.filtersGroupBox}>
-				<div className={styles.filtersGroupTitle}>
-					<h4>Lokalizacja</h4>
-					<button
-						className={styles.filtersGroupBtn}
-						type='button'
-						onClick={handleShowLocationFilters}
-					>
-						{showLocationFilters ? (
-							<img src='/src/assets/icons/minus-solid.svg' />
-						) : (
-							<img src='/src/assets/icons/plus-solid.svg' />
-						)}
-					</button>
-				</div>
-				{showLocationFilters && (
-					<div className={styles.filtersGroup}>FILTR LOKALIZACJI</div>
-				)}
-			</div>
-			{/* budget filter */}
-			<div className={styles.filtersGroupBox}>
-				<div className={styles.filtersGroupTitle}>
-					<h4>Budżet</h4>
-					<button
-						className={styles.filtersGroupBtn}
-						type='button'
-						onClick={handleShowBudgetFilters}
-					>
-						{showBudgetFilters ? (
-							<img src='/src/assets/icons/minus-solid.svg' />
-						) : (
-							<img src='/src/assets/icons/plus-solid.svg' />
-						)}
-					</button>
-				</div>
-				{showBudgetFilters && (
-					<div className={styles.filtersGroup}>
-						<label htmlFor='minBudget'>Od: </label>
-						<div className={styles.inputBox}>
-							<input
-								name='minBudget'
-								type='number'
-								placeholder={additionalFilters.minBudget}
-								className={styles.budgetInput}
-							/>
-							<p className={styles.inputBoxInfo}>zł</p>
-						</div>
-						<label htmlFor='maxBudget'>Do: </label>
-						<div className={styles.inputBox}>
-							<input
-								name='maxBudget'
-								type='number'
-								placeholder={additionalFilters.maxBudget}
-								className={styles.budgetInput}
-							/>
-							<p className={styles.inputBoxInfo}>zł</p>
-						</div>
+		<>
+			<Toaster />
+			<form
+				onSubmit={handleSetAdditionalFilters}
+				className={styles.additionalFiltersContainer}
+			>
+				{/* countires filter */}
+				<div className={styles.filtersGroupBox}>
+					<div className={styles.filtersGroupTitle}>
+						<h4>Lokalizacja</h4>
+						<button
+							className={styles.filtersGroupBtn}
+							type='button'
+							onClick={handleShowLocationFilters}
+						>
+							{showLocationFilters ? (
+								<img src='/src/assets/icons/minus-solid.svg' />
+							) : (
+								<img src='/src/assets/icons/plus-solid.svg' />
+							)}
+						</button>
 					</div>
-				)}
-			</div>
-			{/* dates filter */}
-			<div className={styles.filtersGroupBox}>
-				<div className={styles.filtersGroupTitle}>
-					<h4>Daty</h4>
-					<button
-						className={styles.filtersGroupBtn}
-						type='button'
-						onClick={handleShowDatesFilters}
-					>
-						{showDatesFilters ? (
-							<img src='/src/assets/icons/minus-solid.svg' />
-						) : (
-							<img src='/src/assets/icons/plus-solid.svg' />
-						)}
-					</button>
+					{showLocationFilters && (
+						<div className={styles.filtersGroup}>FILTR LOKALIZACJI</div>
+					)}
 				</div>
-				{showDatesFilters && (
-					<div className={styles.filtersGroup}>
-						<label htmlFor='fromDate'>Od: </label>
-						<div className={styles.inputBox}>
-							<input name='fromDate' type='date' className={styles.dateInput} />
-						</div>
-						<label htmlFor='toDate'>Do: </label>
-						<div className={styles.inputBox}>
-							<input name='toDate' type='date' className={styles.dateInput} />
-						</div>
+				{/* budget filter */}
+				<div className={styles.filtersGroupBox}>
+					<div className={styles.filtersGroupTitle}>
+						<h4>Budżet</h4>
+						<button
+							className={styles.filtersGroupBtn}
+							type='button'
+							onClick={handleShowBudgetFilters}
+						>
+							{showBudgetFilters ? (
+								<img src='/src/assets/icons/minus-solid.svg' />
+							) : (
+								<img src='/src/assets/icons/plus-solid.svg' />
+							)}
+						</button>
 					</div>
-				)}
-			</div>
-			<button className={styles.confirmBtn}>Zatwierdź</button>
-		</form>
+					{showBudgetFilters && (
+						<div className={styles.filtersGroup}>
+							<label htmlFor='minBudget'>Od: </label>
+							<div className={styles.inputBox}>
+								<input
+									name='minBudget'
+									type='number'
+									placeholder={additionalFilters.minBudget}
+									className={styles.budgetInput}
+								/>
+								<p className={styles.inputBoxInfo}>zł</p>
+							</div>
+							<label htmlFor='maxBudget'>Do: </label>
+							<div className={styles.inputBox}>
+								<input
+									name='maxBudget'
+									type='number'
+									placeholder={additionalFilters.maxBudget}
+									className={styles.budgetInput}
+								/>
+								<p className={styles.inputBoxInfo}>zł</p>
+							</div>
+						</div>
+					)}
+				</div>
+				{/* dates filter */}
+				<div className={styles.filtersGroupBox}>
+					<div className={styles.filtersGroupTitle}>
+						<h4>Daty</h4>
+						<button
+							className={styles.filtersGroupBtn}
+							type='button'
+							onClick={handleShowDatesFilters}
+						>
+							{showDatesFilters ? (
+								<img src='/src/assets/icons/minus-solid.svg' />
+							) : (
+								<img src='/src/assets/icons/plus-solid.svg' />
+							)}
+						</button>
+					</div>
+					{showDatesFilters && (
+						<div className={styles.filtersGroup}>
+							<label htmlFor='fromDate'>Od: </label>
+							<div className={styles.inputBox}>
+								<input name='fromDate' type='date' className={styles.dateInput} />
+							</div>
+							<label htmlFor='toDate'>Do: </label>
+							<div className={styles.inputBox}>
+								<input name='toDate' type='date' className={styles.dateInput} />
+							</div>
+						</div>
+					)}
+				</div>
+				<button className={styles.confirmBtn}>Zatwierdź</button>
+			</form>
+		</>
 	);
 };
 
