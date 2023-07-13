@@ -94,8 +94,6 @@ const AllTrips = () => {
 	};
 
 	const filterTrips = (text) => {
-		console.log('FILTERS', additionalFilters, selectedTags, searchedText);
-
 		const searchedTrips = allTrips
 			.filter(filterByTags)
 			.filter((trip) => filterByInput(trip, text))
