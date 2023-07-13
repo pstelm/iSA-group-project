@@ -4,6 +4,7 @@ import { getUserData } from '../../../utils/getUserData';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../contexts/AuthContext';
 import { getTripDuration } from '../../../utils/getTripDuration';
+import { getDownloadURL, getStorage, ref } from '@firebase/storage';
 
 const TripMini = ({
 	id,
@@ -13,12 +14,13 @@ const TripMini = ({
 	endPlace,
 	owner,
 	maxParticipantsCount,
-	participants,
 	filterOwnership,
 }) => {
 	// const [tripOwner, setTripOwner] = useState();
-	const [tripDuration, setTripDuration] = useState('');
 	const { currentUser } = useAuth();
+	const storage = getStorage();
+	const [tripImgURL, setTripImgURL] = useState();
+	const [tripDuration, setTripDuration] = useState('');
 
 	const getTripDuration = () => {
 		let tripDurationText = '';
@@ -52,8 +54,23 @@ const TripMini = ({
 		setTripDuration(tripDurationText);
 	};
 
+	const getTripImage = async () => {
+		const imgPathReference = ref(storage, `tripsPhoto/${id}.jpg`);
+		getDownloadURL(imgPathReference)
+			.then((url) => {
+				setTripImgURL(url);
+			})
+			.catch((error) => {
+				if (error.code !== 'storage/object-not-found') {
+					// setTripImgURL()
+					console.log(error.message);
+				}
+			});
+	};
+
 	useEffect(() => {
 		// getUserData(owner, setTripOwner);
+		getTripImage();
 		getTripDuration();
 	}, []);
 
@@ -68,6 +85,22 @@ const TripMini = ({
 							: styles.tripLink
 					}
 				>
+					<div className={styles.tripImgBox}>
+						{tripImgURL ? (
+							<img
+								src={tripImgURL}
+								alt={`Zdjęcie podróży ${title}`}
+								className={styles.tripImg}
+							/>
+						) : (
+							<img
+								src='/assets/default.png'
+								// src='/assets/logo_transparent.png'
+								alt={`Zdjęcie podróży ${title}`}
+								className={styles.defaultTripImg}
+							/>
+						)}
+					</div>
 					<h4 className={styles.title}>{title}</h4>
 					<div className={styles.oneLine}>
 						<img
