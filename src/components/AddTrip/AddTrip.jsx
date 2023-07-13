@@ -16,7 +16,9 @@ const AddTrip = () => {
 	const tripsCollectionRef = collection(db, 'Trips');
 
 	const [selectedTags, setSelectedTags] = useState([]);
-	const [selectedCountry, setSelectedCountry] = useState([]);
+
+	const [selectedFromCountry, setSelectedFromCountry] = useState([]);
+	const [selectedToCountry, setSelectedToCountry] = useState([]);
 
 	const { currentUser } = useAuth();
 
@@ -30,8 +32,10 @@ const AddTrip = () => {
 			const info = e.target.info.value;
 			const startDate = new Date(e.target.startDate.value);
 			const endDate = new Date(e.target.endDate.value);
-			const startPlace = e.target.startPlace.value;
-			const endPlace = selectedCountry;
+			const fromCity = e.target.fromCity.value;
+			const fromCountry = selectedFromCountry;
+			const toCity = e.target.toCity.value;
+			const toCountry = selectedToCountry;
 			const maxParticipantsCount = Number(e.target.maxParticipantsCount.value);
 			const participants = [currentUser.uid];
 			const budget = Number(e.target.budget.value);
@@ -59,8 +63,10 @@ const AddTrip = () => {
 				info: info,
 				startDate: startDate,
 				endDate: endDate,
-				startPlace: startPlace,
-				endPlace: endPlace,
+				fromCity: fromCity,
+				fromCountry: fromCountry,
+				toCity: toCity,
+				toCountry: toCountry,
 				maxParticipantsCount: maxParticipantsCount,
 				participants: participants,
 				budget: budget,
@@ -158,20 +164,39 @@ const AddTrip = () => {
 					</div>
 
 					<div className={styles.places_container}>
-						<legend className={styles.labels}>Miejsce docelowe*</legend>
+						<legend className={styles.labels}>Miejsce wyjazdu*</legend>
 						<div className={styles.places}>
 							<input
 								className={styles.input_add_trip}
 								type='text'
-								name='startPlace'
-								id='startPlace'
+								name='fromCity'
+								id='fromCity'
 								placeholder='Z'
 								required
 							/>
 							<Countries
 								countriesData={countriesData}
-								selectedCountry={selectedCountry}
-								setSelectedCountry={setSelectedCountry}
+								selectedCountry={selectedFromCountry}
+								setSelectedCountry={setSelectedFromCountry}
+							/>
+						</div>
+					</div>
+
+					<div className={styles.places_container}>
+						<legend className={styles.labels}>Miejsce docelowe*</legend>
+						<div className={styles.places}>
+							<input
+								className={styles.input_add_trip}
+								type='text'
+								name='toCity'
+								id='toCity'
+								placeholder='Do'
+								required
+							/>
+							<Countries
+								countriesData={countriesData}
+								selectedCountry={selectedToCountry}
+								setSelectedCountry={setSelectedToCountry}
 							/>
 						</div>
 					</div>
