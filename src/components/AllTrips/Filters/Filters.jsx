@@ -26,6 +26,16 @@ const Filters = ({
 		setShowBudgetFilters(!showBudgetFilters);
 	};
 
+	const handleRemoveSelectedCountry = (e) => {
+		e.preventDefault();
+
+		const updateSelectedCountries = selectedCountries.filter((country) => {
+			return country === e.currentTarget.id ? false : true;
+		});
+
+		setSelectedCountries(updateSelectedCountries);
+	};
+
 	const handleSetAdditionalFilters = (e) => {
 		e.preventDefault();
 		try {
@@ -76,7 +86,7 @@ const Filters = ({
 			}
 
 			setAdditionalFilters({
-				countries: [],
+				countries: selectedCountries,
 				minBudget: newMinBudget,
 				maxBudget: newMaxBudget,
 				fromDate: newFromDate,
@@ -115,16 +125,17 @@ const Filters = ({
 							{/* div.selectBox dodany tylko po to, żeby wszystkei strzałki /ikony/kalendarze były w jednej pionowej linii */}
 							<div className={styles.selectBox}>
 								<select
-									// multiple={true}
-									// value={selectedVegs}
 									className={styles.countiesSelect}
 									onChange={(event) => {
 										const newSelectedValue = event.target.value;
-										setSelectedCountries((previouslySelecetedCountries) => [
-											...previouslySelecetedCountries,
-											newSelectedValue,
-										]);
-										// console.log(newSelectedValue);
+										if (!selectedCountries.includes(newSelectedValue)) {
+											setSelectedCountries((previouslySelecetedCountries) => [
+												...previouslySelecetedCountries,
+												newSelectedValue,
+											]);
+										} else {
+											toast('Ten kraj jest już zaznaczony');
+										}
 									}}
 								>
 									<option defaultValue=''></option>
@@ -138,10 +149,17 @@ const Filters = ({
 								</select>
 							</div>
 							<ul className={styles.selectedCountiesList}>
-								{console.log(selectedCountries)}
+								{/* {console.log(selectedCountries)} */}
 								{selectedCountries.map((selectedCountry) => (
-									<li key={selectedCountry}>
-										{selectedCountry} <button type='button'></button>
+									<li
+										key={selectedCountry}
+										id={selectedCountry}
+										onClick={handleRemoveSelectedCountry}
+									>
+										{selectedCountry}{' '}
+										<button type='button' className={styles.removeSelectedCountry}>
+											<img src='/src/assets/icons/trash.svg' alt='Usuń wybranyn kraj' />
+										</button>
 									</li>
 								))}
 							</ul>
