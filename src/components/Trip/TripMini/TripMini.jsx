@@ -74,8 +74,8 @@ const TripMini = ({
 							className={styles.icon}
 							src={
 								filterOwnership === true && owner === currentUser.uid
-									? '/src/assets/icons/location-dot-grey.svg'
-									: '/src/assets/icons/location-dot-solid.svg'
+									? '/assets/icons/location-dot-grey.svg'
+									: '/assets/icons/location-dot-solid.svg'
 							}
 							alt=''
 						/>
@@ -86,8 +86,8 @@ const TripMini = ({
 							className={styles.icon}
 							src={
 								filterOwnership === true && owner === currentUser.uid
-									? '/src/assets/icons/calendar-days-grey.svg'
-									: '/src/assets/icons/calendar-days-regular.svg'
+									? '/assets/icons/calendar-days-grey.svg'
+									: '/assets/icons/calendar-days-regular.svg'
 							}
 							alt=''
 						/>
@@ -103,8 +103,8 @@ const TripMini = ({
 							className={styles.icon}
 							src={
 								filterOwnership === true && owner === currentUser.uid
-									? '/src/assets/icons/people-group-grey.svg'
-									: '/src/assets/icons/people-group-solid.svg'
+									? '/assets/icons/people-group-grey.svg'
+									: '/assets/icons/people-group-solid.svg'
 							}
 							alt=''
 						/>

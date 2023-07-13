@@ -156,7 +156,7 @@ const AllTrips = () => {
 						type='button'
 						onClick={handleShowFilters}
 					>
-						<img src='/src/assets/icons/filters.svg' alt='Filtruj' />
+						<img src='/assets/icons/filters.svg' alt='Filtruj' />
 					</button>
 
 					{showFilters && (

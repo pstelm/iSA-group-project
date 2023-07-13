@@ -27,7 +27,7 @@ const Login = () => {
 			{!currentUser ? (
 				<div className={styles.container}>
 					<div className={styles.logo}>
-						<img src='../../src/assets/logo_transparent.png' alt='Logo CoTravel' />
+						<img src='/assets/logo_transparent.png' alt='Logo CoTravel' />
 					</div>
 					<form onSubmit={handleSubmit} className={styles.form}>
 						<h1>Zaloguj się</h1>

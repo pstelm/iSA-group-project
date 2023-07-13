@@ -199,7 +199,7 @@ const TripFullPage = () => {
 						<div className={styles.oneLine}>
 							<img
 								className={styles.icon}
-								src='/src/assets/icons/location-dot-solid.svg'
+								src='/assets/icons/location-dot-solid.svg'
 								alt=''
 							/>
 							<p>{trip.endPlace}</p>
@@ -207,7 +207,7 @@ const TripFullPage = () => {
 						<div className={styles.oneLine}>
 							<img
 								className={styles.icon}
-								src='/src/assets/icons/calendar-days-regular.svg'
+								src='/assets/icons/calendar-days-regular.svg'
 								alt=''
 							/>
 							<p>{tripDuration}</p>
