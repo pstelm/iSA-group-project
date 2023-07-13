@@ -24,7 +24,12 @@ const OwnedTrips = () => {
 				id: doc.id,
 				...doc.data(),
 			}));
-			setOwnedTrips(ownedTripsData);
+
+			const ownedValidTripsData = ownedTripsData.filter(
+				(trip) => trip.endDate.toDate() > new Date()
+			);
+
+			setOwnedTrips(ownedValidTripsData);
 		} catch (error) {
 			toast.error('Wystąpił błąd: ' + firebaseErrors[error.code]);
 		}
@@ -51,6 +56,9 @@ const OwnedTrips = () => {
 				</Link>
 				<Link to='/mytrips/joinedtrips' className={styles.myTripsLink}>
 					Dołączone
+				</Link>
+				<Link to='/mytrips/completedtrips' className={styles.myTripsLink}>
+					Zakończone
 				</Link>
 			</div>
 			<div className={styles.container}>
