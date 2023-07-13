@@ -11,7 +11,7 @@ const TripMini = ({
 	title,
 	startDate,
 	endDate,
-	endPlace,
+	toCountry,
 	owner,
 	maxParticipantsCount,
 	filterOwnership,
@@ -63,7 +63,7 @@ const TripMini = ({
 			.catch((error) => {
 				// if (error.code !== 'storage/object-not-found') {
 				// 	// setTripImgURL()
-				// 	console.log(error.message);
+				console.log(error.message);
 				// }
 			});
 	};
@@ -112,7 +112,7 @@ const TripMini = ({
 							}
 							alt=''
 						/>
-						<p>{endPlace}</p>
+						<p>{toCountry}</p>
 					</div>
 					<div className={styles.oneLine}>
 						<img
