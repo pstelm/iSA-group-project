@@ -13,8 +13,8 @@ const Footer = () => {
 						className={styles.icon}
 						src={
 							pathname === '/'
-								? '../../src/assets/icons/home-circle-light.svg'
-								: '../../src/assets/icons/home-circle-dark.svg'
+								? '/assets/icons/home-circle-light.svg'
+								: '/assets/icons/home-circle-dark.svg'
 						}
 						alt='Ikona skrótu do Home'
 					/>
@@ -30,8 +30,8 @@ const Footer = () => {
 						className={styles.icon}
 						src={
 							pathname === '/alltrips'
-								? '../../src/assets/icons/airplane-light.svg'
-								: '../../src/assets/icons/airplane-dark.svg'
+								? '/assets/icons/airplane-light.svg'
+								: '/assets/icons/airplane-dark.svg'
 						}
 						alt='Ikona skrótu do Podróżuj'
 					/>
@@ -52,8 +52,8 @@ const Footer = () => {
 						className={styles.icon}
 						src={
 							pathname === '/mytrips/ownedtrips' || pathname === '/mytrips/joinedtrips'
-								? '../../src/assets/icons/auto-mode-light.svg'
-								: '../../src/assets/icons/auto-mode-dark.svg'
+								? '/assets/icons/auto-mode-light.svg'
+								: '/assets/icons/auto-mode-dark.svg'
 						}
 						alt='Ikona skrótu do Moje Podróże'
 					/>
@@ -69,8 +69,8 @@ const Footer = () => {
 						className={styles.icon}
 						src={
 							pathname === '/userprofile'
-								? '../../src/assets/icons/account-circle-light.svg'
-								: '../../src/assets/icons/account-circle-dark.svg'
+								? '/assets/icons/account-circle-light.svg'
+								: '/assets/icons/account-circle-dark.svg'
 						}
 						alt='Ikona skrótu do Profil'
 					/>
