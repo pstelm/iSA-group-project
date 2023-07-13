@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './AddTrip.module.css';
 import { db } from '../../config/firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../contexts/AuthContext';
 import { toast } from 'react-hot-toast';
@@ -11,11 +11,12 @@ import Tags from './Tags/Tags';
 import { useState } from 'react';
 import countriesData from '../../components/Countries/countries.json';
 import Countries from '../../components/Countries/Countries.jsx';
+import { getStorage, ref, uploadBytes } from '@firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
 
 const AddTrip = () => {
-	const tripsCollectionRef = collection(db, 'Trips');
-
 	const [selectedTags, setSelectedTags] = useState([]);
+	const tripID = uuidv4();
 
 	const [selectedFromCountry, setSelectedFromCountry] = useState([]);
 	const [selectedToCountry, setSelectedToCountry] = useState([]);
@@ -58,7 +59,9 @@ const AddTrip = () => {
 				throw new Error('Budżet nie może być mniejszy niż 1 zł');
 			}
 
-			await addDoc(tripsCollectionRef, {
+			const newTripRef = doc(db, 'Trips', tripID);
+
+			await setDoc(newTripRef, {
 				title: title,
 				info: info,
 				startDate: startDate,
@@ -74,10 +77,26 @@ const AddTrip = () => {
 				owner: owner,
 			});
 
+			if (tripPhoto) {
+				const pathReference = ref(storage, `tripsPhoto/${tripID}.jpg`);
+				await uploadBytes(pathReference, tripPhoto);
+			}
+
 			toast.success('Pomyślnie dodano nową podróż');
 			navigate('/mytrips/ownedtrips');
 		} catch (error) {
 			toast.error('Wystąpił błąd: ' + error.message);
+		}
+	};
+
+	const storage = getStorage();
+	const [tripPhoto, setTripPhoto] = useState();
+
+	const handlePhotoAdd = async (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			setTripPhoto(file);
+			toast.success('Pomyślnie dodano zdjęcie');
 		}
 	};
 
@@ -88,11 +107,13 @@ const AddTrip = () => {
 
 	return (
 		<>
+		<div className={styles.containter_add_trip}>
+			<div className={styles.header_container}>
 			<h4 className={styles.add_trip_header}>Dane podróży</h4>
 			<Popup
 				trigger={
 					<button type='button' className={styles.button_back}>
-						<img src='/src/assets/arrow.svg' alt='arrow' />
+						<img src='/assets/icons/chevron-left-solid.svg' alt='arrow' />
 					</button>
 				}
 				modal
@@ -131,6 +152,41 @@ const AddTrip = () => {
 					</div>
 				)}
 			</Popup>
+			</div>
+
+			{tripPhoto ? (
+				<div className={styles.photo_container}>
+				<img
+					src={URL.createObjectURL(tripPhoto)}
+					alt='zdjęcie opisujące podróż'
+					id='tripPhoto'
+					className={styles.trip_photo}
+				/>
+				</div>
+			) : (
+				<div className={styles.photo_container}>
+					<div className={styles.add_photo}>
+						<img src='/assets/icons/camera.png' alt='ikonka aparatu fotograficznego' className={styles.add_photo_icon} 
+						/>
+					</div>
+				</div>
+			)}
+
+			<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
+				<input
+					type='file'
+					id='editTripPhoto'
+					className={styles.edit_trip_photo}
+					accept='.jpg'
+					multiple={false}
+					hidden
+				/>
+				<div className={styles.add_photo_plus}>
+					
+				+
+				
+				</div>
+			</label>
 
 			<div className={styles.container}>
 				<form className={styles.form} onSubmit={handleSubmit}>
@@ -316,6 +372,7 @@ const AddTrip = () => {
 					</div>
 				</form>
 			</div>
+		</div>
 		</>
 	);
 };
