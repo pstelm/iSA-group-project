@@ -148,7 +148,7 @@ const AllTrips = () => {
 							placeholder='Wpisz, czego szukasz'
 						/>
 						<div className={styles.searchbarInputIcon}>
-							<img src='/src/assets/icons/magnifying-glass.svg' alt='' />
+							<img src='/assets/icons/magnifying-glass.svg' alt='' />
 						</div>
 					</div>
 					<button

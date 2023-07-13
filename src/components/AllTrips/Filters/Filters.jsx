@@ -114,9 +114,9 @@ const Filters = ({
 							onClick={handleShowLocationFilters}
 						>
 							{showLocationFilters ? (
-								<img src='/src/assets/icons/minus-solid.svg' />
+								<img src='/assets/icons/minus-solid.svg' />
 							) : (
-								<img src='/src/assets/icons/plus-solid.svg' />
+								<img src='/assets/icons/plus-solid.svg' />
 							)}
 						</button>
 					</div>
@@ -158,7 +158,7 @@ const Filters = ({
 									>
 										{selectedCountry}{' '}
 										<button type='button' className={styles.removeSelectedCountry}>
-											<img src='/src/assets/icons/trash.svg' alt='Usuń wybranyn kraj' />
+											<img src='/assets/icons/trash.svg' alt='Usuń wybranyn kraj' />
 										</button>
 									</li>
 								))}
@@ -176,9 +176,9 @@ const Filters = ({
 							onClick={handleShowBudgetFilters}
 						>
 							{showBudgetFilters ? (
-								<img src='/src/assets/icons/minus-solid.svg' />
+								<img src='/assets/icons/minus-solid.svg' />
 							) : (
-								<img src='/src/assets/icons/plus-solid.svg' />
+								<img src='/assets/icons/plus-solid.svg' />
 							)}
 						</button>
 					</div>
@@ -217,9 +217,9 @@ const Filters = ({
 							onClick={handleShowDatesFilters}
 						>
 							{showDatesFilters ? (
-								<img src='/src/assets/icons/minus-solid.svg' />
+								<img src='/assets/icons/minus-solid.svg' />
 							) : (
-								<img src='/src/assets/icons/plus-solid.svg' />
+								<img src='/assets/icons/plus-solid.svg' />
 							)}
 						</button>
 					</div>
