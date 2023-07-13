@@ -176,7 +176,6 @@ const AddTrip = () => {
 							/>
 							<Countries
 								countriesData={countriesData}
-								selectedCountry={selectedFromCountry}
 								setSelectedCountry={setSelectedFromCountry}
 							/>
 						</div>
@@ -195,7 +194,6 @@ const AddTrip = () => {
 							/>
 							<Countries
 								countriesData={countriesData}
-								selectedCountry={selectedToCountry}
 								setSelectedCountry={setSelectedToCountry}
 							/>
 						</div>
