@@ -83,10 +83,7 @@ const UserProfile = () => {
 					<div className={styles.user_profile_container}>
 						<div className={styles.user_profile_content}>
 							<Link to='/editprofile' className={styles.link_edit}>
-								<img
-									src='../../src/assets/icons/pen.png'
-									className={styles.icon_edit_profile}
-								/>
+								<img src='/assets/icons/pen.png' className={styles.icon_edit_profile} />
 							</Link>
 							{userProfileImgURL ? (
 								<img
@@ -97,7 +94,7 @@ const UserProfile = () => {
 								/>
 							) : (
 								<img
-									src='../../src/assets/icons/account-circle-dark.svg'
+									src='/assets/icons/empty-avatar.png'
 									alt='empty user profile'
 									id='emptyUserProfilePhoto'
 									className={styles.user_photo}
@@ -113,10 +110,7 @@ const UserProfile = () => {
 										multiple={false}
 										hidden
 									/>
-									<img
-										src='../../src/assets/icons/plus.png'
-										className={styles.icon_edit_photo}
-									/>
+									<img src='/assets/icons/plus.png' className={styles.icon_edit_photo} />
 								</label>
 							</div>
 							<div className={styles.user_data_container}>
@@ -125,7 +119,7 @@ const UserProfile = () => {
 							{user.city ? (
 								<div className={styles.user_city_content}>
 									<img
-										src='../../src/assets/icons/location-dot-solid.svg'
+										src='/assets/icons/location-dot-solid.svg'
 										className={styles.icon_city}
 									/>
 									{user.city}

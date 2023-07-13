@@ -10,7 +10,7 @@ const BackButton = ({ sectionTitle }) => {
 			<button className={styles.buttonBox} onClick={() => navigate(-1)}>
 				<img
 					className={styles.buttonImg}
-					src='../src/assets/icons/chevron-left-solid.svg'
+					src='/assets/icons/chevron-left-solid.svg'
 					alt='Go back'
 				/>
 			</button>

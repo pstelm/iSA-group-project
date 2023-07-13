@@ -8,7 +8,7 @@ const Navbar = () => {
 	return (
 		<div className={styles.navbar}>
 			<div className={styles.navLogo}>
-				<img src='../../src/assets/logo_transparent.png' alt='Logo CoTravel' />
+				<img src='/assets/logo_transparent.png' alt='Logo CoTravel' />
 				<h1 className={styles.name}>CoTravel</h1>
 			</div>
 			{/* <button className={styles.hamburgerBtn} type="button">
