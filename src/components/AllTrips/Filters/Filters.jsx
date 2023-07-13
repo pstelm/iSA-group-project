@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Filters.module.css';
+import countriesList from './countries.json';
 import { Toaster, toast } from 'react-hot-toast';
 
 const Filters = ({
@@ -10,6 +11,8 @@ const Filters = ({
 	const [showLocationFilters, setShowLocationFilters] = useState(false);
 	const [showDatesFilters, setShowDatesFilters] = useState(false);
 	const [showBudgetFilters, setShowBudgetFilters] = useState(false);
+	const [selectedCountries, setSelectedCountries] = useState([]);
+	let currentSelecetedCountries = [];
 
 	const handleShowLocationFilters = () => {
 		setShowLocationFilters(!showLocationFilters);
@@ -91,7 +94,7 @@ const Filters = ({
 				onSubmit={handleSetAdditionalFilters}
 				className={styles.additionalFiltersContainer}
 			>
-				{/* countires filter */}
+				{/* countries filter */}
 				<div className={styles.filtersGroupBox}>
 					<div className={styles.filtersGroupTitle}>
 						<h4>Lokalizacja</h4>
@@ -108,7 +111,41 @@ const Filters = ({
 						</button>
 					</div>
 					{showLocationFilters && (
-						<div className={styles.filtersGroup}>FILTR LOKALIZACJI</div>
+						<div className={styles.filtersCountriesGroup}>
+							{/* div.selectBox dodany tylko po to, żeby wszystkei strzałki /ikony/kalendarze były w jednej pionowej linii */}
+							<div className={styles.selectBox}>
+								<select
+									// multiple={true}
+									// value={selectedVegs}
+									className={styles.countiesSelect}
+									onChange={(event) => {
+										const newSelectedValue = event.target.value;
+										setSelectedCountries((previouslySelecetedCountries) => [
+											...previouslySelecetedCountries,
+											newSelectedValue,
+										]);
+										// console.log(newSelectedValue);
+									}}
+								>
+									<option defaultValue=''></option>
+									{countriesList.map((country) => {
+										return (
+											<option key={country} value={country}>
+												{country}
+											</option>
+										);
+									})}
+								</select>
+							</div>
+							<ul className={styles.selectedCountiesList}>
+								{console.log(selectedCountries)}
+								{selectedCountries.map((selectedCountry) => (
+									<li key={selectedCountry}>
+										{selectedCountry} <button type='button'></button>
+									</li>
+								))}
+							</ul>
+						</div>
 					)}
 				</div>
 				{/* budget filter */}

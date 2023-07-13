@@ -39,6 +39,12 @@
 	margin-bottom: 10px;
 }
 
+.filtersCountriesGroup {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
 .inputBox {
 	border-radius: 8px;
 	overflow: hidden;
@@ -47,6 +53,34 @@
 	align-items: center;
 }
 
+.selectBox {
+	width: 100%;
+	height: 35px;
+	margin: 5px 0;
+	padding-right: 8px;
+	border-radius: 8px;
+	background-color: var(--clr-bg);
+}
+
+.countiesSelect {
+	height: 100%;
+	width: 100%;
+	border-radius: 8px;
+}
+
+.selectedCountiesList {
+	list-style: none;
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.selectedCountiesList li {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.countiesSelect,
 .budgetInput,
 .dateInput {
 	padding: 5px 10px;
@@ -55,6 +89,7 @@
 	font-size: var(--fs-p);
 }
 
+.countiesSelect:focus,
 .budgetInput:focus,
 .dateInput:focus {
 	outline: none;
