@@ -26,8 +26,13 @@ const AllTrips = () => {
 				id: doc.id,
 				...doc.data(),
 			}));
-			setAllTrips(tripsData);
-			setFilteredTrips(tripsData);
+
+			const currentTripsData = tripsData.filter(
+				(trip) => trip.startDate.toDate() > new Date()
+			);
+
+			setAllTrips(currentTripsData);
+			setFilteredTrips(currentTripsData);
 		} catch (error) {
 			toast.error('Ta podróż już nie istnieje');
 		}
