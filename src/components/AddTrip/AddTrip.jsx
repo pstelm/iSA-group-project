@@ -18,8 +18,8 @@ const AddTrip = () => {
 	const [selectedTags, setSelectedTags] = useState([]);
 	const tripID = uuidv4();
 
-	const [selectedFromCountry, setSelectedFromCountry] = useState([]);
-	const [selectedToCountry, setSelectedToCountry] = useState([]);
+	const [selectedFromCountry, setSelectedFromCountry] = useState('');
+	const [selectedToCountry, setSelectedToCountry] = useState('');
 
 	const { currentUser } = useAuth();
 
@@ -232,6 +232,7 @@ const AddTrip = () => {
 							/>
 							<Countries
 								countriesData={countriesData}
+								selectedCountry={selectedFromCountry}
 								setSelectedCountry={setSelectedFromCountry}
 							/>
 						</div>
@@ -250,6 +251,7 @@ const AddTrip = () => {
 							/>
 							<Countries
 								countriesData={countriesData}
+								selectedCountry={selectedToCountry}
 								setSelectedCountry={setSelectedToCountry}
 							/>
 						</div>
@@ -257,7 +259,6 @@ const AddTrip = () => {
 
 					<div className={styles.dates_container}>
 						<legend className={styles.labels}>Data</legend>
-
 						<div className={styles.dates}>
 							<label htmlFor='startDate' className={styles.small_notes}>
 								Początek
