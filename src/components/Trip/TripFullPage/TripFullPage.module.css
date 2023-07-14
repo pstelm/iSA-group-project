@@ -88,7 +88,6 @@
 	margin-bottom: 5px;
 	padding-bottom: 5px;
 	border-bottom: 1px solid var(--clr-grey-dark);
-	/* border-bottom: 1px solid var(--clr-main-dark); */
 }
 
 .box {
@@ -97,6 +96,10 @@
 	background-color: var(--clr-grey);
 	/* background-color: var(--clr-main-light-transparent); */
 	border-radius: 15px;
+}
+
+.box:last-child {
+	margin-bottom: 100px;
 }
 
 .tagsBox {
@@ -129,6 +132,7 @@
 .participant {
 	display: flex;
 	align-items: center;
+	margin-bottom: 5px;
 }
 
 .owner {
@@ -137,19 +141,26 @@
 	order: -1;
 }
 
-.owner img,
 .owner p,
-.participant img,
 .participant p {
 	display: inline;
 }
 
-.participantImg {
+.participantImg,
+.ownerImg {
 	display: block;
-	width: var(--fs-p);
-	height: var(--fs-p);
+	width: 30px;
+	height: 30px;
 	border-radius: 50%;
 	margin-right: 5px;
+}
+
+.ownerImg {
+	border: 2px solid var(--clr-orange);
+}
+
+.participantImg {
+	border: 2px solid var(--clr-bg);
 }
 
 .addToTripBtn,

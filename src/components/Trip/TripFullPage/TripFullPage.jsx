@@ -70,32 +70,29 @@ const TripFullPage = () => {
 		const participantsFilteredArray = users.filter((doc) => {
 			return trip?.participants.some((partID) => doc.id.includes(partID));
 		});
-		// console.log(participantsFilteredArray);
 		setParticipantsData(participantsFilteredArray);
 
 		const participantsWithImages = participantsFilteredArray.map(async (item) => {
 			const imageRef = ref(storage, `usersProfilePhoto/${item.id}.jpg`);
-			// console.log(imageRef);
-			return await getDownloadURL(imageRef).then((url) => {
-				// setParticipantImgURL(url);
-				console.log(url);
-				return {
-					imgURL: url,
-					...item,
-				};
-			});
+			return await getDownloadURL(imageRef)
+				.then((url) => {
+					return {
+						imgURL: url,
+						...item,
+					};
+				})
+				.catch((error) => {
+					return {
+						imgURL:
+							'https://firebasestorage.googleapis.com/v0/b/promises-land.appspot.com/o/usersProfilePhoto%2Fdefault-user-image.svg?alt=media&token=51cfbe1c-fb80-4d7f-bc54-cd59b95361aa',
+						...item,
+					};
+				});
 		});
 		Promise.all(participantsWithImages).then((uuu) => {
 			setParticipantsDataWithImg(uuu);
-			console.log('UUU', uuu);
 		});
-
-		console.log(participantsDataWithImg);
 	};
-
-	// const getParticipantsImages = (participantsFilteredArray) => {
-
-	// };
 
 	const getTripDuration = () => {
 		let tripDurationText = '';
@@ -286,6 +283,20 @@ const TripFullPage = () => {
 						</div>
 
 						<div className={styles.box}>
+							<h4 className={styles.sectionTitle}>Skąd ruszamy</h4>
+							<p>
+								{trip.fromCity}, {trip.fromCountry}
+							</p>
+						</div>
+
+						<div className={styles.box}>
+							<h4 className={styles.sectionTitle}>Dokąd się wybieramy</h4>
+							<p>
+								{trip.toCity}, {trip.toCountry}
+							</p>
+						</div>
+
+						<div className={styles.box}>
 							<h4 className={styles.sectionTitle}>
 								<span>Uczestnicy</span>
 								<span>max. {trip.maxParticipantsCount}</span>
@@ -298,7 +309,7 @@ const TripFullPage = () => {
 													<li key={participant.id} className={styles.owner}>
 														<img
 															src={participant.imgURL}
-															className={styles.participantImg}
+															className={styles.ownerImg}
 															alt={`Awatar użytkownike ${participant.firstName} ${participant.lastName}`}
 														/>
 														<p>
