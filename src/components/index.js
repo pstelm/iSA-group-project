@@ -15,6 +15,7 @@ import TripMini from './Trip/TripMini/TripMini';
 import TripFullPage from './Trip/TripFullPage/TripFullPage';
 import PasswordReminder from './Auth/PasswordReminder/PasswordReminder';
 import BackButton from './BackButton/BackButton';
+import EditTrip from './Trip/EditTrip/EditTrip';
 
 export {
 	Layout,
@@ -34,4 +35,5 @@ export {
 	TripFullPage,
 	PasswordReminder,
 	BackButton,
+	EditTrip,
 };
