@@ -12,7 +12,6 @@ const Filters = ({
 	const [showDatesFilters, setShowDatesFilters] = useState(false);
 	const [showBudgetFilters, setShowBudgetFilters] = useState(false);
 	const [selectedCountries, setSelectedCountries] = useState([]);
-	let currentSelecetedCountries = [];
 
 	const handleShowLocationFilters = () => {
 		setShowLocationFilters(!showLocationFilters);
