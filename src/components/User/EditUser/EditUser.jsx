@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from './EditUser.module.css';
-import BackButton from '../../BackButton/BackButton';
 import useAuth from '../../../contexts/AuthContext';
 import { getUserData } from '../../../utils/getUserData';
 import { doc, updateDoc } from 'firebase/firestore';
@@ -65,7 +64,7 @@ const EditUser = () => {
 	};
 
 	const handleCancelEditUserClick = () => {
-		navigate('/userprofile');
+		navigate(-1);
 		toast.error('Twoje zmiany nie zostały zapisane');
 	};
 
@@ -73,7 +72,19 @@ const EditUser = () => {
 		<>
 			{user ? (
 				<div className={styles.container}>
-					<BackButton sectionTitle={'Edycja profilu użytkownika'} />
+					<ModalPopup
+						triggerBtn={
+							<div className={styles.button_back_container}>
+								<button className={styles.button_back}>
+									<img src='/assets/icons/chevron-left-solid.svg' alt='Go back' />
+								</button>
+								<h3>Edycja profilu użytkownika</h3>
+							</div>
+						}
+						modalHeader='Czy na pewno chcesz anulować edycję profilu?'
+						modalAdditionalInfo='Spowoduje to usunięcie wszystkich wprowadzonych danych.'
+						handleConfirmCancelationClick={handleCancelEditUserClick}
+					/>
 					<div className={styles.form_container}>
 						<form
 							onSubmit={(e) => handleSaveUpdatedUserData(e)}
