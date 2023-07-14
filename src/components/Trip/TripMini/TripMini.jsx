@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from './TripMini.module.css';
-import { getUserData } from '../../../utils/getUserData';
+// import { getUserData } from '../../../utils/getUserData';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../contexts/AuthContext';
-import { getTripDuration } from '../../../utils/getTripDuration';
 import { getDownloadURL, getStorage, ref } from '@firebase/storage';
 
 const TripMini = ({
@@ -96,7 +95,7 @@ const TripMini = ({
 							<img
 								src='/assets/default.png'
 								// src='/assets/logo_transparent.png'
-								alt={`Zdjęcie podróży ${title}`}
+								alt={`Przykłądowe zdjęcie podróży`}
 								className={styles.defaultTripImg}
 							/>
 						)}
