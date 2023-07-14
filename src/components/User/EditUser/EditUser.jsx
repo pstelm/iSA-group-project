@@ -6,7 +6,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import ModalPopup from '../../ModalPopup/ModalPopup';
+import { ModalPopup } from '../../../components';
 
 const EditUser = () => {
 	const { currentUser } = useAuth();
