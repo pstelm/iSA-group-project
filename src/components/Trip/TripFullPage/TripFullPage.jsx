@@ -15,6 +15,7 @@ import { Popup } from 'reactjs-popup';
 import useAuth from '../../../contexts/AuthContext';
 import BackButton from '../../BackButton/BackButton';
 // import { getTripDuration } from '../../../utils/getTripDuration';
+import { Link } from 'react-router-dom';
 
 const TripFullPage = () => {
 	const { tripID } = useParams();
@@ -140,6 +141,15 @@ const TripFullPage = () => {
 			{participantsData ? (
 				<div className={styles.container}>
 					<BackButton sectionTitle={'Podróże'} />
+
+
+					{trip.owner === currentUser.uid ? ( 
+					<button>
+					<Link to={`/trip/${tripID}/edittrip`} className={styles.link_edit_trip}>
+								<img src='/assets/icons/pen.png' className={styles.icon_edit_trip} />
+							</Link>
+					</button>) : null}
+
 
 					{/* Przyciski Dołącz do podróży oraz Usuń podróż wraz z logiką */}
 					{trip.owner === currentUser.uid ? (
