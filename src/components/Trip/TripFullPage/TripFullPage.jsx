@@ -66,13 +66,36 @@ const TripFullPage = () => {
 		}
 	};
 
-	const getParticipantsData = () => {
+	const getParticipantsData = async () => {
 		const participantsFilteredArray = users.filter((doc) => {
 			return trip?.participants.some((partID) => doc.id.includes(partID));
 		});
-		console.log(participantsFilteredArray);
+		// console.log(participantsFilteredArray);
 		setParticipantsData(participantsFilteredArray);
+
+		const participantsWithImages = participantsFilteredArray.map(async (item) => {
+			const imageRef = ref(storage, `usersProfilePhoto/${item.id}.jpg`);
+			// console.log(imageRef);
+			return await getDownloadURL(imageRef).then((url) => {
+				// setParticipantImgURL(url);
+				console.log(url);
+				return {
+					imgURL: url,
+					...item,
+				};
+			});
+		});
+		Promise.all(participantsWithImages).then((uuu) => {
+			setParticipantsDataWithImg(uuu);
+			console.log('UUU', uuu);
+		});
+
+		console.log(participantsDataWithImg);
 	};
+
+	// const getParticipantsImages = (participantsFilteredArray) => {
+
+	// };
 
 	const getTripDuration = () => {
 		let tripDurationText = '';
@@ -268,30 +291,30 @@ const TripFullPage = () => {
 								<span>max. {trip.maxParticipantsCount}</span>
 							</h4>
 							<ul className={styles.participantsList}>
-								{participantsData
-									? participantsData.map((participant) => {
+								{participantsDataWithImg
+									? participantsDataWithImg.map((participant) => {
 											if (participant.id === trip.owner) {
 												return (
-													<li className={styles.owner}>
-														{/* <img
-															src={participant.imgUrl}
+													<li key={participant.id} className={styles.owner}>
+														<img
+															src={participant.imgURL}
 															className={styles.participantImg}
 															alt={`Awatar użytkownike ${participant.firstName} ${participant.lastName}`}
-														/> */}
-														<p key={participant.id}>
+														/>
+														<p>
 															{participant.firstName} {participant.lastName} - Organizator
 														</p>
 													</li>
 												);
 											} else {
 												return (
-													<li className={styles.participant}>
-														{/* <img
-															src={participant.imgUrl}
+													<li key={participant.id} className={styles.participant}>
+														<img
+															src={participant.imgURL}
 															className={styles.participantImg}
 															alt={`Awatar użytkownike ${participant.firstName} ${participant.lastName}`}
-														/> */}
-														<p key={participant.id}>
+														/>
+														<p>
 															{participant.firstName} {participant.lastName}
 														</p>
 													</li>
