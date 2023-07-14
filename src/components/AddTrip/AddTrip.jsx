@@ -109,12 +109,14 @@ const AddTrip = () => {
 		<>
 			<div className={styles.containter_add_trip}>
 				<div className={styles.header_container}>
-					<h4 className={styles.add_trip_header}>Dane podróży</h4>
 					<ModalPopup
 						triggerBtn={
-							<button type='button' className={styles.button_back}>
-								<img src='/assets/icons/chevron-left-solid.svg' alt='arrow' />
-							</button>
+							<div className={styles.button_back_container}>
+								<button className={styles.button_back}>
+									<img src='/assets/icons/chevron-left-solid.svg' alt='Go back' />
+								</button>
+								<h3>Stwórz podróż</h3>
+							</div>
 						}
 						modalHeader='Czy na pewno chcesz anulować tworzenie podróży?'
 						modalAdditionalInfo='Spowoduje to usunięcie wszystkich wprowadzonych danych.'
