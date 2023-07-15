@@ -162,6 +162,20 @@ const TripFullPage = () => {
 		}
 	};
 
+	const handleLeaveTrip = async () => {
+		try {
+			const participantsIdArray = [...trip.participants];
+			const participantsIdArrayUpdated = participantsIdArray.filter(
+				(participant) => participant !== currentUser.uid
+			);
+			await updateDoc(tripRef, { participants: participantsIdArrayUpdated });
+			toast.success('Opuszczono podróż');
+			navigate('/mytrips/joinedtrips');
+		} catch (error) {
+			toast.error('Błąd serwera');
+		}
+	};
+
 	useEffect(() => {
 		getUsers();
 	}, []);
@@ -201,6 +215,17 @@ const TripFullPage = () => {
 								Dołącz do podróży
 							</button>
 						)
+					) : participantsData.some((item) => item.id === currentUser.uid) ? (
+						participantsData && trip.endDate.toDate() > new Date() ? (
+							<ModalPopup
+								triggerBtn={
+									<button className={styles.leaveTripBtn}>Opuść podróż</button>
+								}
+								modalHeader='Czy na pewno chcesz opuścić tę podróż?'
+								modalAdditionalInfo='Spowoduje to trwałe usunięcie Cię z podróży.'
+								handleConfirmCancelationClick={handleLeaveTrip}
+							/>
+						) : null
 					) : null}
 
 					{/* Informacje dotyczące podróży */}
