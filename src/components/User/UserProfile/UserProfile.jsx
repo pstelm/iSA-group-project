@@ -14,6 +14,7 @@ import BackButton from '../../BackButton/BackButton';
 import { Link } from 'react-router-dom';
 import emptyAvatar from '/public/assets/icons/empty-avatar.png';
 import iconPlus from '/public/assets/icons/plus-solid.svg';
+import iconLocation from '/public/assets/icons/location-dot-solid.svg';
 
 const UserProfile = () => {
 	const { currentUser } = useAuth();
@@ -118,19 +119,28 @@ const UserProfile = () => {
 						</div>
 
 						<div className={styles.user_data_box}>
-							{user.firstName} {user.lastName}, {age}
+							<h2>
+								{user.firstName} {user.lastName}, {age} l.
+							</h2>
+							{user.city ? (
+								<div className={styles.user_city_content}>
+									<img src={iconLocation} className={styles.icon_city} />
+									<p>{user.city}, Polska</p>
+								</div>
+							) : (
+								<p className={styles.user_city_info}>Uzupełnij swoją lokalizację</p>
+							)}
 						</div>
-						{user.city ? (
-							<div className={styles.user_city_content}>
-								<img
-									src='/assets/icons/location-dot-solid.svg'
-									className={styles.icon_city}
-								/>
-								{user.city}
-							</div>
-						) : null}
-						<legend className={styles.legend}>O mnie</legend>
-						<div className={styles.user_about}>{user.aboutMe}</div>
+
+						<div className={styles.user_about_box}>
+							<h4 className={styles.section_title}>O mnie</h4>
+							<p>{user.aboutMe}</p>
+						</div>
+
+						<div className={styles.user_about_box}>
+							<h4 className={styles.section_title}>Moje podróże</h4>
+							<p>{user.aboutMe}</p>
+						</div>
 					</div>
 				</div>
 			) : null}
