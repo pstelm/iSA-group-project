@@ -44,17 +44,6 @@ const Filters = ({
 					: parseInt(e.target.minBudget.value)
 				: additionalFilters.minBudget;
 
-			// To powyżej to skrócone to poniżej. Musiałam dodać sprawdzanie, czy pola w ogóle są widoczne na stronie, przez akcje an pomarańczowym plusie
-			// let newMinBudget = '';
-			// if (e.target.minBudget) {
-			// 	newMinBudget =
-			// 		e.target.minBudget.value === ''
-			// 			? additionalFilters.minBudget
-			// 			: parseInt(e.target.minBudget.value);
-			// } else {
-			// 	newMinBudget = additionalFilters.minBudget;
-			// }
-
 			const newMaxBudget = e.target.maxBudget
 				? e.target.maxBudget.value === ''
 					? topBudgetOfAllTrips
@@ -121,7 +110,6 @@ const Filters = ({
 					</div>
 					{showLocationFilters && (
 						<div className={styles.filtersCountriesGroup}>
-							{/* div.selectBox dodany tylko po to, żeby wszystkei strzałki /ikony/kalendarze były w jednej pionowej linii */}
 							<div className={styles.selectBox}>
 								<select
 									className={styles.countiesSelect}
@@ -148,7 +136,6 @@ const Filters = ({
 								</select>
 							</div>
 							<ul className={styles.selectedCountiesList}>
-								{/* {console.log(selectedCountries)} */}
 								{selectedCountries.map((selectedCountry) => (
 									<li
 										key={selectedCountry}
