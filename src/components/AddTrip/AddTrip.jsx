@@ -13,6 +13,8 @@ import Countries from '../../components/Countries/Countries.jsx';
 import { getStorage, ref, uploadBytes } from '@firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { ModalPopup } from '../../components';
+import iconBack from '/public/assets/icons/chevron-left-solid.svg';
+import emptyTripPhoto from '/public/assets/icons/camera.png';
 
 const AddTrip = () => {
 	const [selectedTags, setSelectedTags] = useState([]);
@@ -113,7 +115,7 @@ const AddTrip = () => {
 						triggerBtn={
 							<div className={styles.button_back_container}>
 								<button className={styles.button_back}>
-									<img src='/assets/icons/chevron-left-solid.svg' alt='Go back' />
+									<img src={iconBack} alt='Go back' />
 								</button>
 								<h3>Stwórz podróż</h3>
 							</div>
@@ -137,7 +139,7 @@ const AddTrip = () => {
 					<div className={styles.photo_container}>
 						<div className={styles.add_photo}>
 							<img
-								src='/assets/icons/camera.png'
+								src={emptyTripPhoto}
 								alt='ikonka aparatu fotograficznego'
 								className={styles.add_photo_icon}
 							/>
@@ -199,11 +201,11 @@ const AddTrip = () => {
 									placeholder='Z'
 									required
 								/>
-							<Countries
-								countriesData={countriesData}
-								selectedCountry={selectedFromCountry}
-								setSelectedCountry={setSelectedFromCountry}
-							/>
+								<Countries
+									countriesData={countriesData}
+									selectedCountry={selectedFromCountry}
+									setSelectedCountry={setSelectedFromCountry}
+								/>
 							</div>
 						</div>
 
@@ -219,10 +221,10 @@ const AddTrip = () => {
 									required
 								/>
 								<Countries
-								countriesData={countriesData}
-								selectedCountry={selectedToCountry}
-								setSelectedCountry={setSelectedToCountry}
-							/>
+									countriesData={countriesData}
+									selectedCountry={selectedToCountry}
+									setSelectedCountry={setSelectedToCountry}
+								/>
 							</div>
 						</div>
 
