@@ -107,7 +107,7 @@ const AddTrip = () => {
 
 	return (
 		<>
-			<div className={styles.containter_add_trip}>
+			<div className={styles.container_add_trip}>
 				<div className={styles.header_container}>
 					<ModalPopup
 						triggerBtn={
@@ -124,38 +124,46 @@ const AddTrip = () => {
 					/>
 				</div>
 
-				{tripPhoto ? (
-					<div className={styles.photo_container}>
-						<img
-							src={URL.createObjectURL(tripPhoto)}
-							alt='zdjęcie opisujące podróż'
-							id='tripPhoto'
-							className={styles.trip_photo}
-						/>
-					</div>
-				) : (
-					<div className={styles.photo_container}>
-						<div className={styles.add_photo}>
+				<div className={styles.photoBox}>
+					{tripPhoto ? (
+						<div className={styles.photo_container}>
 							<img
-								src='/assets/icons/camera.png'
-								alt='ikonka aparatu fotograficznego'
-								className={styles.add_photo_icon}
+								src={URL.createObjectURL(tripPhoto)}
+								alt='zdjęcie opisujące podróż'
+								id='tripPhoto'
+								className={styles.trip_photo}
 							/>
 						</div>
-					</div>
-				)}
+					) : (
+						<div className={styles.photo_container}>
+							<div className={styles.add_photo}>
+								<img
+									src='/assets/icons/camera.png'
+									alt='ikonka aparatu fotograficznego'
+									className={styles.add_photo_icon}
+								/>
+							</div>
+						</div>
+					)}
 
-				<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
-					<input
-						type='file'
-						id='editTripPhoto'
-						className={styles.edit_trip_photo}
-						accept='.jpg'
-						multiple={false}
-						hidden
-					/>
-					<div className={styles.add_photo_plus}><img src='/assets/icons/plus-solid.svg' /> </div>
-				</label>
+					<label
+						onChange={handlePhotoAdd}
+						htmlFor='editTripPhoto'
+						className={styles.add_photo_plus_label}
+					>
+						<input
+							type='file'
+							id='editTripPhoto'
+							className={styles.edit_trip_photo}
+							accept='.jpg'
+							multiple={false}
+							hidden
+						/>
+						<div className={styles.add_photo_plus}>
+							<img src='/assets/icons/plus-solid.svg' />{' '}
+						</div>
+					</label>
+				</div>
 
 				<div className={styles.container}>
 					<form className={styles.form} onSubmit={handleSubmit}>
@@ -199,11 +207,11 @@ const AddTrip = () => {
 									placeholder='Z'
 									required
 								/>
-							<Countries
-								countriesData={countriesData}
-								selectedCountry={selectedFromCountry}
-								setSelectedCountry={setSelectedFromCountry}
-							/>
+								<Countries
+									countriesData={countriesData}
+									selectedCountry={selectedFromCountry}
+									setSelectedCountry={setSelectedFromCountry}
+								/>
 							</div>
 						</div>
 
@@ -219,10 +227,10 @@ const AddTrip = () => {
 									required
 								/>
 								<Countries
-								countriesData={countriesData}
-								selectedCountry={selectedToCountry}
-								setSelectedCountry={setSelectedToCountry}
-							/>
+									countriesData={countriesData}
+									selectedCountry={selectedToCountry}
+									setSelectedCountry={setSelectedToCountry}
+								/>
 							</div>
 						</div>
 
@@ -256,12 +264,12 @@ const AddTrip = () => {
 
 						<div className={styles.participants_container}>
 							<div className={styles.participants}>
-							<label htmlFor='maxParticipantsCount' className={styles.labels}>
-								Podaj łączną ilość uczestników
-							</label>
-							<div className={styles.hint}>
-								<p>Pamiętaj, że Ty również jesteś uczestnikiem podróży!</p>
-							</div>
+								<label htmlFor='maxParticipantsCount' className={styles.labels}>
+									Podaj łączną ilość uczestników
+								</label>
+								<div className={styles.hint}>
+									<p>Pamiętaj, że Ty również jesteś uczestnikiem podróży!</p>
+								</div>
 							</div>
 							<input
 								className={styles.input_add_trip}
