@@ -11,6 +11,7 @@ import AddTrip from './AddTrip/AddTrip';
 import AllTrips from './AllTrips/AllTrips';
 import OwnedTrips from './MyTrips/OwnedTrips/OwnedTrips';
 import JoinedTrips from './MyTrips/JoinedTrips/JoinedTrips';
+import CompletedTrips from './MyTrips/CompletedTrips/CompletedTrips';
 import TripMini from './Trip/TripMini/TripMini';
 import TripFullPage from './Trip/TripFullPage/TripFullPage';
 import PasswordReminder from './Auth/PasswordReminder/PasswordReminder';
@@ -31,6 +32,7 @@ export {
 	AllTrips,
 	OwnedTrips,
 	JoinedTrips,
+	CompletedTrips,
 	TripMini,
 	TripFullPage,
 	PasswordReminder,
