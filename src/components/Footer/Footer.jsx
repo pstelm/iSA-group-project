@@ -1,6 +1,14 @@
 import React from 'react';
 import styles from './Footer.module.css';
 import { Link, useLocation } from 'react-router-dom';
+import iconHomeDark from '/public/assets/icons/home-circle-dark.svg';
+import iconHomeLight from '/public/assets/icons/home-circle-light.svg';
+import iconAllTripsDark from '/public/assets/icons/airplane-dark.svg';
+import iconAllTripsLight from '/public/assets/icons/airplane-light.svg';
+import iconJoinedTripsDark from '/public/assets/icons/auto-mode-dark.svg';
+import iconJoinedTripsLight from '/public/assets/icons/auto-mode-light.svg';
+import iconUserProfileDark from '/public/assets/icons/account-circle-dark.svg';
+import iconUserProfileLight from '/public/assets/icons/account-circle-light.svg';
 
 const Footer = () => {
 	const { pathname } = useLocation();
@@ -11,11 +19,7 @@ const Footer = () => {
 				<div className={styles.link}>
 					<img
 						className={styles.icon}
-						src={
-							pathname === '/'
-								? '/assets/icons/home-circle-light.svg'
-								: '/assets/icons/home-circle-dark.svg'
-						}
+						src={pathname === '/' ? { iconHomeLight } : { iconHomeDark }}
 						alt='Ikona skrótu do Home'
 					/>
 					<span>Home</span>
@@ -29,9 +33,7 @@ const Footer = () => {
 					<img
 						className={styles.icon}
 						src={
-							pathname === '/alltrips'
-								? '/assets/icons/airplane-light.svg'
-								: '/assets/icons/airplane-dark.svg'
+							pathname === '/alltrips' ? { iconAllTripsLight } : { iconAllTripsDark }
 						}
 						alt='Ikona skrótu do Podróżuj'
 					/>
@@ -52,8 +54,8 @@ const Footer = () => {
 						className={styles.icon}
 						src={
 							pathname === '/mytrips/ownedtrips' || pathname === '/mytrips/joinedtrips'
-								? '/assets/icons/auto-mode-light.svg'
-								: '/assets/icons/auto-mode-dark.svg'
+								? { iconJoinedTripsLight }
+								: { iconJoinedTripsDark }
 						}
 						alt='Ikona skrótu do Moje Podróże'
 					/>
@@ -69,8 +71,8 @@ const Footer = () => {
 						className={styles.icon}
 						src={
 							pathname === '/userprofile'
-								? '/assets/icons/account-circle-light.svg'
-								: '/assets/icons/account-circle-dark.svg'
+								? { iconUserProfileLight }
+								: { iconUserProfileDark }
 						}
 						alt='Ikona skrótu do Profil'
 					/>
