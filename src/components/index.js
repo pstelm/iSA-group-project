@@ -16,6 +16,7 @@ import TripMini from './Trip/TripMini/TripMini';
 import TripFullPage from './Trip/TripFullPage/TripFullPage';
 import PasswordReminder from './Auth/PasswordReminder/PasswordReminder';
 import BackButton from './BackButton/BackButton';
+import ModalPopup from './ModalPopup/ModalPopup';
 import Filters from './AllTrips/Filters/Filters';
 
 export {
@@ -37,5 +38,6 @@ export {
 	TripFullPage,
 	PasswordReminder,
 	BackButton,
+	ModalPopup,
 	Filters,
 };
