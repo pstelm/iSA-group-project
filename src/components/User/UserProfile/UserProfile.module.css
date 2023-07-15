@@ -2,12 +2,6 @@
 	padding: 10px;
 }
 
-.user_photo {
-	height: 140px;
-	width: 140px;
-	border-radius: 50%;
-}
-
 .user_profile_container {
 	height: 100%;
 	width: 100%;
@@ -15,36 +9,26 @@
 	justify-content: center;
 	align-content: flex-start;
 	margin-top: 20px;
+	background-color: var(--clr-main-light-transparent);
+	border-radius: 10px;
+	font-family: var(--font-family);
 }
 
 .user_profile_content {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	gap: 10px;
 	height: 100%;
 	font-size: var(--fs-h2);
+	gap: 10px;
 }
 
-.icon_edit_profile {
-	height: 25px;
-}
-
-.icon_edit_photo {
-	position: absolute;
-	height: 25px;
-	right: 130px;
-	top: 220px;
-}
-
-.user_city_content {
-	display: flex;
-	align-items: center;
-	gap: 6px;
-}
-
-.icon_city {
-	height: 20px;
+.visuals_container {
+	height: fit-content;
+	width: fit-content;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .link_edit {
@@ -54,4 +38,70 @@
 	border: none;
 	width: 35px;
 	height: 35px;
+}
+
+.icon_edit_profile {
+	height: 20px;
+	position: relative;
+	top: 48px;
+	left: 140px;
+}
+
+.user_photo {
+	height: 160px;
+	width: 160px;
+	border-radius: 50%;
+	padding: 10px;
+}
+
+.edit_avatar_input {
+}
+
+.icon_add_photo {
+	height: 22px;
+	position: relative;
+	left: 138px;
+	bottom: 32px;
+}
+
+.user_data_container {
+	font-size: var(--fs-h2);
+	font-weight: var(--font-bold);
+	background-color: var(--clr-white-transparent);
+	width: fit-content;
+	padding: 5px 10px;
+	border-radius: 15px;
+	align-self: center;
+}
+
+.user_city_content {
+	font-size: var(--fs-h3);
+	align-self: center;
+	background-color: var(--clr-white-transparent);
+	width: fit-content;
+	padding: 5px 10px;
+	border-radius: 15px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.icon_city {
+	height: 20px;
+}
+
+.legend {
+	padding: 10px;
+	font-size: var(--fs-h4);
+	font-weight: var(--font-bold);
+	position: relative;
+	top: 20px;
+}
+
+.user_about {
+	background-color: var(--clr-white-transparent);
+	width: 100%;
+	padding: 5px 10px;
+	border-radius: 15px;
+	font-size: var(--fs-p);
 }

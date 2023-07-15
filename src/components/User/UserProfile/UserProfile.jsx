@@ -82,36 +82,41 @@ const UserProfile = () => {
 					<BackButton sectionTitle={'Profil użytkownika'} />
 					<div className={styles.user_profile_container}>
 						<div className={styles.user_profile_content}>
-							<Link to='/editprofile' className={styles.link_edit}>
-								<img src='/assets/icons/pen.png' className={styles.icon_edit_profile} />
-							</Link>
-							{userProfileImgURL ? (
-								<img
-									src={userProfileImgURL}
-									alt='user profile'
-									id='userProfilePhoto'
-									className={styles.user_photo}
-								/>
-							) : (
-								<img
-									src='/assets/icons/empty-avatar.png'
-									alt='empty user profile'
-									id='emptyUserProfilePhoto'
-									className={styles.user_photo}
-								/>
-							)}
-							<div>
-								<label onChange={handleEditAvatar} htmlFor='editAvatarInput'>
-									<input
-										type='file'
-										id='editAvatarInput'
-										className={styles.edit_avatar_input}
-										accept='.jpg'
-										multiple={false}
-										hidden
+							<div className={styles.visuals_container}>
+								<Link to='/editprofile' className={styles.link_edit}>
+									<img
+										src='/assets/icons/pen.png'
+										className={styles.icon_edit_profile}
 									/>
-									<img src='/assets/icons/plus.png' className={styles.icon_edit_photo} />
-								</label>
+								</Link>
+								{userProfileImgURL ? (
+									<img
+										src={userProfileImgURL}
+										alt='user profile'
+										id='userProfilePhoto'
+										className={styles.user_photo}
+									/>
+								) : (
+									<img
+										src='/assets/icons/empty-avatar.png'
+										alt='empty user profile'
+										id='emptyUserProfilePhoto'
+										className={styles.user_photo}
+									/>
+								)}
+								<div>
+									<label onChange={handleEditAvatar} htmlFor='editAvatarInput'>
+										<input
+											type='file'
+											id='editAvatarInput'
+											className={styles.edit_avatar_input}
+											accept='.jpg'
+											multiple={false}
+											hidden
+										/>
+										<img src='/assets/icons/plus.png' className={styles.icon_add_photo} />
+									</label>
+								</div>
 							</div>
 							<div className={styles.user_data_container}>
 								{user.firstName} {user.lastName}, {age}
@@ -126,10 +131,7 @@ const UserProfile = () => {
 								</div>
 							) : null}
 							<legend className={styles.legend}>O mnie</legend>
-							<div className={styles.user_about}>
-								{user.aboutMe}
-							</div>
-						
+							<div className={styles.user_about}>{user.aboutMe}</div>
 						</div>
 					</div>
 				</div>
