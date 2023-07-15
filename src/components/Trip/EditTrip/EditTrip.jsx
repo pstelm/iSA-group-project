@@ -26,8 +26,7 @@ import {
 	ref,
 	uploadBytes,
 } from '@firebase/storage';
-import BackButton from '../../BackButton/BackButton';
-import Popup from 'reactjs-popup';
+import { ModalPopup } from '../../index';
 
 const EditTrip = () => {
 	const { currentUser } = useAuth();
@@ -193,11 +192,30 @@ const EditTrip = () => {
 		getTrip();
 	}, []);
 
+    const handleCancel = () => {
+		navigate('/');
+		toast.error('Twoje zmiany nie zostały zapisane');
+	};
+
 	return (
 		<>
 			{user ? (
 				<div className={styles.container}>
-					<BackButton sectionTitle={'Edycja podróży'} />
+                   <div className={styles.header_container}>
+					<ModalPopup
+						triggerBtn={
+							<div className={styles.button_back_container}>
+								<button className={styles.button_back}>
+									<img src='/assets/icons/chevron-left-solid.svg' alt='Go back' />
+								</button>
+								<h3>Edytuj podróż</h3>
+							</div>
+						}
+						modalHeader='Czy na pewno chcesz anulować edycję podróży?'
+						modalAdditionalInfo='Spowoduje to usunięcie wszystkich wprowadzonych danych.'
+						handleConfirmCancelationClick={handleCancel}
+					/>
+				</div>
 					{tripPhotoURL ? (
 						<div className={styles.photo_container}>
 							<img
@@ -226,7 +244,7 @@ const EditTrip = () => {
 							multiple={false}
 							hidden
 						/>
-						<div className={styles.add_photo_plus}>+</div>
+						<div className={styles.add_photo_plus}><img src='/assets/icons/plus-solid.svg' /></div>
 					</label>
 
 					<form
@@ -394,49 +412,16 @@ const EditTrip = () => {
 							</div>
 
 							<div className={styles.btn_container}>
-								<Popup
-									trigger={
-										<button type='button' className={styles.cancel_btn}>
-											Anuluj
-										</button>
-									}
-									modal
-									nested
-								>
-									{(close) => (
-										<div className={styles.overlay}>
-											<div className={styles.modal}>
-												<button className={styles.close_sign} onClick={close}>
-													&times;
-												</button>
-												<div className={styles.modal_header}>
-													Czy na pewno chcesz anulować edycję?
-												</div>
-												<p className={styles.modal_additional_info}>
-													Spowoduje to usunięcie wszystkich wprowadzonych danych.
-												</p>
-												<div className={styles.actions}>
-													<button
-														className={`${styles.actions_btn} + ${styles.actions_btn_cancel}`}
-														onClick={() => close()}
-													>
-														Powrót
-													</button>
-													<button
-														className={`${styles.actions_btn} + ${styles.actions_btn_confirm}`}
-														onClick={() => {
-															navigate('/mytrips/ownedtrips');
-															toast.error('Twoje zmiany nie zostały zapisane');
-															close();
-														}}
-													>
-														Potwierdź
-													</button>
-												</div>
-											</div>
-										</div>
-									)}
-								</Popup>
+                            <ModalPopup
+								triggerBtn={
+									<button type='button' className={styles.cancel_btn}>
+										Anuluj
+									</button>
+								}
+								modalHeader='Czy na pewno chcesz anulować edycję podróży?'
+								modalAdditionalInfo='Spowoduje to usunięcie wszystkich wprowadzonych danych.'
+								handleConfirmCancelationClick={handleCancel}
+							/>
 								<button type='submit' className={styles.save_btn}>
 									Zapisz
 								</button>
