@@ -190,6 +190,7 @@ const Filters = ({
 									type='number'
 									placeholder={additionalFilters.minBudget}
 									className={styles.budgetInput}
+									onWheel={(e) => e.target.blur()}
 								/>
 								<p className={styles.inputBoxInfo}>zł</p>
 							</div>
@@ -200,6 +201,7 @@ const Filters = ({
 									type='number'
 									placeholder={additionalFilters.maxBudget}
 									className={styles.budgetInput}
+									onWheel={(e) => e.target.blur()}
 								/>
 								<p className={styles.inputBoxInfo}>zł</p>
 							</div>
