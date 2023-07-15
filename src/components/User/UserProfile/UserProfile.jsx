@@ -112,15 +112,12 @@ const UserProfile = () => {
 				<div className={styles.container}>
 					<BackButton sectionTitle={'Profil użytkownika'} />
 
-					{/* <Link to='/editprofile' className={styles.link_edit_bottom}>
+					<Link to='/editprofile' className={styles.link_edit_bottom}>
 						Edytuj profil
-					</Link> */}
+					</Link>
 
 					<div className={styles.user_profile_content}>
 						<div className={styles.user_photo_box}>
-							<Link to='/editprofile' className={styles.link_edit}>
-								<img src='/assets/icons/pen.png' className={styles.icon_edit_profile} />
-							</Link>
 							{userProfileImgURL ? (
 								<img
 									src={userProfileImgURL}
