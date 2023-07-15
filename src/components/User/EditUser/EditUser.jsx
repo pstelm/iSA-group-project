@@ -7,6 +7,7 @@ import { db } from '../../../config/firebase';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { ModalPopup } from '../../../components';
+import iconBack from '/public/assets/icons/chevron-left-solid.svg';
 
 const EditUser = () => {
 	const { currentUser } = useAuth();
@@ -76,7 +77,7 @@ const EditUser = () => {
 						triggerBtn={
 							<div className={styles.button_back_container}>
 								<button className={styles.button_back}>
-									<img src='/assets/icons/chevron-left-solid.svg' alt='Go back' />
+									<img src={iconBack} alt='Go back' />
 								</button>
 								<h3>Edycja profilu użytkownika</h3>
 							</div>
