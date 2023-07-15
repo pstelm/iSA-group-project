@@ -12,6 +12,10 @@ import {
 import { toast } from 'react-hot-toast';
 import BackButton from '../../BackButton/BackButton';
 import { Link } from 'react-router-dom';
+import emptyAvatar from '/public/assets/icons/empty-avatar.png';
+import iconEdit from '/public/assets/icons/pen.png';
+import iconPlus from '/public/assets/icons/plus.png';
+import iconLocation from '/public/assets/icons/location-dot-solid.svg';
 
 const UserProfile = () => {
 	const { currentUser } = useAuth();
@@ -83,7 +87,7 @@ const UserProfile = () => {
 					<div className={styles.user_profile_container}>
 						<div className={styles.user_profile_content}>
 							<Link to='/editprofile' className={styles.link_edit}>
-								<img src='/assets/icons/pen.png' className={styles.icon_edit_profile} />
+								<img src={iconEdit} className={styles.icon_edit_profile} />
 							</Link>
 							{userProfileImgURL ? (
 								<img
@@ -94,7 +98,7 @@ const UserProfile = () => {
 								/>
 							) : (
 								<img
-									src='/assets/icons/empty-avatar.png'
+									src={emptyAvatar}
 									alt='empty user profile'
 									id='emptyUserProfilePhoto'
 									className={styles.user_photo}
@@ -110,7 +114,7 @@ const UserProfile = () => {
 										multiple={false}
 										hidden
 									/>
-									<img src='/assets/icons/plus.png' className={styles.icon_edit_photo} />
+									<img src={iconPlus} className={styles.icon_edit_photo} />
 								</label>
 							</div>
 							<div className={styles.user_data_container}>
@@ -118,18 +122,12 @@ const UserProfile = () => {
 							</div>
 							{user.city ? (
 								<div className={styles.user_city_content}>
-									<img
-										src='/assets/icons/location-dot-solid.svg'
-										className={styles.icon_city}
-									/>
+									<img src={iconLocation} className={styles.icon_city} />
 									{user.city}
 								</div>
 							) : null}
 							<legend className={styles.legend}>O mnie</legend>
-							<div className={styles.user_about}>
-								{user.aboutMe}
-							</div>
-						
+							<div className={styles.user_about}>{user.aboutMe}</div>
 						</div>
 					</div>
 				</div>

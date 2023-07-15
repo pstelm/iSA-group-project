@@ -4,6 +4,7 @@ import styles from './Login.module.css';
 import useAuth from '../../../contexts/AuthContext';
 import { firebaseErrors } from '../../../utils/firebaseErrors';
 import GrayButton from '../../GrayButton/GrayButton';
+import logo from '/public/assets/logo_transparent.png';
 
 const Login = () => {
 	const { login, currentUser } = useAuth();
@@ -27,7 +28,7 @@ const Login = () => {
 			{!currentUser ? (
 				<div className={styles.container}>
 					<div className={styles.logo}>
-						<img src='/assets/logo_transparent.png' alt='Logo CoTravel' />
+						<img src={logo} alt='Logo CoTravel' />
 					</div>
 					<form onSubmit={handleSubmit} className={styles.form}>
 						<h1>Zaloguj się</h1>

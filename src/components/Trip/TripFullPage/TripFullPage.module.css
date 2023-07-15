@@ -164,7 +164,8 @@
 
 .addToTripBtn,
 .addToTripBtnDisabled,
-.deleteTripBtn {
+.deleteTripBtn,
+.leaveTripBtn {
 	position: fixed;
 	bottom: 100px;
 	left: 50%;
@@ -192,6 +193,14 @@
 }
 
 .deleteTripBtn {
+	border: 2px solid var(--clr-dark-red);
+	color: var(--clr-dark-red);
+	background-color: var(--clr-dark-red);
+	color: var(--clr-bg);
+	cursor: pointer;
+}
+
+.leaveTripBtn {
 	border: 2px solid var(--clr-dark-red);
 	color: var(--clr-dark-red);
 	background-color: var(--clr-dark-red);

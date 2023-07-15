@@ -3,6 +3,10 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
 import { getUserData } from '../../utils/getUserData';
+import iconUserProfile from '/public/assets/icons/account-circle-dark.svg';
+import iconJoinedTrips from '/public/assets/icons/auto-mode-dark.svg';
+import iconAddTrip from '/public/assets/icons/airplane-dark.svg';
+import iconSearchTrip from '/public/assets/icons/search-airplane.svg';
 
 const Home = () => {
 	const { currentUser } = useAuth();
@@ -32,7 +36,7 @@ const Home = () => {
 								<div className={styles.hexagontent}>
 									<Link to='/userprofile' className={styles.linkshx}>
 										Mój <br /> profil
-										<img src='assets/icons/account-circle-dark.svg' />
+										<img src={iconUserProfile} />
 									</Link>
 								</div>
 							</div>
@@ -40,7 +44,7 @@ const Home = () => {
 								<div className={styles.hexagontent}>
 									<Link to='/mytrips/joinedtrips' className={styles.linkshx}>
 										Dołączone podróże
-										<img src='assets/icons/auto-mode-dark.svg' />
+										<img src={iconJoinedTrips} />
 									</Link>
 								</div>
 							</div>
@@ -48,7 +52,7 @@ const Home = () => {
 								<div className={styles.hexagontent}>
 									<Link to='/addtrip' className={styles.linkshx}>
 										Stwórz <br /> podróż
-										<img src='assets/icons/airplane-dark.svg' />
+										<img src={iconAddTrip} />
 									</Link>
 								</div>
 							</div>
@@ -56,7 +60,7 @@ const Home = () => {
 								<div className={styles.hexagontent}>
 									<Link to='/alltrips' className={styles.linkshx}>
 										Szukaj <br /> podróży
-										<img src='assets/icons/search-airplane.svg' />
+										<img src={iconSearchTrip} />
 									</Link>
 								</div>
 							</div>

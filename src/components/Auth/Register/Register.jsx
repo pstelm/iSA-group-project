@@ -6,6 +6,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate, Link } from 'react-router-dom';
 import { firebaseErrors } from '../../../utils/firebaseErrors';
 import GrayButton from '../../GrayButton/GrayButton';
+import arrow from '/public/assets/arrow.svg';
 
 const Register = () => {
 	const navigate = useNavigate();
@@ -91,15 +92,50 @@ const Register = () => {
 			<div className={styles.container}>
 				<header className={styles.header}>
 					<Link to='/login'>
-						<img
-							className={styles.arrow}
-							src='/assets/arrow.svg'
-							alt='Arrow pointing left'
-						/>
+						<img className={styles.arrow} src={arrow} alt='Arrow pointing left' />
 					</Link>
 					<h2>Rejestracja</h2>
 				</header>
 				<form onSubmit={handleSubmit} className={styles.form}>
+					<div className={styles.relative}>
+						<div className={styles.data}>
+							<h2>Dane logowania</h2>
+						</div>
+						<div className={styles.info}>
+							<label htmlFor='email' className={styles.label}>
+								Adres e-mail
+							</label>
+							<input type='email' name='email' id='email' className={styles.input} />
+							<label htmlFor='password' className={styles.label}>
+								Hasło
+							</label>
+							<input
+								type='password'
+								name='password'
+								id='password'
+								pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*[&%$]).{8,}$'
+								title='Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny i 1 dużą literę'
+								className={styles.input}
+							/>
+							<p>
+								Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak
+								specjalny i 1 dużą literę
+							</p>
+							<label htmlFor='password_confirm' className={styles.label}>
+								Powtórz hasło
+							</label>
+							<input
+								type='password'
+								name='password_confirm'
+								id='password_confirm'
+								className={styles.input}
+							/>
+							<p>
+								Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak
+								specjalny i 1 dużą literę
+							</p>
+						</div>
+					</div>
 					<div className={styles.relative}>
 						<div className={styles.data}>
 							<h2>Dane podstawowe</h2>
@@ -150,45 +186,6 @@ const Register = () => {
 									Mężczyzna
 								</label>
 							</div>
-						</div>
-					</div>
-					<div className={styles.relative}>
-						<div className={styles.data}>
-							<h2>Dane logowania</h2>
-						</div>
-						<div className={styles.info}>
-							<label htmlFor='email' className={styles.label}>
-								Adres e-mail
-							</label>
-							<input type='email' name='email' id='email' className={styles.input} />
-							<label htmlFor='password' className={styles.label}>
-								Hasło
-							</label>
-							<input
-								type='password'
-								name='password'
-								id='password'
-								pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*[&%$]).{8,}$'
-								title='Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak specjalny i 1 dużą literę'
-								className={styles.input}
-							/>
-							<p>
-								Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak
-								specjalny i 1 dużą literę
-							</p>
-							<label htmlFor='password_confirm' className={styles.label}>
-								Powtórz hasło
-							</label>
-							<input
-								type='password'
-								name='password_confirm'
-								id='password_confirm'
-								className={styles.input}
-							/>
-							<p>
-								Twoje hasło musi zawierać 8 znaków, co najmniej 1 cyfrę, 1 znak
-								specjalny i 1 dużą literę
-							</p>
 						</div>
 					</div>
 					<div className={styles.button}>

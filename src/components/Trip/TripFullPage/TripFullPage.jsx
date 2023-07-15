@@ -13,10 +13,12 @@ import { db } from '../../../config/firebase';
 import { toast } from 'react-hot-toast';
 import useAuth from '../../../contexts/AuthContext';
 import BackButton from '../../BackButton/BackButton';
-// import { getTripDuration } from '../../../utils/getTripDuration';
 import { Link } from 'react-router-dom';
 import { ModalPopup } from '../../../components';
 import { getDownloadURL, getStorage, ref } from '@firebase/storage';
+import iconLocation from '/public/assets/icons/location-dot-main-light.svg';
+import iconCalendar from '/public/assets/icons/calendar-days-main-light.svg';
+import iconEdit from '/public/assets/icons/pen.png';
 
 const TripFullPage = () => {
 	const { tripID } = useParams();
@@ -30,7 +32,8 @@ const TripFullPage = () => {
 	const [tripImgURL, setTripImgURL] = useState();
 	const [participantsData, setParticipantsData] = useState();
 	const [participantsDataWithImg, setParticipantsDataWithImg] = useState([]);
-	const [participantImgURL, setParticipantImgURL] = useState();
+	const defaultImgURL =
+		'https://firebasestorage.googleapis.com/v0/b/promises-land.appspot.com/o/tripsPhoto%2Fdefault.png?alt=media&token=179f10ed-72cc-40a8-bef4-2a76ba77f98f';
 
 	const tripRef = doc(db, 'Trips', tripID);
 
@@ -164,6 +167,20 @@ const TripFullPage = () => {
 		}
 	};
 
+	const handleLeaveTrip = async () => {
+		try {
+			const participantsIdArray = [...trip.participants];
+			const participantsIdArrayUpdated = participantsIdArray.filter(
+				(participant) => participant !== currentUser.uid
+			);
+			await updateDoc(tripRef, { participants: participantsIdArrayUpdated });
+			toast.success('Opuszczono podróż');
+			navigate('/mytrips/joinedtrips');
+		} catch (error) {
+			toast.error('Błąd serwera');
+		}
+	};
+
 	useEffect(() => {
 		getUsers();
 	}, []);
@@ -182,7 +199,6 @@ const TripFullPage = () => {
 				<div className={styles.container}>
 					<div className={styles.header_container}>
 					<BackButton sectionTitle={'Podróże'} />
-
 
 					{trip.owner === currentUser.uid ? ( 
 						<div className={styles.edit_trip_container}>
@@ -215,6 +231,17 @@ const TripFullPage = () => {
 								Dołącz do podróży
 							</button>
 						)
+					) : participantsData.some((item) => item.id === currentUser.uid) ? (
+						participantsData && trip.endDate.toDate() > new Date() ? (
+							<ModalPopup
+								triggerBtn={
+									<button className={styles.leaveTripBtn}>Opuść podróż</button>
+								}
+								modalHeader='Czy na pewno chcesz opuścić tę podróż?'
+								modalAdditionalInfo='Spowoduje to trwałe usunięcie Cię z podróży.'
+								handleConfirmCancelationClick={handleLeaveTrip}
+							/>
+						) : null
 					) : null}
 
 					{/* Informacje dotyczące podróży */}
@@ -229,7 +256,7 @@ const TripFullPage = () => {
 									/>
 								) : (
 									<img
-										src='/assets/default.png'
+										src={defaultImgURL}
 										alt={`Przykładowe zdjęcie podrózy`}
 										className={styles.tripHeaderImg}
 									/>
@@ -238,19 +265,11 @@ const TripFullPage = () => {
 							<div className={styles.tripHeaderInfo}>
 								<h4 className={styles.tripTitle}>{trip.title}</h4>
 								<div className={styles.oneLine}>
-									<img
-										className={styles.icon}
-										src='/assets/icons/location-dot-main-light.svg'
-										alt=''
-									/>
+									<img className={styles.icon} src={iconLocation} alt='' />
 									<p>{trip.toCountry}</p>
 								</div>
 								<div className={styles.oneLine}>
-									<img
-										className={styles.icon}
-										src='/assets/icons/calendar-days-main-light.svg'
-										alt=''
-									/>
+									<img className={styles.icon} src={iconCalendar} alt='' />
 									<p>{tripDuration}</p>
 								</div>
 							</div>
