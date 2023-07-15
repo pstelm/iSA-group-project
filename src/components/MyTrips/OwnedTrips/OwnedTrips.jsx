@@ -7,6 +7,7 @@ import TripMini from '../../Trip/TripMini/TripMini';
 import { toast } from 'react-hot-toast';
 import { firebaseErrors } from '../../../utils/firebaseErrors';
 import { Link, useNavigate } from 'react-router-dom';
+import iconPlus from '/public/assets/icons/plus-solid.svg';
 
 const OwnedTrips = () => {
 	const { currentUser } = getAuth();
@@ -69,15 +70,16 @@ const OwnedTrips = () => {
 							Dokąd chcesz się wybrać? :) <br />
 							Tapnij + aby dodać nową podróż.
 						</p>
-						<button onClick={handleClick} className={styles.create_btn}>
-							+
+						<button className={styles.create_btn} type='button' onClick={handleClick}>
+							<img src={iconPlus} />
 						</button>
 					</div>
 				</div>
 				<ul className={styles.trip}>
 					{ownedTrips
 						? ownedTrips.map((trip) => (
-								<TripMini key={trip.id} {...trip} filterOwnership={false} />))
+								<TripMini key={trip.id} {...trip} filterOwnership={false} />
+						  ))
 						: null}
 				</ul>
 			</div>
