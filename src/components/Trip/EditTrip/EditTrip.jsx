@@ -26,8 +26,10 @@ import {
 	ref,
 	uploadBytes,
 } from '@firebase/storage';
+import { ModalPopup } from '../../index';
 import BackButton from '../../BackButton/BackButton';
 import Popup from 'reactjs-popup';
+import emptyTripPhoto from '/public/assets/icons/camera.png';
 
 const EditTrip = () => {
 	const { currentUser } = useAuth();
@@ -61,12 +63,12 @@ const EditTrip = () => {
 				setSelectedFromCountry(tripFilteredData.fromCountry);
 				setSelectedToCountry(tripFilteredData.toCountry);
 				setSelectedTags(tripFilteredData.tags);
-                if (tripFilteredData.participants.length > 0) {
-                    const participants = await fetchParticipantsData(
-                        tripFilteredData.participants
-                    );
-                    setParticipants(participants);
-                }
+				if (tripFilteredData.participants.length > 0) {
+					const participants = await fetchParticipantsData(
+						tripFilteredData.participants
+					);
+					setParticipants(participants);
+				}
 
 				getDownloadURL(pathReference)
 					.then((url) => {
@@ -88,7 +90,7 @@ const EditTrip = () => {
 		const participantsRef = query(
 			collection(db, 'Users'),
 			where(documentId(), 'in', partcipantsIDs),
-            where(documentId(), '!=', currentUser.uid)
+			where(documentId(), '!=', currentUser.uid)
 		);
 		const participants = await getDocs(participantsRef);
 
@@ -128,8 +130,8 @@ const EditTrip = () => {
 			const maxParticipantsCount = Number(e.target.maxParticipantsCount.value);
 			const budget = Number(e.target.budget.value);
 			const tags = selectedTags;
-            const participantsIds = participants.map((participant) => participant.id);
-            const participantsWithOwner = [...participantsIds, currentUser.uid];
+			const participantsIds = participants.map((participant) => participant.id);
+			const participantsWithOwner = [...participantsIds, currentUser.uid];
 
 			if (startDate > endDate) {
 				throw new Error('Data powrotu nie może być wcześniejsza niż data wylotu');
@@ -157,7 +159,7 @@ const EditTrip = () => {
 				toCity: toCity,
 				toCountry: toCountry,
 				maxParticipantsCount: maxParticipantsCount,
-                participants: participantsWithOwner,
+				participants: participantsWithOwner,
 				budget: budget,
 				tags: tags,
 			});
@@ -182,22 +184,43 @@ const EditTrip = () => {
 		}
 	};
 
-    const handleDeleteParticipant = async (partcipantID) => {
-        if (participants) {
-            setParticipants(participants.filter((participant) => participant.id !== partcipantID));
-        }
-    };
+	const handleDeleteParticipant = async (partcipantID) => {
+		if (participants) {
+			setParticipants(
+				participants.filter((participant) => participant.id !== partcipantID)
+			);
+		}
+	};
 
 	useEffect(() => {
 		getUserData(currentUser.uid, setUser);
 		getTrip();
 	}, []);
 
+    const handleCancel = () => {
+        navigate(-1);
+        toast.error('Twoje zmiany nie zostały zapisane');
+    };
+    
 	return (
 		<>
 			{user ? (
 				<div className={styles.container}>
-					<BackButton sectionTitle={'Edycja podróży'} />
+                   <div className={styles.header_container}>
+					<ModalPopup
+						triggerBtn={
+							<div className={styles.button_back_container}>
+								<button className={styles.button_back}>
+									<img src='/assets/icons/chevron-left-solid.svg' alt='Go back' />
+								</button>
+								<h3>Edytuj podróż</h3>
+							</div>
+						}
+						modalHeader='Czy na pewno chcesz anulować edycję podróży?'
+						modalAdditionalInfo='Spowoduje to usunięcie wszystkich wprowadzonych danych.'
+						handleConfirmCancelationClick={handleCancel}
+					/>
+				</div>
 					{tripPhotoURL ? (
 						<div className={styles.photo_container}>
 							<img
@@ -209,12 +232,14 @@ const EditTrip = () => {
 						</div>
 					) : (
 						<div className={styles.photo_container}>
+                            <div className={styles.trip_photo_empty}>
 							<img
-								src='/assets/icons/camera.png'
+								src={emptyTripPhoto}
 								alt='ikonka aparatu fotograficznego'
 								className={styles.icon_edit_trip}
 							/>
 						</div>
+                        </div>
 					)}
 
 					<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
@@ -226,7 +251,7 @@ const EditTrip = () => {
 							multiple={false}
 							hidden
 						/>
-						<div className={styles.add_photo_plus}>+</div>
+						<div className={styles.add_photo_plus}><img src='/assets/icons/plus-solid.svg' /></div>
 					</label>
 
 					<form
@@ -350,21 +375,26 @@ const EditTrip = () => {
 								<label htmlFor='participants' className={styles.labels}>
 									Zapisani uczestnicy:
 								</label>
-                                <div className={styles.participants_border}>
-								{participants.length > 0
-									? participants.map((participant) => {
-											return ( 
+								<div className={styles.participants_border}>
+									{participants.length > 0 ? (
+										participants.map((participant) => {
+											return (
 												<div className={styles.participant} key={participant.id}>
 													{participant.firstName} {participant.lastName}
-                                                    <button className={styles.remove_user_btn} type="button" onClick={() => handleDeleteParticipant(participant.id)}> Usuń </button>
+													<button
+														className={styles.remove_user_btn}
+														type='button'
+														onClick={() => handleDeleteParticipant(participant.id)}
+													>
+														Usuń
+													</button>
 												</div>
 											);
-								}
-                                )
-									:  (
-                                        <div>Nikt się jeszcze nie zapisał</div>
-                                    )}
-                                    </div>
+										})
+									) : (
+										<div>Nikt się jeszcze nie zapisał</div>
+									)}
+								</div>
 							</div>
 
 							<div className={styles.budget_container}>
@@ -394,49 +424,16 @@ const EditTrip = () => {
 							</div>
 
 							<div className={styles.btn_container}>
-								<Popup
-									trigger={
-										<button type='button' className={styles.cancel_btn}>
-											Anuluj
-										</button>
-									}
-									modal
-									nested
-								>
-									{(close) => (
-										<div className={styles.overlay}>
-											<div className={styles.modal}>
-												<button className={styles.close_sign} onClick={close}>
-													&times;
-												</button>
-												<div className={styles.modal_header}>
-													Czy na pewno chcesz anulować edycję?
-												</div>
-												<p className={styles.modal_additional_info}>
-													Spowoduje to usunięcie wszystkich wprowadzonych danych.
-												</p>
-												<div className={styles.actions}>
-													<button
-														className={`${styles.actions_btn} + ${styles.actions_btn_cancel}`}
-														onClick={() => close()}
-													>
-														Powrót
-													</button>
-													<button
-														className={`${styles.actions_btn} + ${styles.actions_btn_confirm}`}
-														onClick={() => {
-															navigate('/mytrips/ownedtrips');
-															toast.error('Twoje zmiany nie zostały zapisane');
-															close();
-														}}
-													>
-														Potwierdź
-													</button>
-												</div>
-											</div>
-										</div>
-									)}
-								</Popup>
+                            <ModalPopup
+								triggerBtn={
+									<button type='button' className={styles.cancel_btn}>
+										Anuluj
+									</button>
+								}
+								modalHeader='Czy na pewno chcesz anulować edycję podróży?'
+								modalAdditionalInfo='Spowoduje to usunięcie wszystkich wprowadzonych danych.'
+								handleConfirmCancelationClick={handleCancel}
+							/>
 								<button type='submit' className={styles.save_btn}>
 									Zapisz
 								</button>
