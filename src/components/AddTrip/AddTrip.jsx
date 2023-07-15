@@ -154,7 +154,7 @@ const AddTrip = () => {
 						multiple={false}
 						hidden
 					/>
-					<div className={styles.add_photo_plus}>+</div>
+					<div className={styles.add_photo_plus}><img src='/assets/icons/plus-solid.svg' /> </div>
 				</label>
 
 				<div className={styles.container}>
@@ -255,9 +255,14 @@ const AddTrip = () => {
 						</div>
 
 						<div className={styles.participants_container}>
+							<div className={styles.participants}>
 							<label htmlFor='maxParticipantsCount' className={styles.labels}>
-								Podaj ilość uczestników
+								Podaj łączną ilość uczestników
 							</label>
+							<div className={styles.hint}>
+								<p>Pamiętaj, że Ty również jesteś uczestnikiem podróży!</p>
+							</div>
+							</div>
 							<input
 								className={styles.input_add_trip}
 								type='number'
