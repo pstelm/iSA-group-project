@@ -29,7 +29,7 @@
 	display: flex;
 	flex-direction: column;
 	width: 360px;
-	height: 990px;
+	height: 1100px;
 }
 
 .textarea_add_trip {
@@ -105,17 +105,23 @@
 
 .add_trip_header {
 	text-align: center;
-	margin:5px;
+	margin: 5px;
+}
+
+.button_back_container {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	height: 50px;
 }
 
 .button_back {
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	height: 20px;
-	background: none;
+	height: var(--fs-h3);
+	width: var(--fs-h3);
 	border: none;
-	margin: 5px;
+	background-color: transparent;
 }
 
 .modal_container {
@@ -274,7 +280,6 @@ input[type='date']:focus::-webkit-datetime-edit {
 	top: 36%;
 	background-color: var(--clr-0);
 }
-
 
 .add_photo_icon {
 	height: 50px;
