@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styles from './TripMini.module.css';
-// import { getUserData } from '../../../utils/getUserData';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../contexts/AuthContext';
 import { getDownloadURL, getStorage, ref } from '@firebase/storage';
+import iconLocation from '/public/assets/icons/magnifying-glass.svg';
+import iconFilters from '/public/assets/icons/filters.svg';
 
 const TripMini = ({
 	id,
