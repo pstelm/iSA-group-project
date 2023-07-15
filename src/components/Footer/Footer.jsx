@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Footer.module.css';
 import { Link, useLocation } from 'react-router-dom';
 import iconHomeDark from '/public/assets/icons/home-circle-dark.svg';
@@ -12,14 +12,49 @@ import iconUserProfileLight from '/public/assets/icons/account-circle-light.svg'
 
 const Footer = () => {
 	const { pathname } = useLocation();
+	let iconHomePathname = iconHomeDark;
+	let iconAllTripsPathname = iconAllTripsDark;
+	let iconJoinedTripsPathname = iconJoinedTripsDark;
+	let iconUserProfilePathname = iconUserProfileDark;
+
+	const handleFooterLink = () => {
+		if (pathname === '/') {
+			iconHomePathname = iconHomeLight;
+			iconAllTripsPathname = iconAllTripsDark;
+			iconJoinedTripsPathname = iconJoinedTripsDark;
+			iconUserProfilePathname = iconUserProfileDark;
+		} else if (pathname === '/alltrips') {
+			iconHomePathname = iconHomeDark;
+			iconAllTripsPathname = iconAllTripsLight;
+			iconJoinedTripsPathname = iconJoinedTripsDark;
+			iconUserProfilePathname = iconUserProfileDark;
+		} else if (
+			pathname === '/mytrips/ownedtrips' ||
+			pathname === '/mytrips/joinedtrips'
+		) {
+			iconHomePathname = iconHomeDark;
+			iconAllTripsPathname = iconAllTripsDark;
+			iconJoinedTripsPathname = iconJoinedTripsLight;
+			iconUserProfilePathname = iconUserProfileDark;
+		} else if (pathname === '/userprofile') {
+			iconHomePathname = iconHomeDark;
+			iconAllTripsPathname = iconAllTripsDark;
+			iconJoinedTripsPathname = iconJoinedTripsDark;
+			iconUserProfilePathname = iconUserProfileLight;
+		}
+	};
 
 	return (
 		<div className={styles.footer}>
-			<Link className={pathname === '/' ? styles.active : ''} to='/'>
+			<Link
+				className={pathname === '/' ? styles.active : ''}
+				to='/'
+				onClick={handleFooterLink()}
+			>
 				<div className={styles.link}>
 					<img
 						className={styles.icon}
-						src={pathname === '/' ? { iconHomeLight } : { iconHomeDark }}
+						src={iconHomePathname}
 						alt='Ikona skrótu do Home'
 					/>
 					<span>Home</span>
@@ -32,9 +67,7 @@ const Footer = () => {
 				<div className={styles.link}>
 					<img
 						className={styles.icon}
-						src={
-							pathname === '/alltrips' ? { iconAllTripsLight } : { iconAllTripsDark }
-						}
+						src={iconAllTripsPathname}
 						alt='Ikona skrótu do Podróżuj'
 					/>
 
@@ -52,11 +85,7 @@ const Footer = () => {
 				<div className={styles.link}>
 					<img
 						className={styles.icon}
-						src={
-							pathname === '/mytrips/ownedtrips' || pathname === '/mytrips/joinedtrips'
-								? { iconJoinedTripsLight }
-								: { iconJoinedTripsDark }
-						}
+						src={iconJoinedTripsPathname}
 						alt='Ikona skrótu do Moje Podróże'
 					/>
 					<span>Moje podróże</span>
@@ -69,11 +98,7 @@ const Footer = () => {
 				<div className={styles.link}>
 					<img
 						className={styles.icon}
-						src={
-							pathname === '/userprofile'
-								? { iconUserProfileLight }
-								: { iconUserProfileDark }
-						}
+						src={iconUserProfilePathname}
 						alt='Ikona skrótu do Profil'
 					/>
 					<span>Profil</span>
