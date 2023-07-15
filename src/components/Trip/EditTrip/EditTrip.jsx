@@ -193,7 +193,7 @@ const EditTrip = () => {
 	}, []);
 
     const handleCancel = () => {
-		navigate('/');
+		navigate('/mytrips/ownedtrips');
 		toast.error('Twoje zmiany nie zostały zapisane');
 	};
 
@@ -227,12 +227,14 @@ const EditTrip = () => {
 						</div>
 					) : (
 						<div className={styles.photo_container}>
+                            <div className={styles.trip_photo_empty}>
 							<img
 								src='/assets/icons/camera.png'
 								alt='ikonka aparatu fotograficznego'
 								className={styles.icon_edit_trip}
 							/>
 						</div>
+                        </div>
 					)}
 
 					<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
