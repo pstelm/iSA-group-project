@@ -13,6 +13,7 @@ import { toast } from 'react-hot-toast';
 import BackButton from '../../BackButton/BackButton';
 import { Link } from 'react-router-dom';
 import emptyAvatar from '/public/assets/icons/empty-avatar.png';
+import iconPlus from '/public/assets/icons/plus-solid.svg';
 
 const UserProfile = () => {
 	const { currentUser } = useAuth();
@@ -81,8 +82,9 @@ const UserProfile = () => {
 			{user ? (
 				<div className={styles.container}>
 					<BackButton sectionTitle={'Profil użytkownika'} />
-					<div className={styles.user_profile_container}>
-						<div className={styles.user_profile_content}>
+
+					<div className={styles.user_profile_content}>
+						<div className={styles.user_photo_box}>
 							<Link to='/editprofile' className={styles.link_edit}>
 								<img src='/assets/icons/pen.png' className={styles.icon_edit_profile} />
 							</Link>
@@ -101,34 +103,34 @@ const UserProfile = () => {
 									className={styles.user_photo}
 								/>
 							)}
-							<div>
-								<label onChange={handleEditAvatar} htmlFor='editAvatarInput'>
-									<input
-										type='file'
-										id='editAvatarInput'
-										className={styles.edit_avatar_input}
-										accept='.jpg'
-										multiple={false}
-										hidden
-									/>
-									<img src='/assets/icons/plus.png' className={styles.icon_edit_photo} />
-								</label>
-							</div>
-							<div className={styles.user_data_container}>
-								{user.firstName} {user.lastName}, {age}
-							</div>
-							{user.city ? (
-								<div className={styles.user_city_content}>
-									<img
-										src='/assets/icons/location-dot-solid.svg'
-										className={styles.icon_city}
-									/>
-									{user.city}
-								</div>
-							) : null}
-							<legend className={styles.legend}>O mnie</legend>
-							<div className={styles.user_about}>{user.aboutMe}</div>
+
+							<label onChange={handleEditAvatar} htmlFor='editAvatarInput'>
+								<input
+									type='file'
+									id='editAvatarInput'
+									className={styles.edit_avatar_input}
+									accept='.jpg'
+									multiple={false}
+									hidden
+								/>
+								<img src={iconPlus} className={styles.icon_edit_photo} />
+							</label>
 						</div>
+
+						<div className={styles.user_data_box}>
+							{user.firstName} {user.lastName}, {age}
+						</div>
+						{user.city ? (
+							<div className={styles.user_city_content}>
+								<img
+									src='/assets/icons/location-dot-solid.svg'
+									className={styles.icon_city}
+								/>
+								{user.city}
+							</div>
+						) : null}
+						<legend className={styles.legend}>O mnie</legend>
+						<div className={styles.user_about}>{user.aboutMe}</div>
 					</div>
 				</div>
 			) : null}

@@ -2,76 +2,66 @@
 	padding: 10px;
 }
 
-.user_profile_container {
-	height: 100%;
-	width: 100%;
-	display: grid;
-	justify-content: center;
-	align-content: flex-start;
-	margin-top: 20px;
-	background-color: var(--clr-main-light-transparent);
-	border-radius: 10px;
-	font-family: var(--font-family);
-}
-
 .user_profile_content {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	height: 100%;
-	font-size: var(--fs-h2);
-	gap: 10px;
+	width: 100%;
+	border-radius: 10px;
+	font-family: var(--font-family);
 }
 
-.visuals_container {
-	height: fit-content;
-	width: fit-content;
+.user_photo_box {
 	position: relative;
-	left: 50%;
-	transform: translateX(-50%);
-}
-
-.link_edit {
-	display: flex;
-	align-self: flex-end;
-	background: none;
-	border: none;
-	width: 35px;
-	height: 35px;
-}
-
-.icon_edit_profile {
-	height: 20px;
-	position: relative;
-	top: 48px;
-	left: 140px;
+	height: 170px;
+	width: 170px;
+	/* padding: 5px; */
+	border: 10px solid var(--clr-grey);
+	/* border: 5px solid var(--clr-main-light); */
+	border-radius: 50%;
 }
 
 .user_photo {
-	height: 160px;
-	width: 160px;
+	height: 100%;
+	width: 100%;
 	border-radius: 50%;
-	padding: 10px;
+	object-fit: cover;
 }
 
-.edit_avatar_input {
+.link_edit {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	width: 30px;
+	height: 30px;
+	padding: 5px;
+	background-color: var(--clr-grey);
+	border-radius: 5px;
 }
 
-.icon_add_photo {
-	height: 22px;
-	position: relative;
-	left: 138px;
-	bottom: 32px;
+.icon_edit_photo {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 30px;
+	width: 30px;
+	padding: 4px;
+	color: var(--clr-bg);
+	background-color: var(--clr-orange);
+	border: 1px solid var(--clr-orange);
+	border-radius: 5px;
 }
 
-.user_data_container {
+.user_data_box {
+	width: 100%;
+	border-radius: 10px;
+	padding: 5px;
+	background-color: var(--clr-main-light-transparent);
 	font-size: var(--fs-h2);
 	font-weight: var(--font-bold);
-	background-color: var(--clr-white-transparent);
-	width: fit-content;
-	padding: 5px 10px;
-	border-radius: 15px;
-	align-self: center;
 }
 
 .user_city_content {
