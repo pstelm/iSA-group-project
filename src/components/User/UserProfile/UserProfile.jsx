@@ -12,6 +12,7 @@ import {
 import { toast } from 'react-hot-toast';
 import BackButton from '../../BackButton/BackButton';
 import { Link } from 'react-router-dom';
+import emptyAvatar from '/public/assets/icons/empty-avatar.png';
 
 const UserProfile = () => {
 	const { currentUser } = useAuth();
@@ -94,7 +95,7 @@ const UserProfile = () => {
 								/>
 							) : (
 								<img
-									src='/assets/icons/empty-avatar.png'
+									src={emptyAvatar}
 									alt='empty user profile'
 									id='emptyUserProfilePhoto'
 									className={styles.user_photo}
@@ -126,10 +127,7 @@ const UserProfile = () => {
 								</div>
 							) : null}
 							<legend className={styles.legend}>O mnie</legend>
-							<div className={styles.user_about}>
-								{user.aboutMe}
-							</div>
-						
+							<div className={styles.user_about}>{user.aboutMe}</div>
 						</div>
 					</div>
 				</div>
