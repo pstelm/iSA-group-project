@@ -180,16 +180,19 @@ const TripFullPage = () => {
 		<>
 			{participantsData ? (
 				<div className={styles.container}>
+					<div className={styles.header_container}>
 					<BackButton sectionTitle={'Podróże'} />
 
 
 					{trip.owner === currentUser.uid ? ( 
-					<button>
+						<div className={styles.edit_trip_container}>
+					<button className={styles.edit_trip_btn}>
 					<Link to={`/trip/${tripID}/edittrip`} className={styles.link_edit_trip}>
 								<img src='/assets/icons/pen.png' className={styles.icon_edit_trip} />
 							</Link>
-					</button>) : null}
-
+					</button>
+					</div>) : null}
+							</div>
 
 					{/* Przyciski Dołącz do podróży oraz Usuń podróż wraz z logiką */}
 					{trip.owner === currentUser.uid ? (
