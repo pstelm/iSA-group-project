@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import styles from './Filters.module.css';
 import countriesList from './countries.json';
 import { Toaster, toast } from 'react-hot-toast';
+import iconPlus from '/public/assets/icons/plus-solid.svg';
+import iconMinus from '/public/assets/icons/minus-solid.svg';
+import iconTrash from '/public/assets/icons/trash.svg';
 
 const Filters = ({
 	additionalFilters,
@@ -101,11 +104,7 @@ const Filters = ({
 							type='button'
 							onClick={handleShowLocationFilters}
 						>
-							{showLocationFilters ? (
-								<img src='/assets/icons/minus-solid.svg' />
-							) : (
-								<img src='/assets/icons/plus-solid.svg' />
-							)}
+							{showLocationFilters ? <img src={iconMinus} /> : <img src={iconPlus} />}
 						</button>
 					</div>
 					{showLocationFilters && (
@@ -144,7 +143,7 @@ const Filters = ({
 									>
 										{selectedCountry}{' '}
 										<button type='button' className={styles.removeSelectedCountry}>
-											<img src='/assets/icons/trash.svg' alt='Usuń wybranyn kraj' />
+											<img src={iconTrash} alt='Usuń wybranyn kraj' />
 										</button>
 									</li>
 								))}
@@ -161,11 +160,7 @@ const Filters = ({
 							type='button'
 							onClick={handleShowBudgetFilters}
 						>
-							{showBudgetFilters ? (
-								<img src='/assets/icons/minus-solid.svg' />
-							) : (
-								<img src='/assets/icons/plus-solid.svg' />
-							)}
+							{showBudgetFilters ? <img src={iconMinus} /> : <img src={iconPlus} />}
 						</button>
 					</div>
 					{showBudgetFilters && (
@@ -204,11 +199,7 @@ const Filters = ({
 							type='button'
 							onClick={handleShowDatesFilters}
 						>
-							{showDatesFilters ? (
-								<img src='/assets/icons/minus-solid.svg' />
-							) : (
-								<img src='/assets/icons/plus-solid.svg' />
-							)}
+							{showDatesFilters ? <img src={iconMinus} /> : <img src={iconPlus} />}
 						</button>
 					</div>
 					{showDatesFilters && (
