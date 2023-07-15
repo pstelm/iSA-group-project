@@ -28,6 +28,7 @@ import {
 } from '@firebase/storage';
 import BackButton from '../../BackButton/BackButton';
 import Popup from 'reactjs-popup';
+import emptyTripPhoto from '/public/assets/icons/camera.png';
 
 const EditTrip = () => {
 	const { currentUser } = useAuth();
@@ -61,12 +62,12 @@ const EditTrip = () => {
 				setSelectedFromCountry(tripFilteredData.fromCountry);
 				setSelectedToCountry(tripFilteredData.toCountry);
 				setSelectedTags(tripFilteredData.tags);
-                if (tripFilteredData.participants.length > 0) {
-                    const participants = await fetchParticipantsData(
-                        tripFilteredData.participants
-                    );
-                    setParticipants(participants);
-                }
+				if (tripFilteredData.participants.length > 0) {
+					const participants = await fetchParticipantsData(
+						tripFilteredData.participants
+					);
+					setParticipants(participants);
+				}
 
 				getDownloadURL(pathReference)
 					.then((url) => {
@@ -88,7 +89,7 @@ const EditTrip = () => {
 		const participantsRef = query(
 			collection(db, 'Users'),
 			where(documentId(), 'in', partcipantsIDs),
-            where(documentId(), '!=', currentUser.uid)
+			where(documentId(), '!=', currentUser.uid)
 		);
 		const participants = await getDocs(participantsRef);
 
@@ -128,8 +129,8 @@ const EditTrip = () => {
 			const maxParticipantsCount = Number(e.target.maxParticipantsCount.value);
 			const budget = Number(e.target.budget.value);
 			const tags = selectedTags;
-            const participantsIds = participants.map((participant) => participant.id);
-            const participantsWithOwner = [...participantsIds, currentUser.uid];
+			const participantsIds = participants.map((participant) => participant.id);
+			const participantsWithOwner = [...participantsIds, currentUser.uid];
 
 			if (startDate > endDate) {
 				throw new Error('Data powrotu nie może być wcześniejsza niż data wylotu');
@@ -157,7 +158,7 @@ const EditTrip = () => {
 				toCity: toCity,
 				toCountry: toCountry,
 				maxParticipantsCount: maxParticipantsCount,
-                participants: participantsWithOwner,
+				participants: participantsWithOwner,
 				budget: budget,
 				tags: tags,
 			});
@@ -182,11 +183,13 @@ const EditTrip = () => {
 		}
 	};
 
-    const handleDeleteParticipant = async (partcipantID) => {
-        if (participants) {
-            setParticipants(participants.filter((participant) => participant.id !== partcipantID));
-        }
-    };
+	const handleDeleteParticipant = async (partcipantID) => {
+		if (participants) {
+			setParticipants(
+				participants.filter((participant) => participant.id !== partcipantID)
+			);
+		}
+	};
 
 	useEffect(() => {
 		getUserData(currentUser.uid, setUser);
@@ -210,7 +213,7 @@ const EditTrip = () => {
 					) : (
 						<div className={styles.photo_container}>
 							<img
-								src='/assets/icons/camera.png'
+								src={emptyTripPhoto}
 								alt='ikonka aparatu fotograficznego'
 								className={styles.icon_edit_trip}
 							/>
@@ -350,21 +353,26 @@ const EditTrip = () => {
 								<label htmlFor='participants' className={styles.labels}>
 									Zapisani uczestnicy:
 								</label>
-                                <div className={styles.participants_border}>
-								{participants.length > 0
-									? participants.map((participant) => {
-											return ( 
+								<div className={styles.participants_border}>
+									{participants.length > 0 ? (
+										participants.map((participant) => {
+											return (
 												<div className={styles.participant} key={participant.id}>
 													{participant.firstName} {participant.lastName}
-                                                    <button className={styles.remove_user_btn} type="button" onClick={() => handleDeleteParticipant(participant.id)}> Usuń </button>
+													<button
+														className={styles.remove_user_btn}
+														type='button'
+														onClick={() => handleDeleteParticipant(participant.id)}
+													>
+														Usuń
+													</button>
 												</div>
 											);
-								}
-                                )
-									:  (
-                                        <div>Nikt się jeszcze nie zapisał</div>
-                                    )}
-                                    </div>
+										})
+									) : (
+										<div>Nikt się jeszcze nie zapisał</div>
+									)}
+								</div>
 							</div>
 
 							<div className={styles.budget_container}>

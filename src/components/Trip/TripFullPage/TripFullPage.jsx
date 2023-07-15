@@ -18,6 +18,7 @@ import { ModalPopup } from '../../../components';
 import { getDownloadURL, getStorage, ref } from '@firebase/storage';
 import iconLocation from '/public/assets/icons/location-dot-main-light.svg';
 import iconCalendar from '/public/assets/icons/calendar-days-main-light.svg';
+import iconEdit from '/public/assets/icons/pen.png';
 
 const TripFullPage = () => {
 	const { tripID } = useParams();
@@ -187,7 +188,7 @@ const TripFullPage = () => {
 					{trip.owner === currentUser.uid ? (
 						<button>
 							<Link to={`/trip/${tripID}/edittrip`} className={styles.link_edit_trip}>
-								<img src='/assets/icons/pen.png' className={styles.icon_edit_trip} />
+								<img src={iconEdit} className={styles.icon_edit_trip} />
 							</Link>
 						</button>
 					) : null}
