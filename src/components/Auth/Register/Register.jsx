@@ -102,7 +102,7 @@ const Register = () => {
 				<form onSubmit={handleSubmit} className={styles.form}>
 					<div className={styles.relative}>
 						<div className={styles.data}>
-							<h2>Dane podstawowe</h2>
+							<h3>Dane podstawowe</h3>
 						</div>
 						<div className={styles.info}>
 							<label htmlFor='text' className={styles.label}>
@@ -154,7 +154,7 @@ const Register = () => {
 					</div>
 					<div className={styles.relative}>
 						<div className={styles.data}>
-							<h2>Dane logowania</h2>
+							<h3>Dane logowania</h3>
 						</div>
 						<div className={styles.info}>
 							<label htmlFor='email' className={styles.label}>
