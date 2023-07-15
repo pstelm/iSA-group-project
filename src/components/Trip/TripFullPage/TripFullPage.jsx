@@ -11,9 +11,9 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import { toast } from 'react-hot-toast';
-import { Popup } from 'reactjs-popup';
 import useAuth from '../../../contexts/AuthContext';
 import BackButton from '../../BackButton/BackButton';
+import { ModalPopup } from '../../../components';
 // import { getTripDuration } from '../../../utils/getTripDuration';
 
 const TripFullPage = () => {
@@ -142,44 +142,14 @@ const TripFullPage = () => {
 
 					{/* Przyciski Dołącz do podróży oraz Usuń podróż wraz z logiką */}
 					{trip.owner === currentUser.uid ? (
-						<Popup
-							trigger={<button className={styles.deleteTripBtn}> Usuń podróż </button>}
-							modal
-							nested
-						>
-							{(close) => (
-								<div className={styles.overlay}>
-									<div className={styles.modal}>
-										<button className={styles.close_sign} onClick={close}>
-											&times;
-										</button>
-										<div className={styles.modal_header}>
-											Czy na pewno chcesz usunąć tę podróż?
-										</div>
-										<p className={styles.modal_additional_info}>
-											Spowoduje to trwałe usunięcie podróży.
-										</p>
-										<div className={styles.actions}>
-											<button
-												className={`${styles.actions_btn} + ${styles.actions_btn_cancel}`}
-												onClick={() => close()}
-											>
-												Powrót
-											</button>
-											<button
-												className={`${styles.actions_btn} + ${styles.actions_btn_confirm}`}
-												onClick={() => {
-													handleDeleteTripClick();
-													close();
-												}}
-											>
-												Potwierdź
-											</button>
-										</div>
-									</div>
-								</div>
-							)}
-						</Popup>
+						<ModalPopup
+							triggerBtn={
+								<button className={styles.deleteTripBtn}> Usuń podróż </button>
+							}
+							modalHeader='Czy na pewno chcesz usunąć tę podróż?'
+							modalAdditionalInfo='Spowoduje to trwałe usunięcie podróży.'
+							handleConfirmCancelationClick={handleDeleteTripClick}
+						/>
 					) : !participantsData.some((item) => item.id === currentUser.uid) ? (
 						participantsData &&
 						participantsData.length < trip.maxParticipantsCount ? (
