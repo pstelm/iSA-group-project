@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './JoinedTrips.module.css';
+import styles from './CompletedTrips.module.css';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import { getAuth } from 'firebase/auth';
@@ -8,16 +8,16 @@ import { toast } from 'react-hot-toast';
 import { firebaseErrors } from '../../../utils/firebaseErrors';
 import { Link } from 'react-router-dom';
 
-const JoinedTrips = () => {
+const CompletedTrips = () => {
 	const { currentUser } = getAuth();
-	const [joinedTrips, setJoinedTrips] = useState([]);
+	const [completedTrips, setCompletedTrips] = useState([]);
 
 	const filteredParticipatedTripsCollectionRef = query(
 		collection(db, 'Trips'),
 		where('participants', 'array-contains', currentUser.uid)
 	);
 
-	const getJoinedTrips = async () => {
+	const getCompletedTrips = async () => {
 		try {
 			const participatedTripsSnapshot = await getDocs(
 				filteredParticipatedTripsCollectionRef
@@ -27,19 +27,18 @@ const JoinedTrips = () => {
 				...doc.data(),
 			}));
 
-			const joinedTripsData = participatedTripsData.filter(
-				(trip) =>
-					trip.owner !== currentUser.uid && trip.endDate.toDate() > new Date()
+			const completedTripsData = participatedTripsData.filter(
+				(trip) => trip.endDate.toDate() < new Date()
 			);
 
-			setJoinedTrips(joinedTripsData);
+			setCompletedTrips(completedTripsData);
 		} catch (error) {
 			toast.error('Wystąpił błąd: ' + firebaseErrors[error.code]);
 		}
 	};
 
 	useEffect(() => {
-		getJoinedTrips();
+		getCompletedTrips();
 	}, []);
 
 	return (
@@ -48,20 +47,20 @@ const JoinedTrips = () => {
 				<Link to='/mytrips/ownedtrips' className={styles.myTripsLink}>
 					Moje
 				</Link>
-				<Link
-					to='/mytrips/joinedtrips'
-					className={`${styles.myTripsLink} ${styles.myTripsLinkActive}`}
-				>
+				<Link to='/mytrips/joinedtrips' className={styles.myTripsLink}>
 					Dołączone
 				</Link>
-				<Link to='/mytrips/completedtrips' className={styles.myTripsLink}>
+				<Link
+					to='/mytrips/completedtrips'
+					className={`${styles.myTripsLink} ${styles.myTripsLinkActive}`}
+				>
 					Zakończone
 				</Link>
 			</div>
 			<div className={styles.container}>
 				<ul className={styles.trip}>
-					{joinedTrips
-						? joinedTrips.map((trip) => (
+					{completedTrips
+						? completedTrips.map((trip) => (
 								<TripMini key={trip.id} {...trip} filterOwnership={false} />
 						  ))
 						: null}
@@ -71,4 +70,4 @@ const JoinedTrips = () => {
 	);
 };
 
-export default JoinedTrips;
+export default CompletedTrips;

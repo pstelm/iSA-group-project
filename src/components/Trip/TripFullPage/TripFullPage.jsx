@@ -131,7 +131,6 @@ const TripFullPage = () => {
 		if (users && trip) {
 			getParticipants();
 			getTripDuration();
-			// getTripDuration(trip, setTripDuration);
 		}
 	}, [users, trip]);
 
@@ -226,7 +225,7 @@ const TripFullPage = () => {
 
 						<div className={styles.box}>
 							<h4 className={styles.sectionTitle}>Budżet</h4>
-							<p>{trip.budget},00 zł</p>
+							<p>{trip.budget} zł</p>
 						</div>
 					</div>
 				</div>
