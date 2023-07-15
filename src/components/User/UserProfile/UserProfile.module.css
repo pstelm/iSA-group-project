@@ -102,11 +102,15 @@
 	height: 20px;
 }
 
-.user_city_info {
-	padding: 10px 0 5px;
+.user_city_info,
+.user_trips_info {
 	color: var(--clr-main-dark-transparent);
 	font-weight: normal;
-	font-size: var(--fs-small-text);
+	font-size: var(--fs-p);
+}
+
+.user_city_info {
+	padding: 10px 0 5px;
 }
 
 .user_about_box {
@@ -118,4 +122,19 @@
 	margin-bottom: 5px;
 	padding-bottom: 5px;
 	border-bottom: 1px solid var(--clr-main-dark-transparent);
+}
+
+.my_trips_list {
+	list-style: none;
+}
+
+.my_trips_link {
+	display: flex;
+	align-items: center;
+	color: var(--dark);
+}
+
+.my_trips_link_icon {
+	height: var(--fs-p);
+	margin-right: 5px;
 }

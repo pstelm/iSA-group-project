@@ -1,6 +1,13 @@
 import useAuth from '../../../contexts/AuthContext';
 import { db } from '../../../config/firebase';
-import { doc, getDoc } from '@firebase/firestore';
+import {
+	collection,
+	doc,
+	getDoc,
+	getDocs,
+	query,
+	where,
+} from '@firebase/firestore';
 import { useEffect, useState } from 'react';
 import styles from './userprofile.module.css';
 import {
@@ -12,18 +19,19 @@ import {
 import { toast } from 'react-hot-toast';
 import BackButton from '../../BackButton/BackButton';
 import { Link } from 'react-router-dom';
+import { firebaseErrors } from '../../../utils/firebaseErrors';
 import emptyAvatar from '/public/assets/icons/empty-avatar.png';
 import iconPlus from '/public/assets/icons/plus-solid.svg';
 import iconLocation from '/public/assets/icons/location-dot-solid.svg';
+import iconAirplane from '/public/assets/icons/airplane-dark.svg';
 
 const UserProfile = () => {
+	const storage = getStorage();
 	const { currentUser } = useAuth();
 	const [user, setUser] = useState();
-
-	const [age, setAge] = useState();
-
-	const storage = getStorage();
 	const [userProfileImgURL, setUserProfileImgURL] = useState();
+	const [age, setAge] = useState();
+	const [myTrips, setMyTrips] = useState([]);
 
 	const getUserData = async () => {
 		const userRef = await doc(db, 'Users', currentUser.uid);
@@ -54,6 +62,25 @@ const UserProfile = () => {
 		});
 	};
 
+	const filteredOwnedTripsCollectionRef = query(
+		collection(db, 'Trips'),
+		where('owner', '==', currentUser.uid)
+	);
+
+	const getOwnedTrips = async () => {
+		try {
+			const ownedTripsSnapshot = await getDocs(filteredOwnedTripsCollectionRef);
+			const ownedTripsData = ownedTripsSnapshot.docs.map((doc) => ({
+				id: doc.id,
+				...doc.data(),
+			}));
+
+			setMyTrips(ownedTripsData);
+		} catch (error) {
+			toast.error('Wystąpił błąd: ' + firebaseErrors[error.code]);
+		}
+	};
+
 	const handleEditAvatar = (e) => {
 		const file = e.target.files[0];
 		if (file) {
@@ -75,6 +102,7 @@ const UserProfile = () => {
 	useEffect(() => {
 		if (currentUser) {
 			getUserData();
+			getOwnedTrips();
 		}
 	}, [currentUser]);
 
@@ -143,7 +171,24 @@ const UserProfile = () => {
 
 						<div className={styles.user_about_box}>
 							<h4 className={styles.section_title}>Moje podróże</h4>
-							<p>{user.aboutMe}</p>
+							<ul className={styles.my_trips_list}>
+								{myTrips && myTrips.length > 0 ? (
+									myTrips.map((trip) => (
+										<li key={trip.id}>
+											<Link to={`/trip/${trip.id}`} className={styles.my_trips_link}>
+												<img
+													src={iconAirplane}
+													alt=''
+													className={styles.my_trips_link_icon}
+												/>
+												<p>{trip.title}</p>
+											</Link>
+										</li>
+									))
+								) : (
+									<p className={styles.user_trips_info}>Brak podróży</p>
+								)}
+							</ul>
 						</div>
 					</div>
 				</div>
