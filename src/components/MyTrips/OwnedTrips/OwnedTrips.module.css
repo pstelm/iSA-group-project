@@ -15,6 +15,7 @@
 	width: 100%;
 	border-top-style: solid;
 	border-color: var(--clr-main-light);
+	/* border-top: 1px solid var(--clr-main-light); */
 	display: flex;
 	margin-bottom: 10px;
 	padding-top: 5px;
@@ -27,7 +28,7 @@
 }
 
 .create_btn {
-	background-color: var(--clr-main-dark);
+	/* background-color: var(--clr-main-dark);
 	border-radius: 50%;
 	border: none;
 	width: 25px;
@@ -35,7 +36,16 @@
 	font-weight: bold;
 	font-size: 1.2rem;
 	color: var(--clr-0);
-	text-align: center;
+	text-align: center; */
+
+	width: 24px;
+	padding: 4px;
+	color: var(--clr-bg);
+	background-color: var(--clr-orange);
+	border: 1px solid var(--clr-orange);
+	border-radius: 5px;
+	font-size: 20px;
+	font-weight: 500;
 }
 
 .trip {
@@ -49,8 +59,9 @@
 }
 
 .myTripsLink {
-	color: var(--dark);
+	color: var(--clr-black);
 	width: 100%;
+	margin-bottom: 10px;
 	text-align: center;
 	border-bottom-style: solid;
 	border-color: var(--clr-main-light);
@@ -58,6 +69,7 @@
 
 .myTripsLinkActive {
 	color: var(--clr-orange);
+	border-bottom-style: solid;
 	border-color: var(--clr-orange);
-	border-width: 5px;
+	border-width: 3px;
 }

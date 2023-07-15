@@ -6,10 +6,6 @@
 	background-color: var(--clr-bg);
 }
 
-/* .ownedTrip {
-	color: var(--clr-main-dark-transparent);
-} */
-
 .tripLink,
 .tripLink:focus,
 .tripLink:active {
@@ -22,8 +18,39 @@
 	color: var(--clr-black-transparent);
 }
 
+.tripLink,
+.tripLinkOwned {
+	display: grid;
+	grid-template-columns: 30% 1fr;
+	grid-template-rows: 50px repeat(3, 1fr);
+	column-gap: 10px;
+}
+
+.tripImgBox {
+	grid-column: 1/2;
+	grid-row: 1/5;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.tripImg {
+	display: block;
+	width: 100%;
+	object-fit: cover;
+}
+
+.defaultTripImg {
+	display: block;
+	width: 100%;
+	object-fit: cover;
+	filter: saturate(70%);
+}
+
 .title {
+	height: 100%;
+	overflow: hidden;
 	text-align: left;
+	/* text-wrap: nowrap; */
 }
 
 .oneLine {
@@ -34,4 +61,5 @@
 
 .icon {
 	height: 20px;
+	width: 20px;
 }

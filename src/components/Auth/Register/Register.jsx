@@ -6,6 +6,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate, Link } from 'react-router-dom';
 import { firebaseErrors } from '../../../utils/firebaseErrors';
 import GrayButton from '../../GrayButton/GrayButton';
+import arrow from '/public/assets/arrow.svg';
 
 const Register = () => {
 	const navigate = useNavigate();
@@ -91,11 +92,7 @@ const Register = () => {
 			<div className={styles.container}>
 				<header className={styles.header}>
 					<Link to='/login'>
-						<img
-							className={styles.arrow}
-							src='/assets/arrow.svg'
-							alt='Arrow pointing left'
-						/>
+						<img className={styles.arrow} src={arrow} alt='Arrow pointing left' />
 					</Link>
 					<h2>Rejestracja</h2>
 				</header>

@@ -12,6 +12,7 @@ import {
 import { toast } from 'react-hot-toast';
 import BackButton from '../../BackButton/BackButton';
 import { Link } from 'react-router-dom';
+import emptyAvatar from '/public/assets/icons/empty-avatar.png';
 
 const UserProfile = () => {
 	const { currentUser } = useAuth();
@@ -82,41 +83,36 @@ const UserProfile = () => {
 					<BackButton sectionTitle={'Profil użytkownika'} />
 					<div className={styles.user_profile_container}>
 						<div className={styles.user_profile_content}>
-							<div className={styles.visuals_container}>
-								<Link to='/editprofile' className={styles.link_edit}>
-									<img
-										src='/assets/icons/pen.png'
-										className={styles.icon_edit_profile}
+							<Link to='/editprofile' className={styles.link_edit}>
+								<img src='/assets/icons/pen.png' className={styles.icon_edit_profile} />
+							</Link>
+							{userProfileImgURL ? (
+								<img
+									src={userProfileImgURL}
+									alt='user profile'
+									id='userProfilePhoto'
+									className={styles.user_photo}
+								/>
+							) : (
+								<img
+									src={emptyAvatar}
+									alt='empty user profile'
+									id='emptyUserProfilePhoto'
+									className={styles.user_photo}
+								/>
+							)}
+							<div>
+								<label onChange={handleEditAvatar} htmlFor='editAvatarInput'>
+									<input
+										type='file'
+										id='editAvatarInput'
+										className={styles.edit_avatar_input}
+										accept='.jpg'
+										multiple={false}
+										hidden
 									/>
-								</Link>
-								{userProfileImgURL ? (
-									<img
-										src={userProfileImgURL}
-										alt='user profile'
-										id='userProfilePhoto'
-										className={styles.user_photo}
-									/>
-								) : (
-									<img
-										src='/assets/icons/empty-avatar.png'
-										alt='empty user profile'
-										id='emptyUserProfilePhoto'
-										className={styles.user_photo}
-									/>
-								)}
-								<div>
-									<label onChange={handleEditAvatar} htmlFor='editAvatarInput'>
-										<input
-											type='file'
-											id='editAvatarInput'
-											className={styles.edit_avatar_input}
-											accept='.jpg'
-											multiple={false}
-											hidden
-										/>
-										<img src='/assets/icons/plus.png' className={styles.icon_add_photo} />
-									</label>
-								</div>
+									<img src='/assets/icons/plus.png' className={styles.icon_edit_photo} />
+								</label>
 							</div>
 							<div className={styles.user_data_container}>
 								{user.firstName} {user.lastName}, {age}

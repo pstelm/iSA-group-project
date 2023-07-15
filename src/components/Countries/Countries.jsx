@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from './Countries.module.css';
 
-const Countries = ({ countriesData, setSelectedCountry }) => {
+const Countries = ({ countriesData, selectedCountry, setSelectedCountry }) => {
 	return (
 		<div>
 			<select
 				className={styles.country_list}
 				onChange={(e) => setSelectedCountry(e.target.value)}
 				required
+				defaultValue={selectedCountry}
 			>
 				<option value='' hidden>
 					Wybierz kraj

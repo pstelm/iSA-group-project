@@ -5,6 +5,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { firebaseErrors } from '../../../utils/firebaseErrors';
 import styles from '../PasswordReminder/PasswordReminder.module.css';
 import GrayButton from '../../GrayButton/GrayButton';
+import arrow from '/public/assets/arrow.svg';
 
 const PasswordReminder = () => {
 	const navigate = useNavigate();
@@ -28,11 +29,7 @@ const PasswordReminder = () => {
 			<Toaster />
 			<header className={styles.header}>
 				<Link to='/login'>
-					<img
-						className={styles.arrow}
-						src='/assets/arrow.svg'
-						alt='Arrow pointing left'
-					/>
+					<img className={styles.arrow} src={arrow} alt='Arrow pointing left' />
 				</Link>
 				<h2>Przypomnij hasło</h2>
 			</header>
