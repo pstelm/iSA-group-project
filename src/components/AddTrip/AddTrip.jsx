@@ -160,7 +160,6 @@ const AddTrip = () => {
 							<img src='/assets/icons/plus-solid.svg' />{' '}
 						</div>
 					</label>
-				</div>
 
 				<div className={styles.container}>
 					<form className={styles.form} onSubmit={handleSubmit}>
@@ -321,7 +320,7 @@ const AddTrip = () => {
 					</form>
 				</div>
 			</div>
-		</>
+		</>					
 	);
 };
 
