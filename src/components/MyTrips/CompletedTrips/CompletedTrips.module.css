@@ -16,7 +16,7 @@
 }
 
 .myTripsLink {
-	color: var(--dark);
+	color: var(--clr-black);
 	width: 100%;
 	text-align: center;
 	border-bottom-style: solid;
