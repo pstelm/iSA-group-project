@@ -58,7 +58,7 @@ const AllTrips = () => {
 		if (additionalFilters.countries.length === 0) {
 			return true;
 		} else {
-			return additionalFilters.countries.includes(trip.endPlace);
+			return additionalFilters.countries.includes(trip.toCountry);
 		}
 	};
 

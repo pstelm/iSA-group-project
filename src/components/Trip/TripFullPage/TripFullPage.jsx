@@ -14,17 +14,21 @@ import { toast } from 'react-hot-toast';
 import useAuth from '../../../contexts/AuthContext';
 import BackButton from '../../BackButton/BackButton';
 import { ModalPopup } from '../../../components';
-// import { getTripDuration } from '../../../utils/getTripDuration';
+import { getDownloadURL, getStorage, ref } from '@firebase/storage';
 
 const TripFullPage = () => {
 	const { tripID } = useParams();
 
+	const storage = getStorage();
 	const { currentUser } = useAuth();
 
 	const [trip, setTrip] = useState();
 	const [users, setUsers] = useState();
 	const [tripDuration, setTripDuration] = useState('');
+	const [tripImgURL, setTripImgURL] = useState();
 	const [participantsData, setParticipantsData] = useState();
+	const [participantsDataWithImg, setParticipantsDataWithImg] = useState([]);
+	const [participantImgURL, setParticipantImgURL] = useState();
 
 	const tripRef = doc(db, 'Trips', tripID);
 
@@ -62,11 +66,32 @@ const TripFullPage = () => {
 		}
 	};
 
-	const getParticipants = () => {
+	const getParticipantsData = async () => {
 		const participantsFilteredArray = users.filter((doc) => {
 			return trip?.participants.some((partID) => doc.id.includes(partID));
 		});
 		setParticipantsData(participantsFilteredArray);
+
+		const participantsWithImages = participantsFilteredArray.map(async (item) => {
+			const imageRef = ref(storage, `usersProfilePhoto/${item.id}.jpg`);
+			return await getDownloadURL(imageRef)
+				.then((url) => {
+					return {
+						imgURL: url,
+						...item,
+					};
+				})
+				.catch((error) => {
+					return {
+						imgURL:
+							'https://firebasestorage.googleapis.com/v0/b/promises-land.appspot.com/o/usersProfilePhoto%2Fdefault-user-image.svg?alt=media&token=51cfbe1c-fb80-4d7f-bc54-cd59b95361aa',
+						...item,
+					};
+				});
+		});
+		Promise.all(participantsWithImages).then((uuu) => {
+			setParticipantsDataWithImg(uuu);
+		});
 	};
 
 	const getTripDuration = () => {
@@ -101,6 +126,20 @@ const TripFullPage = () => {
 		setTripDuration(tripDurationText);
 	};
 
+	const getTripImage = async () => {
+		const imgPathReference = ref(storage, `tripsPhoto/${tripID}.jpg`);
+		getDownloadURL(imgPathReference)
+			.then((url) => {
+				setTripImgURL(url);
+			})
+			.catch((error) => {
+				// if (error.code !== 'storage/object-not-found') {
+				// 	// setTripImgURL()
+				console.log(error.message);
+				// }
+			});
+	};
+
 	const handleAddToTrip = async () => {
 		try {
 			const participantsIdArray = [...trip.participants];
@@ -129,8 +168,9 @@ const TripFullPage = () => {
 
 	useEffect(() => {
 		if (users && trip) {
-			getParticipants();
+			getParticipantsData();
 			getTripDuration();
+			getTripImage();
 		}
 	}, [users, trip]);
 
@@ -165,22 +205,41 @@ const TripFullPage = () => {
 
 					{/* Informacje dotyczące podróży */}
 					<div className={styles.tripCard}>
-						<h4 className={styles.title}>{trip.title}</h4>
-						<div className={styles.oneLine}>
-							<img
-								className={styles.icon}
-								src='/assets/icons/location-dot-solid.svg'
-								alt=''
-							/>
-							<p>{trip.endPlace}</p>
-						</div>
-						<div className={styles.oneLine}>
-							<img
-								className={styles.icon}
-								src='/assets/icons/calendar-days-regular.svg'
-								alt=''
-							/>
-							<p>{tripDuration}</p>
+						<div className={styles.tripHeader}>
+							<div className={styles.tripHeaderImgBox}>
+								{tripImgURL ? (
+									<img
+										src={tripImgURL}
+										alt={`Zdjęcie podróży ${trip.title}`}
+										className={styles.tripHeaderImg}
+									/>
+								) : (
+									<img
+										src='/assets/default.png'
+										alt={`Przykładowe zdjęcie podrózy`}
+										className={styles.tripHeaderImg}
+									/>
+								)}
+							</div>
+							<div className={styles.tripHeaderInfo}>
+								<h4 className={styles.tripTitle}>{trip.title}</h4>
+								<div className={styles.oneLine}>
+									<img
+										className={styles.icon}
+										src='/assets/icons/location-dot-main-light.svg'
+										alt=''
+									/>
+									<p>{trip.toCountry}</p>
+								</div>
+								<div className={styles.oneLine}>
+									<img
+										className={styles.icon}
+										src='/assets/icons/calendar-days-main-light.svg'
+										alt=''
+									/>
+									<p>{tripDuration}</p>
+								</div>
+							</div>
 						</div>
 
 						<div className={styles.tagsBox}>
@@ -194,28 +253,57 @@ const TripFullPage = () => {
 						</div>
 
 						<div className={styles.box}>
+							<h4 className={styles.sectionTitle}>Skąd ruszamy</h4>
+							<p>
+								{trip.fromCity}, {trip.fromCountry}
+							</p>
+						</div>
+
+						<div className={styles.box}>
+							<h4 className={styles.sectionTitle}>Dokąd się wybieramy</h4>
+							<p>
+								{trip.toCity}, {trip.toCountry}
+							</p>
+						</div>
+
+						<div className={styles.box}>
 							<h4 className={styles.sectionTitle}>
 								<span>Uczestnicy</span>
 								<span>max. {trip.maxParticipantsCount}</span>
 							</h4>
-							{participantsData
-								? participantsData.map((participant) => {
-										if (participant.id === trip.owner) {
-											return (
-												<p key={participant.id} className={styles.owner}>
-													{participant.firstName} {participant.lastName} - Organizator
-												</p>
-											);
-										} else {
-											return (
-												<p key={participant.id} className={styles.participant}>
-													{participant.firstName} {participant.lastName}
-												</p>
-											);
-										}
-								  })
-								: null}
-							{/* {participantsData.length < trip.maxParticipantsCount ? <p>Wolne miejsca: </p> : null} */}
+							<ul className={styles.participantsList}>
+								{participantsDataWithImg
+									? participantsDataWithImg.map((participant) => {
+											if (participant.id === trip.owner) {
+												return (
+													<li key={participant.id} className={styles.owner}>
+														<img
+															src={participant.imgURL}
+															className={styles.ownerImg}
+															alt={`Awatar użytkownike ${participant.firstName} ${participant.lastName}`}
+														/>
+														<p>
+															{participant.firstName} {participant.lastName} - Organizator
+														</p>
+													</li>
+												);
+											} else {
+												return (
+													<li key={participant.id} className={styles.participant}>
+														<img
+															src={participant.imgURL}
+															className={styles.participantImg}
+															alt={`Awatar użytkownike ${participant.firstName} ${participant.lastName}`}
+														/>
+														<p>
+															{participant.firstName} {participant.lastName}
+														</p>
+													</li>
+												);
+											}
+									  })
+									: null}
+							</ul>
 						</div>
 
 						<div className={styles.box}>
@@ -225,7 +313,7 @@ const TripFullPage = () => {
 
 						<div className={styles.box}>
 							<h4 className={styles.sectionTitle}>Budżet</h4>
-							<p>{trip.budget} zł</p>
+							<p>{trip.budget} zł/os.</p>
 						</div>
 					</div>
 				</div>
