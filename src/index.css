@@ -1,11 +1,11 @@
 :root {
-	--clr-bg: #fffffd;
+	--clr-bg: hsl(60, 100%, 100%);
 	--clr-orange: hsla(32, 98%, 56%, 1);
 	--clr-main-dark: hsla(176, 79%, 15%, 1);
 	--clr-main-dark-transparent: hsla(176, 79%, 15%, 0.2);
 	--clr-main-light: hsla(173, 68%, 44%, 1);
 	--clr-main-light-transparent: hsla(173, 68%, 44%, 0.2);
-	--clr-white-transparent: hsla(0, 0%, 100%, 0.5);
+	--clr-white-transparent: hsla(0, 0%, 100%, 0.7);
 	--clr-shadow: hsl(0, 0%, 79%, 50%);
 	--clr-shadow-transparent: hsl(0, 0%, 79%, 50%);
 	--clr-dark-red: hsl(343, 54%, 37%);

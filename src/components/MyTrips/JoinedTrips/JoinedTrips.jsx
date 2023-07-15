@@ -28,7 +28,8 @@ const JoinedTrips = () => {
 			}));
 
 			const joinedTripsData = participatedTripsData.filter(
-				(trip) => trip.owner !== currentUser.uid
+				(trip) =>
+					trip.owner !== currentUser.uid && trip.endDate.toDate() > new Date()
 			);
 
 			setJoinedTrips(joinedTripsData);
@@ -52,6 +53,9 @@ const JoinedTrips = () => {
 					className={`${styles.myTripsLink} ${styles.myTripsLinkActive}`}
 				>
 					Dołączone
+				</Link>
+				<Link to='/mytrips/completedtrips' className={styles.myTripsLink}>
+					Zakończone
 				</Link>
 			</div>
 			<div className={styles.container}>

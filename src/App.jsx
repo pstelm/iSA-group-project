@@ -15,6 +15,7 @@ import {
 	TripFullPage,
 	PasswordReminder,
 	EditTrip,
+	CompletedTrips,
 } from './components';
 
 export const App = () => {
@@ -34,6 +35,7 @@ export const App = () => {
 					<Route path='/mytrips' element={<MyTrips />}>
 						<Route path='/mytrips/ownedtrips' element={<OwnedTrips />} />
 						<Route path='/mytrips/joinedtrips' element={<JoinedTrips />} />
+						<Route path='/mytrips/completedtrips' element={<CompletedTrips />} />
 					</Route>
 					<Route path='/addtrip' element={<AddTrip />} />
 					<Route path='/alltrips' element={<AllTrips />} />

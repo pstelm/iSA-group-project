@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import styles from './AllTrips.module.css';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import TripMini from '../Trip/TripMini/TripMini';
 import { toast } from 'react-hot-toast';
-import useAuth from '../../contexts/AuthContext';
 import BackButton from '../BackButton/BackButton';
 import Tags from '../AddTrip/Tags/Tags';
 import tagsData from '../AddTrip/Tags/tags.json';
+import Filters from './Filters/Filters';
 
 const AllTrips = () => {
-	const { currentUser } = useAuth();
 	const [allTrips, setAllTrips] = useState([]);
 	const [filteredTrips, setFilteredTrips] = useState([]);
 	const [selectedTags, setSelectedTags] = useState([]);
 	const [searchedText, setSearchedText] = useState('');
-
-	// Pobieram referencję do wszystkich wycieczek, których aktualnie zalogowany user nie jest właścicielem
-	// const filteredTripsCollectionRef = query(
-	// 	collection(db, 'Trips'),
-	// 	where('owner', '!=', currentUser.uid)
-	// );
+	const [showFilters, setShowFilters] = useState(false);
+	const [additionalFilters, setAdditionalFilters] = useState({});
+	// dodałam state topBudgetOfAllTrips, żeby móc wyświetlać max kwotę za wycieczkę w inpucie filtra budżetu; czyli dałoby się filtrowac bez tego (musiałabym nieco zmienić logikę filtrowania), ale wydaje mi się, że tak jest ładniej :)
+	const [topBudgetOfAllTrips, setTopBudgetOfAllTrips] = useState();
 
 	const getTrips = async () => {
 		try {
@@ -29,11 +26,20 @@ const AllTrips = () => {
 				id: doc.id,
 				...doc.data(),
 			}));
-			setAllTrips(tripsData);
-			setFilteredTrips(tripsData);
+
+			const currentTripsData = tripsData.filter(
+				(trip) => trip.startDate.toDate() > new Date()
+			);
+
+			setAllTrips(currentTripsData);
+			setFilteredTrips(currentTripsData);
 		} catch (error) {
 			toast.error('Ta podróż już nie istnieje');
 		}
+	};
+
+	const handleShowFilters = () => {
+		setShowFilters(!showFilters);
 	};
 
 	const filterByTags = (trip) => {
@@ -48,11 +54,57 @@ const AllTrips = () => {
 		}
 	};
 
+	const filterByCountry = (trip) => {
+		if (additionalFilters.countries.length === 0) {
+			return true;
+		} else {
+			return additionalFilters.countries.includes(trip.toCountry);
+		}
+	};
+
+	const filterByBudget = (trip) => {
+		if (
+			trip.budget >= additionalFilters.minBudget &&
+			trip.budget <= additionalFilters.maxBudget
+		) {
+			return true;
+		}
+	};
+
+	const filterByDate = (trip) => {
+		if ((additionalFilters.fromDate === '') & (additionalFilters.toDate === '')) {
+			return true;
+		} else if (
+			(additionalFilters.fromDate !== '') &
+			(additionalFilters.toDate === '')
+		) {
+			return trip.startDate.toDate().getTime() >=
+				additionalFilters.fromDate.getTime()
+				? true
+				: false;
+		} else if (
+			(additionalFilters.fromDate === '') &
+			(additionalFilters.toDate !== '')
+		) {
+			return trip.endDate.toDate().getTime() <= additionalFilters.toDate.getTime()
+				? true
+				: false;
+		} else {
+			return (trip.startDate.toDate().getTime() >=
+				additionalFilters.fromDate.getTime()) &
+				(trip.endDate.toDate().getTime() <= additionalFilters.toDate.getTime())
+				? true
+				: false;
+		}
+	};
+
 	const filterTrips = (text) => {
-		setSearchedText(text);
 		const searchedTrips = allTrips
 			.filter(filterByTags)
-			.filter((trip) => filterByInput(trip, text));
+			.filter((trip) => filterByInput(trip, text))
+			.filter((trip) => filterByCountry(trip))
+			.filter((trip) => filterByBudget(trip))
+			.filter((trip) => filterByDate(trip));
 		setFilteredTrips(searchedTrips);
 	};
 
@@ -62,8 +114,27 @@ const AllTrips = () => {
 	}, []);
 
 	useEffect(() => {
+		setTopBudgetOfAllTrips(
+			allTrips.reduce(function (acc, trip) {
+				return acc > trip.budget ? acc : trip.budget;
+			}, 0)
+		);
+
+		setAdditionalFilters({
+			countries: [],
+			minBudget: 0,
+			maxBudget: allTrips.reduce(function (acc, trip) {
+				return acc > trip.budget ? acc : trip.budget;
+			}, 0),
+			fromDate: '',
+			toDate: '',
+		});
+		// console.log('start: ', additionalFilters);
+	}, [allTrips]);
+
+	useEffect(() => {
 		filterTrips(searchedText);
-	}, [selectedTags]);
+	}, [selectedTags, searchedText, additionalFilters]);
 
 	return (
 		<div className={styles.pageContent}>
@@ -75,19 +146,32 @@ const AllTrips = () => {
 						<input
 							className={styles.searchbarInput}
 							onChange={(e) => {
-								filterTrips(e.target.value);
+								setSearchedText(e.target.value);
 							}}
 							type='text'
 							name='searchbar'
 							placeholder='Wpisz, czego szukasz'
 						/>
 						<div className={styles.searchbarInputIcon}>
-							<img src='/assets/icons/magnifying-glass.svg' alt='Przycisk szukaj' />
+							<img src='/assets/icons/magnifying-glass.svg' alt='' />
 						</div>
 					</div>
-					<button className={styles.filtersBtn} type='button'>
+					<button
+						className={styles.filtersBtn}
+						type='button'
+						onClick={handleShowFilters}
+					>
 						<img src='/assets/icons/filters.svg' alt='Filtruj' />
 					</button>
+
+					{showFilters && (
+						<Filters
+							additionalFilters={additionalFilters}
+							setAdditionalFilters={setAdditionalFilters}
+							topBudgetOfAllTrips={topBudgetOfAllTrips}
+						/>
+					)}
+
 					<div className={styles.tagsBox}>
 						<Tags
 							tags={tagsData}
