@@ -281,10 +281,6 @@ input[type='date']:focus::-webkit-datetime-edit {
 	margin: 5px;
 }
 
-.add_photo_plus_label {
-	position: relative;
-}
-
 .add_photo_plus {
 	display: flex;
 	justify-content: center;

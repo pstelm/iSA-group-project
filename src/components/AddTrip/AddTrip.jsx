@@ -146,11 +146,7 @@ const AddTrip = () => {
 						</div>
 					)}
 
-					<label
-						onChange={handlePhotoAdd}
-						htmlFor='editTripPhoto'
-						className={styles.add_photo_plus_label}
-					>
+					<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
 						<input
 							type='file'
 							id='editTripPhoto'
