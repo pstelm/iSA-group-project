@@ -38,8 +38,9 @@
     font-size: 20px;
 	font-weight: 500;
     position: absolute;
-    top: 36%;
-    right: 23%;
+    transform: translate(1040%, -70%);
+    /* top: 36%;
+    right: 23%; */
 }
 
 .photo_container {

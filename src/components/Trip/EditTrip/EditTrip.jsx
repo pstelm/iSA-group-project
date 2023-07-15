@@ -193,10 +193,10 @@ const EditTrip = () => {
 	}, []);
 
     const handleCancel = () => {
-		navigate('/mytrips/ownedtrips');
-		toast.error('Twoje zmiany nie zostały zapisane');
-	};
-
+        navigate(-1);
+        toast.error('Twoje zmiany nie zostały zapisane');
+    };
+    
 	return (
 		<>
 			{user ? (
