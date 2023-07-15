@@ -13,6 +13,8 @@ import Countries from '../../components/Countries/Countries.jsx';
 import { getStorage, ref, uploadBytes } from '@firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { ModalPopup } from '../../components';
+import iconBack from '/public/assets/icons/chevron-left-solid.svg';
+import emptyTripPhoto from '/public/assets/icons/camera.png';
 
 const AddTrip = () => {
 	const [selectedTags, setSelectedTags] = useState([]);
@@ -107,13 +109,13 @@ const AddTrip = () => {
 
 	return (
 		<>
-			<div className={styles.containter_add_trip}>
+			<div className={styles.container_add_trip}>
 				<div className={styles.header_container}>
 					<ModalPopup
 						triggerBtn={
 							<div className={styles.button_back_container}>
 								<button className={styles.button_back}>
-									<img src='/assets/icons/chevron-left-solid.svg' alt='Go back' />
+									<img src={iconBack} alt='Go back' />
 								</button>
 								<h3>Stwórz podróż</h3>
 							</div>
@@ -137,7 +139,7 @@ const AddTrip = () => {
 					<div className={styles.photo_container}>
 						<div className={styles.add_photo}>
 							<img
-								src='/assets/icons/camera.png'
+								src={emptyTripPhoto}
 								alt='ikonka aparatu fotograficznego'
 								className={styles.add_photo_icon}
 							/>
@@ -145,17 +147,20 @@ const AddTrip = () => {
 					</div>
 				)}
 
-				<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
-					<input
-						type='file'
-						id='editTripPhoto'
-						className={styles.edit_trip_photo}
-						accept='.jpg'
-						multiple={false}
-						hidden
-					/>
-					<div className={styles.add_photo_plus}>+</div>
-				</label>
+					<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
+						<input
+							type='file'
+							id='editTripPhoto'
+							className={styles.edit_trip_photo}
+							accept='.jpg'
+							multiple={false}
+							hidden
+						/>
+						<div className={styles.add_photo_plus}>
+							<img src='/assets/icons/plus-solid.svg' />{' '}
+						</div>
+					</label>
+				</div>
 
 				<div className={styles.container}>
 					<form className={styles.form} onSubmit={handleSubmit}>
@@ -199,11 +204,11 @@ const AddTrip = () => {
 									placeholder='Z'
 									required
 								/>
-							<Countries
-								countriesData={countriesData}
-								selectedCountry={selectedFromCountry}
-								setSelectedCountry={setSelectedFromCountry}
-							/>
+								<Countries
+									countriesData={countriesData}
+									selectedCountry={selectedFromCountry}
+									setSelectedCountry={setSelectedFromCountry}
+								/>
 							</div>
 						</div>
 
@@ -219,10 +224,10 @@ const AddTrip = () => {
 									required
 								/>
 								<Countries
-								countriesData={countriesData}
-								selectedCountry={selectedToCountry}
-								setSelectedCountry={setSelectedToCountry}
-							/>
+									countriesData={countriesData}
+									selectedCountry={selectedToCountry}
+									setSelectedCountry={setSelectedToCountry}
+								/>
 							</div>
 						</div>
 
@@ -255,9 +260,14 @@ const AddTrip = () => {
 						</div>
 
 						<div className={styles.participants_container}>
-							<label htmlFor='maxParticipantsCount' className={styles.labels}>
-								Podaj ilość uczestników
-							</label>
+							<div className={styles.participants}>
+								<label htmlFor='maxParticipantsCount' className={styles.labels}>
+									Podaj łączną ilość uczestników
+								</label>
+								<div className={styles.hint}>
+									<p>Pamiętaj, że Ty również jesteś uczestnikiem podróży!</p>
+								</div>
+							</div>
 							<input
 								className={styles.input_add_trip}
 								type='number'

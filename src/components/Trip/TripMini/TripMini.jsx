@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styles from './TripMini.module.css';
-// import { getUserData } from '../../../utils/getUserData';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../contexts/AuthContext';
 import { getDownloadURL, getStorage, ref } from '@firebase/storage';
+import iconLocationDark from '/public/assets/icons/location-dot-solid.svg';
+import iconLocationGrey from '/public/assets/icons/location-dot-grey.svg';
+import iconCalendarDark from '/public/assets/icons/calendar-days-regular.svg';
+import iconCalendarGrey from '/public/assets/icons/calendar-days-grey.svg';
+import iconGroupDark from '/public/assets/icons/people-group-solid.svg';
+import iconGroupGrey from '/public/assets/icons/people-group-grey.svg';
 
 const TripMini = ({
 	id,
@@ -20,6 +25,11 @@ const TripMini = ({
 	const storage = getStorage();
 	const [tripImgURL, setTripImgURL] = useState();
 	const [tripDuration, setTripDuration] = useState('');
+	const defaultImgURL =
+		'https://firebasestorage.googleapis.com/v0/b/promises-land.appspot.com/o/tripsPhoto%2Fdefault.png?alt=media&token=179f10ed-72cc-40a8-bef4-2a76ba77f98f';
+	let iconLocation = iconLocationDark;
+	let iconCalendar = iconCalendarDark;
+	let iconGroup = iconGroupDark;
 
 	const getTripDuration = () => {
 		let tripDurationText = '';
@@ -67,8 +77,13 @@ const TripMini = ({
 			});
 	};
 
+	if (filterOwnership === true && owner === currentUser.uid) {
+		iconLocation = iconLocationGrey;
+		iconCalendar = iconCalendarGrey;
+		iconGroup = iconGroupGrey;
+	}
+
 	useEffect(() => {
-		// getUserData(owner, setTripOwner);
 		getTripImage();
 		getTripDuration();
 	}, []);
@@ -93,53 +108,23 @@ const TripMini = ({
 							/>
 						) : (
 							<img
-								src='/assets/default.png'
-								// src='/assets/logo_transparent.png'
-								alt={`Przykłądowe zdjęcie podróży`}
+								src={defaultImgURL}
+								alt={`Przykładowe zdjęcie podróży`}
 								className={styles.defaultTripImg}
 							/>
 						)}
 					</div>
 					<h4 className={styles.title}>{title}</h4>
 					<div className={styles.oneLine}>
-						<img
-							className={styles.icon}
-							src={
-								filterOwnership === true && owner === currentUser.uid
-									? '/assets/icons/location-dot-grey.svg'
-									: '/assets/icons/location-dot-solid.svg'
-							}
-							alt=''
-						/>
+						<img className={styles.icon} src={iconLocation} alt='Kraj' />
 						<p>{toCountry}</p>
 					</div>
 					<div className={styles.oneLine}>
-						<img
-							className={styles.icon}
-							src={
-								filterOwnership === true && owner === currentUser.uid
-									? '/assets/icons/calendar-days-grey.svg'
-									: '/assets/icons/calendar-days-regular.svg'
-							}
-							alt=''
-						/>
+						<img className={styles.icon} src={iconCalendar} alt='' />
 						<p>{tripDuration}</p>
 					</div>
-					{/* {tripOwner ? (
-						<p>
-							Owner: {tripOwner.firstName} {tripOwner.lastName}
-						</p>
-					) : null} */}
 					<div className={styles.oneLine}>
-						<img
-							className={styles.icon}
-							src={
-								filterOwnership === true && owner === currentUser.uid
-									? '/assets/icons/people-group-grey.svg'
-									: '/assets/icons/people-group-solid.svg'
-							}
-							alt=''
-						/>
+						<img className={styles.icon} src={iconGroup} alt='' />
 						<p>{maxParticipantsCount ? maxParticipantsCount : '0'} podróżników</p>
 					</div>
 				</Link>
