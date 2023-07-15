@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import styles from './Filters.module.css';
 import countriesList from './countries.json';
 import { Toaster, toast } from 'react-hot-toast';
+import iconPlus from '/public/assets/icons/plus-solid.svg';
+import iconMinus from '/public/assets/icons/minus-solid.svg';
+import iconTrash from '/public/assets/icons/trash.svg';
 
 const Filters = ({
 	additionalFilters,
@@ -43,17 +46,6 @@ const Filters = ({
 					? additionalFilters.minBudget
 					: parseInt(e.target.minBudget.value)
 				: additionalFilters.minBudget;
-
-			// To powyżej to skrócone to poniżej. Musiałam dodać sprawdzanie, czy pola w ogóle są widoczne na stronie, przez akcje an pomarańczowym plusie
-			// let newMinBudget = '';
-			// if (e.target.minBudget) {
-			// 	newMinBudget =
-			// 		e.target.minBudget.value === ''
-			// 			? additionalFilters.minBudget
-			// 			: parseInt(e.target.minBudget.value);
-			// } else {
-			// 	newMinBudget = additionalFilters.minBudget;
-			// }
 
 			const newMaxBudget = e.target.maxBudget
 				? e.target.maxBudget.value === ''
@@ -112,16 +104,11 @@ const Filters = ({
 							type='button'
 							onClick={handleShowLocationFilters}
 						>
-							{showLocationFilters ? (
-								<img src='/assets/icons/minus-solid.svg' />
-							) : (
-								<img src='/assets/icons/plus-solid.svg' />
-							)}
+							{showLocationFilters ? <img src={iconMinus} /> : <img src={iconPlus} />}
 						</button>
 					</div>
 					{showLocationFilters && (
 						<div className={styles.filtersCountriesGroup}>
-							{/* div.selectBox dodany tylko po to, żeby wszystkei strzałki /ikony/kalendarze były w jednej pionowej linii */}
 							<div className={styles.selectBox}>
 								<select
 									className={styles.countiesSelect}
@@ -148,7 +135,6 @@ const Filters = ({
 								</select>
 							</div>
 							<ul className={styles.selectedCountiesList}>
-								{/* {console.log(selectedCountries)} */}
 								{selectedCountries.map((selectedCountry) => (
 									<li
 										key={selectedCountry}
@@ -157,7 +143,7 @@ const Filters = ({
 									>
 										{selectedCountry}{' '}
 										<button type='button' className={styles.removeSelectedCountry}>
-											<img src='/assets/icons/trash.svg' alt='Usuń wybranyn kraj' />
+											<img src={iconTrash} alt='Usuń wybranyn kraj' />
 										</button>
 									</li>
 								))}
@@ -174,11 +160,7 @@ const Filters = ({
 							type='button'
 							onClick={handleShowBudgetFilters}
 						>
-							{showBudgetFilters ? (
-								<img src='/assets/icons/minus-solid.svg' />
-							) : (
-								<img src='/assets/icons/plus-solid.svg' />
-							)}
+							{showBudgetFilters ? <img src={iconMinus} /> : <img src={iconPlus} />}
 						</button>
 					</div>
 					{showBudgetFilters && (
@@ -190,6 +172,7 @@ const Filters = ({
 									type='number'
 									placeholder={additionalFilters.minBudget}
 									className={styles.budgetInput}
+									onWheel={(e) => e.target.blur()}
 								/>
 								<p className={styles.inputBoxInfo}>zł</p>
 							</div>
@@ -200,6 +183,7 @@ const Filters = ({
 									type='number'
 									placeholder={additionalFilters.maxBudget}
 									className={styles.budgetInput}
+									onWheel={(e) => e.target.blur()}
 								/>
 								<p className={styles.inputBoxInfo}>zł</p>
 							</div>
@@ -215,11 +199,7 @@ const Filters = ({
 							type='button'
 							onClick={handleShowDatesFilters}
 						>
-							{showDatesFilters ? (
-								<img src='/assets/icons/minus-solid.svg' />
-							) : (
-								<img src='/assets/icons/plus-solid.svg' />
-							)}
+							{showDatesFilters ? <img src={iconMinus} /> : <img src={iconPlus} />}
 						</button>
 					</div>
 					{showDatesFilters && (
