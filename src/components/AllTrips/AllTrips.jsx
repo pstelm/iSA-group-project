@@ -8,6 +8,8 @@ import BackButton from '../BackButton/BackButton';
 import Tags from '../AddTrip/Tags/Tags';
 import tagsData from '../AddTrip/Tags/tags.json';
 import Filters from './Filters/Filters';
+import iconMagnifyingGlass from '/public/assets/icons/magnifying-glass.svg';
+import iconFilters from '/public/assets/icons/filters.svg';
 
 const AllTrips = () => {
 	const [allTrips, setAllTrips] = useState([]);
@@ -153,7 +155,7 @@ const AllTrips = () => {
 							placeholder='Wpisz, czego szukasz'
 						/>
 						<div className={styles.searchbarInputIcon}>
-							<img src='/assets/icons/magnifying-glass.svg' alt='' />
+							<img src={iconMagnifyingGlass} alt='' />
 						</div>
 					</div>
 					<button
@@ -161,7 +163,7 @@ const AllTrips = () => {
 						type='button'
 						onClick={handleShowFilters}
 					>
-						<img src='/assets/icons/filters.svg' alt='Filtruj' />
+						<img src={iconFilters} alt='Filtruj' />
 					</button>
 
 					{showFilters && (
