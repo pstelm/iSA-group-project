@@ -18,8 +18,8 @@ const AddTrip = () => {
 	const [selectedTags, setSelectedTags] = useState([]);
 	const tripID = uuidv4();
 
-	const [selectedFromCountry, setSelectedFromCountry] = useState([]);
-	const [selectedToCountry, setSelectedToCountry] = useState([]);
+	const [selectedFromCountry, setSelectedFromCountry] = useState('');
+	const [selectedToCountry, setSelectedToCountry] = useState('');
 
 	const { currentUser } = useAuth();
 
@@ -185,7 +185,7 @@ const AddTrip = () => {
 								placeholder='Możesz tutaj wpisać plan na swoją wycieczkę...'
 								maxLength='1500'
 								required
-							></textarea>
+							/>
 						</div>
 
 						<div className={styles.places_container}>
@@ -199,10 +199,11 @@ const AddTrip = () => {
 									placeholder='Z'
 									required
 								/>
-								<Countries
-									countriesData={countriesData}
-									setSelectedCountry={setSelectedFromCountry}
-								/>
+							<Countries
+								countriesData={countriesData}
+								selectedCountry={selectedFromCountry}
+								setSelectedCountry={setSelectedFromCountry}
+							/>
 							</div>
 						</div>
 
@@ -218,9 +219,10 @@ const AddTrip = () => {
 									required
 								/>
 								<Countries
-									countriesData={countriesData}
-									setSelectedCountry={setSelectedToCountry}
-								/>
+								countriesData={countriesData}
+								selectedCountry={selectedToCountry}
+								setSelectedCountry={setSelectedToCountry}
+							/>
 							</div>
 						</div>
 
