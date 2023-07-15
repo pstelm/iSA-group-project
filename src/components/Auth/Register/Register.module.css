@@ -75,6 +75,7 @@
 	border-left: none;
 	padding: 5px;
 	margin-bottom: 30px;
+	font-family: var(--font-family);
 }
 
 .input[type='date'] {

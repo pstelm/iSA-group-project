@@ -39,6 +39,7 @@
 	border-right: none;
 	border-left: none;
 	padding: 5px;
+	font-family: var(--font-family);
 }
 
 .logo img {
