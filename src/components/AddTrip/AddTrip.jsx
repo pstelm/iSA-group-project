@@ -235,27 +235,31 @@ const AddTrip = () => {
 							<legend className={styles.labels}>Data</legend>
 
 							<div className={styles.dates}>
-								<label htmlFor='startDate' className={styles.small_notes}>
-									Początek
-								</label>
-								<input
-									className={styles.input_add_trip}
-									type='date'
-									name='startDate'
-									id='startDate'
-									required
-								/>
+								<div>
+									<label htmlFor='startDate' className={styles.small_notes}>
+										Początek
+									</label>
+									<input
+										className={styles.input_add_trip}
+										type='date'
+										name='startDate'
+										id='startDate'
+										required
+									/>
+								</div>
 
-								<label htmlFor='endDate' className={styles.small_notes}>
-									Powrót
-								</label>
-								<input
-									className={styles.input_add_trip}
-									type='date'
-									name='endDate'
-									id='endDate'
-									required
-								/>
+								<div>
+									<label htmlFor='endDate' className={styles.small_notes}>
+										Powrót
+									</label>
+									<input
+										className={styles.input_add_trip}
+										type='date'
+										name='endDate'
+										id='endDate'
+										required
+									/>
+								</div>
 							</div>
 						</div>
 
