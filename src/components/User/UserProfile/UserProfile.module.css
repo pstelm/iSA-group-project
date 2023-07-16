@@ -2,56 +2,128 @@
 	padding: 10px;
 }
 
-.user_photo {
-	height: 140px;
-	width: 140px;
-	border-radius: 50%;
-}
-
-.user_profile_container {
-	height: 100%;
-	width: 100%;
-	display: grid;
-	justify-content: center;
-	align-content: flex-start;
-	margin-top: 20px;
-}
-
 .user_profile_content {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	gap: 10px;
+	align-items: center;
 	height: 100%;
-	font-size: var(--fs-h2);
+	width: 100%;
+	border-radius: 10px;
+	font-family: var(--font-family);
 }
 
-.icon_edit_profile {
-	height: 25px;
+.user_photo_box {
+	position: relative;
+	height: 170px;
+	width: 170px;
+	/* padding: 5px; */
+	border: 10px solid var(--clr-grey);
+	border: 5px solid var(--clr-orange);
+	border-radius: 50%;
+}
+
+.user_photo {
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.link_edit_bottom {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	bottom: 100px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 90%;
+	height: 50px;
+	color: var(--clr-bg);
+	background-color: var(--clr-main-dark);
+	padding: 4px 8px;
+	border-radius: 8px;
+	font-size: var(--fs-p);
 }
 
 .icon_edit_photo {
 	position: absolute;
-	height: 25px;
-	right: 130px;
-	top: 220px;
+	bottom: 0;
+	right: 0;
+	height: 30px;
+	width: 30px;
+	padding: 4px;
+	color: var(--clr-bg);
+	background-color: var(--clr-orange);
+	border: 1px solid var(--clr-orange);
+	border-radius: 5px;
+}
+
+.user_data_box,
+.user_about_box {
+	width: 100%;
+	border-radius: 10px;
+	padding: 10px;
+	margin-top: 20px;
+	background-color: var(--clr-main-light-transparent);
+}
+
+.user_data_box {
+	font-weight: var(--font-bold);
+	text-align: center;
+}
+
+.user_data_box h2 {
+	font-size: var(--fs-h3);
+	border-bottom: 1px solid var(--clr-main-dark-transparent);
 }
 
 .user_city_content {
 	display: flex;
+	justify-content: center;
 	align-items: center;
-	gap: 6px;
+	gap: 10px;
+	margin-top: 10px;
 }
 
 .icon_city {
 	height: 20px;
 }
 
-.link_edit {
+.user_city_info,
+.user_trips_info {
+	color: var(--clr-main-dark-transparent);
+	font-weight: normal;
+	font-size: var(--fs-p);
+}
+
+.user_city_info {
+	padding: 10px 0 5px;
+}
+
+.user_about_box:last-child {
+	margin-bottom: 100px;
+}
+
+.section_title {
+	width: 100%;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid var(--clr-main-dark-transparent);
+}
+
+.my_trips_list {
+	list-style: none;
+}
+
+.my_trips_link {
 	display: flex;
-	align-self: flex-end;
-	background: none;
-	border: none;
-	width: 35px;
-	height: 35px;
+	align-items: center;
+	color: var(--dark);
+}
+
+.my_trips_link_icon {
+	height: var(--fs-p);
+	margin-right: 5px;
 }

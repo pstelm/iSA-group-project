@@ -147,19 +147,19 @@ const AddTrip = () => {
 					</div>
 				)}
 
-					<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
-						<input
-							type='file'
-							id='editTripPhoto'
-							className={styles.edit_trip_photo}
-							accept='.jpg'
-							multiple={false}
-							hidden
-						/>
-						<div className={styles.add_photo_plus}>
-							<img src='/assets/icons/plus-solid.svg' />{' '}
-						</div>
-					</label>
+				<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
+					<input
+						type='file'
+						id='editTripPhoto'
+						className={styles.edit_trip_photo}
+						accept='.jpg'
+						multiple={false}
+						hidden
+					/>
+					<div className={styles.add_photo_plus}>
+						<img src='/assets/icons/plus-solid.svg' />{' '}
+					</div>
+				</label>
 
 				<div className={styles.container}>
 					<form className={styles.form} onSubmit={handleSubmit}>
@@ -320,7 +320,7 @@ const AddTrip = () => {
 					</form>
 				</div>
 			</div>
-		</>					
+		</>
 	);
 };
 

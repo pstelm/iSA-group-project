@@ -1,6 +1,13 @@
 import useAuth from '../../../contexts/AuthContext';
 import { db } from '../../../config/firebase';
-import { doc, getDoc } from '@firebase/firestore';
+import {
+	collection,
+	doc,
+	getDoc,
+	getDocs,
+	query,
+	where,
+} from '@firebase/firestore';
 import { useEffect, useState } from 'react';
 import styles from './userprofile.module.css';
 import {
@@ -12,19 +19,19 @@ import {
 import { toast } from 'react-hot-toast';
 import BackButton from '../../BackButton/BackButton';
 import { Link } from 'react-router-dom';
+import { firebaseErrors } from '../../../utils/firebaseErrors';
 import emptyAvatar from '/public/assets/icons/empty-avatar.png';
-import iconEdit from '/public/assets/icons/pen.png';
-import iconPlus from '/public/assets/icons/plus.png';
+import iconPlus from '/public/assets/icons/plus-solid.svg';
 import iconLocation from '/public/assets/icons/location-dot-solid.svg';
+import iconAirplane from '/public/assets/icons/airplane-dark.svg';
 
 const UserProfile = () => {
+	const storage = getStorage();
 	const { currentUser } = useAuth();
 	const [user, setUser] = useState();
-
-	const [age, setAge] = useState();
-
-	const storage = getStorage();
 	const [userProfileImgURL, setUserProfileImgURL] = useState();
+	const [age, setAge] = useState();
+	const [myTrips, setMyTrips] = useState([]);
 
 	const getUserData = async () => {
 		const userRef = await doc(db, 'Users', currentUser.uid);
@@ -55,6 +62,25 @@ const UserProfile = () => {
 		});
 	};
 
+	const filteredOwnedTripsCollectionRef = query(
+		collection(db, 'Trips'),
+		where('owner', '==', currentUser.uid)
+	);
+
+	const getOwnedTrips = async () => {
+		try {
+			const ownedTripsSnapshot = await getDocs(filteredOwnedTripsCollectionRef);
+			const ownedTripsData = ownedTripsSnapshot.docs.map((doc) => ({
+				id: doc.id,
+				...doc.data(),
+			}));
+
+			setMyTrips(ownedTripsData);
+		} catch (error) {
+			toast.error('Wystąpił błąd: ' + firebaseErrors[error.code]);
+		}
+	};
+
 	const handleEditAvatar = (e) => {
 		const file = e.target.files[0];
 		if (file) {
@@ -76,6 +102,7 @@ const UserProfile = () => {
 	useEffect(() => {
 		if (currentUser) {
 			getUserData();
+			getOwnedTrips();
 		}
 	}, [currentUser]);
 
@@ -84,11 +111,13 @@ const UserProfile = () => {
 			{user ? (
 				<div className={styles.container}>
 					<BackButton sectionTitle={'Profil użytkownika'} />
-					<div className={styles.user_profile_container}>
-						<div className={styles.user_profile_content}>
-							<Link to='/editprofile' className={styles.link_edit}>
-								<img src={iconEdit} className={styles.icon_edit_profile} />
-							</Link>
+
+					<Link to='/editprofile' className={styles.link_edit_bottom}>
+						Edytuj profil
+					</Link>
+
+					<div className={styles.user_profile_content}>
+						<div className={styles.user_photo_box}>
 							{userProfileImgURL ? (
 								<img
 									src={userProfileImgURL}
@@ -104,30 +133,59 @@ const UserProfile = () => {
 									className={styles.user_photo}
 								/>
 							)}
-							<div>
-								<label onChange={handleEditAvatar} htmlFor='editAvatarInput'>
-									<input
-										type='file'
-										id='editAvatarInput'
-										className={styles.edit_avatar_input}
-										accept='.jpg'
-										multiple={false}
-										hidden
-									/>
-									<img src={iconPlus} className={styles.icon_edit_photo} />
-								</label>
-							</div>
-							<div className={styles.user_data_container}>
-								{user.firstName} {user.lastName}, {age}
-							</div>
+
+							<label onChange={handleEditAvatar} htmlFor='editAvatarInput'>
+								<input
+									type='file'
+									id='editAvatarInput'
+									className={styles.edit_avatar_input}
+									accept='.jpg'
+									multiple={false}
+									hidden
+								/>
+								<img src={iconPlus} className={styles.icon_edit_photo} />
+							</label>
+						</div>
+
+						<div className={styles.user_data_box}>
+							<h2>
+								{user.firstName} {user.lastName}, {age} l.
+							</h2>
 							{user.city ? (
 								<div className={styles.user_city_content}>
 									<img src={iconLocation} className={styles.icon_city} />
-									{user.city}
+									<p>{user.city}, Polska</p>
 								</div>
-							) : null}
-							<legend className={styles.legend}>O mnie</legend>
-							<div className={styles.user_about}>{user.aboutMe}</div>
+							) : (
+								<p className={styles.user_city_info}>Uzupełnij swoją lokalizację</p>
+							)}
+						</div>
+
+						<div className={styles.user_about_box}>
+							<h4 className={styles.section_title}>O mnie</h4>
+							<p>{user.aboutMe}</p>
+						</div>
+
+						<div className={styles.user_about_box}>
+							<h4 className={styles.section_title}>Moje podróże</h4>
+							<ul className={styles.my_trips_list}>
+								{myTrips && myTrips.length > 0 ? (
+									myTrips.map((trip) => (
+										<li key={trip.id}>
+											<Link to={`/trip/${trip.id}`} className={styles.my_trips_link}>
+												<img
+													src={iconAirplane}
+													alt=''
+													className={styles.my_trips_link_icon}
+												/>
+												<p>{trip.title}</p>
+											</Link>
+										</li>
+									))
+								) : (
+									<p className={styles.user_trips_info}>Brak podróży</p>
+								)}
+							</ul>
 						</div>
 					</div>
 				</div>
