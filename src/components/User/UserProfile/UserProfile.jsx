@@ -20,7 +20,6 @@ import { toast } from 'react-hot-toast';
 import BackButton from '../../BackButton/BackButton';
 import { Link } from 'react-router-dom';
 import { firebaseErrors } from '../../../utils/firebaseErrors';
-import emptyAvatar from '/public/assets/icons/empty-avatar.png';
 import iconPlus from '/public/assets/icons/plus-solid.svg';
 import iconLocation from '/public/assets/icons/location-dot-solid.svg';
 import iconAirplane from '/public/assets/icons/airplane-dark.svg';
