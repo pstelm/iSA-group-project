@@ -33,16 +33,15 @@
 	overflow: hidden;
 }
 
-.tripImg {
+.tripImg,
+.defaultTripImg {
 	display: block;
+	max-height: 150px;
 	width: 100%;
 	object-fit: cover;
 }
 
 .defaultTripImg {
-	display: block;
-	width: 100%;
-	object-fit: cover;
 	filter: saturate(70%);
 }
 
@@ -50,7 +49,6 @@
 	height: 100%;
 	overflow: hidden;
 	text-align: left;
-	/* text-wrap: nowrap; */
 }
 
 .oneLine {
