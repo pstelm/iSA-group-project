@@ -68,6 +68,10 @@
 	border-radius: 8px;
 }
 
+.countiesSelect option {
+	background-color: var(--clr-bg);
+}
+
 .selectedCountiesList {
 	list-style: none;
 	width: 100%;

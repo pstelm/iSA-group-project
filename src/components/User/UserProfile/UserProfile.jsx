@@ -20,7 +20,6 @@ import { toast } from 'react-hot-toast';
 import BackButton from '../../BackButton/BackButton';
 import { Link } from 'react-router-dom';
 import { firebaseErrors } from '../../../utils/firebaseErrors';
-import emptyAvatar from '/public/assets/icons/empty-avatar.png';
 import iconPlus from '/public/assets/icons/plus-solid.svg';
 import iconLocation from '/public/assets/icons/location-dot-solid.svg';
 import iconAirplane from '/public/assets/icons/airplane-dark.svg';
@@ -32,6 +31,8 @@ const UserProfile = () => {
 	const [userProfileImgURL, setUserProfileImgURL] = useState();
 	const [age, setAge] = useState();
 	const [myTrips, setMyTrips] = useState([]);
+	const defatultProfileIMG =
+		'https://firebasestorage.googleapis.com/v0/b/promises-land.appspot.com/o/usersProfilePhoto%2Fdefault-user-image.svg?alt=media&token=51cfbe1c-fb80-4d7f-bc54-cd59b95361aa';
 
 	const getUserData = async () => {
 		const userRef = await doc(db, 'Users', currentUser.uid);
@@ -127,7 +128,7 @@ const UserProfile = () => {
 								/>
 							) : (
 								<img
-									src={emptyAvatar}
+									src={defatultProfileIMG}
 									alt='empty user profile'
 									id='emptyUserProfilePhoto'
 									className={styles.user_photo}
