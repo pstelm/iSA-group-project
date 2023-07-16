@@ -29,6 +29,8 @@ import {
 import { ModalPopup } from '../../index';
 import Popup from 'reactjs-popup';
 import emptyTripPhoto from '/public/assets/icons/camera.png';
+import iconsChevron from '/public/assets/icons/chevron-left-solid.svg';
+import iconPlus from '/public/assets/icons/plus-solid.svg';
 
 const EditTrip = () => {
 	const { currentUser } = useAuth();
@@ -210,7 +212,7 @@ const EditTrip = () => {
 							triggerBtn={
 								<div className={styles.button_back_container}>
 									<button className={styles.button_back}>
-										<img src='/assets/icons/chevron-left-solid.svg' alt='Go back' />
+										<img src={iconsChevron} alt='Go back' />
 									</button>
 									<h3>Edytuj podróż</h3>
 								</div>
@@ -251,7 +253,7 @@ const EditTrip = () => {
 							hidden
 						/>
 						<div className={styles.add_photo_plus}>
-							<img src='/assets/icons/plus-solid.svg' />
+							<img src={iconPlus} />
 						</div>
 					</label>
 
