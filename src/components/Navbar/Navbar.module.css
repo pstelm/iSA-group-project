@@ -26,14 +26,8 @@ img {
 .logoutBtn {
 	background-color: transparent;
 	color: var(--clr-main-dark);
-	/* height: 35px; */
-	/* width: 125px; */
-
 	border: none;
-	/* border-radius: 5px; */
-
 	font-family: var(--font-family);
 	font-size: var(--fs-small-text);
 	line-height: var(--fs-h1);
-	/* font-weight: var(--font-medium); */
 }
