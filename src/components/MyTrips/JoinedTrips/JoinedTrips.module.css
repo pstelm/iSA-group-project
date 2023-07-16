@@ -26,5 +26,5 @@
 .myTripsLinkActive {
 	color: var(--clr-orange);
 	border-color: var(--clr-orange);
-	border-width: 5px;
+	border-width: 3px;
 }
