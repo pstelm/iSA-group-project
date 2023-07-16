@@ -14,6 +14,7 @@ import { getStorage, ref, uploadBytes } from '@firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { ModalPopup } from '../../components';
 import iconBack from '/public/assets/icons/chevron-left-solid.svg';
+import iconPlus from '/public/assets/icons/plus-solid.svg';
 import emptyTripPhoto from '/public/assets/icons/camera.png';
 
 const AddTrip = () => {
@@ -157,7 +158,7 @@ const AddTrip = () => {
 						hidden
 					/>
 					<div className={styles.add_photo_plus}>
-						<img src='/assets/icons/plus-solid.svg' />{' '}
+						<img src={iconPlus} />
 					</div>
 				</label>
 
