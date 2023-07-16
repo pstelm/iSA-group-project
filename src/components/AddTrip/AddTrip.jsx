@@ -13,6 +13,8 @@ import Countries from '../../components/Countries/Countries.jsx';
 import { getStorage, ref, uploadBytes } from '@firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { ModalPopup } from '../../components';
+import iconBack from '/public/assets/icons/chevron-left-solid.svg';
+import emptyTripPhoto from '/public/assets/icons/camera.png';
 
 const AddTrip = () => {
 	const [selectedTags, setSelectedTags] = useState([]);
@@ -113,7 +115,7 @@ const AddTrip = () => {
 						triggerBtn={
 							<div className={styles.button_back_container}>
 								<button className={styles.button_back}>
-									<img src='/assets/icons/chevron-left-solid.svg' alt='Go back' />
+									<img src={iconBack} alt='Go back' />
 								</button>
 								<h3>Stwórz podróż</h3>
 							</div>
@@ -124,42 +126,40 @@ const AddTrip = () => {
 					/>
 				</div>
 
-				<div className={styles.photoBox}>
-					{tripPhoto ? (
-						<div className={styles.photo_container}>
+				{tripPhoto ? (
+					<div className={styles.photo_container}>
+						<img
+							src={URL.createObjectURL(tripPhoto)}
+							alt='zdjęcie opisujące podróż'
+							id='tripPhoto'
+							className={styles.trip_photo}
+						/>
+					</div>
+				) : (
+					<div className={styles.photo_container}>
+						<div className={styles.add_photo}>
 							<img
-								src={URL.createObjectURL(tripPhoto)}
-								alt='zdjęcie opisujące podróż'
-								id='tripPhoto'
-								className={styles.trip_photo}
+								src={emptyTripPhoto}
+								alt='ikonka aparatu fotograficznego'
+								className={styles.add_photo_icon}
 							/>
 						</div>
-					) : (
-						<div className={styles.photo_container}>
-							<div className={styles.add_photo}>
-								<img
-									src='/assets/icons/camera.png'
-									alt='ikonka aparatu fotograficznego'
-									className={styles.add_photo_icon}
-								/>
-							</div>
-						</div>
-					)}
+					</div>
+				)}
 
-					<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
-						<input
-							type='file'
-							id='editTripPhoto'
-							className={styles.edit_trip_photo}
-							accept='.jpg'
-							multiple={false}
-							hidden
-						/>
-						<div className={styles.add_photo_plus}>
-							<img src='/assets/icons/plus-solid.svg' />{' '}
-						</div>
-					</label>
-				</div>
+				<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
+					<input
+						type='file'
+						id='editTripPhoto'
+						className={styles.edit_trip_photo}
+						accept='.jpg'
+						multiple={false}
+						hidden
+					/>
+					<div className={styles.add_photo_plus}>
+						<img src='/assets/icons/plus-solid.svg' />{' '}
+					</div>
+				</label>
 
 				<div className={styles.container}>
 					<form className={styles.form} onSubmit={handleSubmit}>
