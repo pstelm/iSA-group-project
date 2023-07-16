@@ -27,7 +27,6 @@ import {
 	uploadBytes,
 } from '@firebase/storage';
 import { ModalPopup } from '../../index';
-import BackButton from '../../BackButton/BackButton';
 import Popup from 'reactjs-popup';
 import emptyTripPhoto from '/public/assets/icons/camera.png';
 
@@ -169,7 +168,7 @@ const EditTrip = () => {
 				await uploadBytes(pathReference, editedTripPhoto);
 			}
 			toast.success('Zmiany zostały zapisane');
-			navigate('/mytrips/ownedtrips');
+			navigate(-1);
 		} catch (error) {
 			toast.error('Wystąpił błąd: ' + error.message);
 		}
@@ -197,30 +196,30 @@ const EditTrip = () => {
 		getTrip();
 	}, []);
 
-    const handleCancel = () => {
-        navigate(-1);
-        toast.error('Twoje zmiany nie zostały zapisane');
-    };
-    
+	const handleCancel = () => {
+		navigate(-1);
+		toast.error('Twoje zmiany nie zostały zapisane');
+	};
+
 	return (
 		<>
 			{user ? (
 				<div className={styles.container}>
-                   <div className={styles.header_container}>
-					<ModalPopup
-						triggerBtn={
-							<div className={styles.button_back_container}>
-								<button className={styles.button_back}>
-									<img src='/assets/icons/chevron-left-solid.svg' alt='Go back' />
-								</button>
-								<h3>Edytuj podróż</h3>
-							</div>
-						}
-						modalHeader='Czy na pewno chcesz anulować edycję podróży?'
-						modalAdditionalInfo='Spowoduje to usunięcie wszystkich wprowadzonych danych.'
-						handleConfirmCancelationClick={handleCancel}
-					/>
-				</div>
+					<div className={styles.header_container}>
+						<ModalPopup
+							triggerBtn={
+								<div className={styles.button_back_container}>
+									<button className={styles.button_back}>
+										<img src='/assets/icons/chevron-left-solid.svg' alt='Go back' />
+									</button>
+									<h3>Edytuj podróż</h3>
+								</div>
+							}
+							modalHeader='Czy na pewno chcesz anulować edycję podróży?'
+							modalAdditionalInfo='Spowoduje to usunięcie wszystkich wprowadzonych danych.'
+							handleConfirmCancelationClick={handleCancel}
+						/>
+					</div>
 					{tripPhotoURL ? (
 						<div className={styles.photo_container}>
 							<img
@@ -232,14 +231,14 @@ const EditTrip = () => {
 						</div>
 					) : (
 						<div className={styles.photo_container}>
-                            <div className={styles.trip_photo_empty}>
-							<img
-								src={emptyTripPhoto}
-								alt='ikonka aparatu fotograficznego'
-								className={styles.icon_edit_trip}
-							/>
+							<div className={styles.trip_photo_empty}>
+								<img
+									src={emptyTripPhoto}
+									alt='ikonka aparatu fotograficznego'
+									className={styles.icon_edit_trip}
+								/>
+							</div>
 						</div>
-                        </div>
 					)}
 
 					<label onChange={handlePhotoAdd} htmlFor='editTripPhoto'>
@@ -251,7 +250,9 @@ const EditTrip = () => {
 							multiple={false}
 							hidden
 						/>
-						<div className={styles.add_photo_plus}><img src='/assets/icons/plus-solid.svg' /></div>
+						<div className={styles.add_photo_plus}>
+							<img src='/assets/icons/plus-solid.svg' />
+						</div>
 					</label>
 
 					<form
@@ -259,7 +260,7 @@ const EditTrip = () => {
 						className={styles.form_container}
 					>
 						<div className={styles.form}>
-							<div>
+							<div className={styles.trip_info_box}>
 								<label htmlFor='title' className={styles.labels}>
 									Tytuł
 								</label>
@@ -272,35 +273,39 @@ const EditTrip = () => {
 									className={styles.title}
 								/>
 							</div>
-							<label htmlFor='info' className={styles.labels}>
-								Opis
-							</label>
-							<textarea
-								id='info'
-								name='info'
-								defaultValue={trip.info}
-								required
-								className={styles.textarea_add_trip}
-							/>
-
-							<div className={styles.countries_container}>
-								<label htmlFor='fromCity' className={styles.labels}>
-									Miejsce wyjazdu
+							<div className={styles.trip_info_box}>
+								<label htmlFor='info' className={styles.labels}>
+									Opis
 								</label>
-								<div className={styles.places}>
-									<input
-										className={styles.input_add_trip}
-										id='fromCity'
-										name='fromCity'
-										defaultValue={trip.fromCity}
-										required
-									/>
+								<textarea
+									id='info'
+									name='info'
+									defaultValue={trip.info}
+									required
+									className={styles.textarea_add_trip}
+								/>
+							</div>
 
-									<Countries
-										countriesData={countriesData}
-										selectedCountry={selectedFromCountry}
-										setSelectedCountry={setSelectedFromCountry}
-									/>
+							<div className={styles.trip_info_box}>
+								<div className={styles.countries_container}>
+									<label htmlFor='fromCity' className={styles.labels}>
+										Miejsce wyjazdu
+									</label>
+									<div className={styles.places}>
+										<input
+											className={styles.input_add_trip}
+											id='fromCity'
+											name='fromCity'
+											defaultValue={trip.fromCity}
+											required
+										/>
+
+										<Countries
+											countriesData={countriesData}
+											selectedCountry={selectedFromCountry}
+											setSelectedCountry={setSelectedFromCountry}
+										/>
+									</div>
 								</div>
 
 								<div className={styles.countries_container}>
@@ -325,115 +330,127 @@ const EditTrip = () => {
 								</div>
 							</div>
 
-							<div className={styles.dates_container}>
-								<legend className={styles.labels}>Data</legend>
-								<div className={styles.dates}>
-									<label htmlFor='startDate' className={styles.small_notes}>
-										Początek
+							<div className={styles.trip_info_box}>
+								<div className={styles.dates_container}>
+									<legend className={styles.labels}>Data</legend>
+									<div className={styles.dates}>
+										<div>
+											<label htmlFor='startDate' className={styles.small_notes}>
+												Początek
+											</label>
+											<input
+												type='date'
+												id='startDate'
+												name='startDate'
+												required
+												defaultValue={firebaseDateToInputDate(trip.startDate)}
+												className={styles.input_add_trip}
+											/>
+										</div>
+
+										<div>
+											<label htmlFor='endDate' className={styles.small_notes}>
+												Powrót
+											</label>
+											<input
+												type='date'
+												id='endDate'
+												name='endDate'
+												required
+												defaultValue={firebaseDateToInputDate(trip.endDate)}
+												className={styles.input_add_trip}
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div className={styles.trip_info_box}>
+								<div className={styles.participants_container}>
+									<label htmlFor='maxParticipantsCount' className={styles.labels}>
+										Maksymalna liczba uczestników
 									</label>
-
 									<input
-										type='date'
-										id='startDate'
-										name='startDate'
+										type='number'
+										id='maxParticipantsCount'
+										name='maxParticipantsCount'
+										defaultValue={trip.maxParticipantsCount}
 										required
-										defaultValue={firebaseDateToInputDate(trip.startDate)}
 										className={styles.input_add_trip}
-									/>
-
-									<label htmlFor='endDate' className={styles.small_notes}>
-										Powrót
-									</label>
-
-									<input
-										type='date'
-										id='endDate'
-										name='endDate'
-										required
-										defaultValue={firebaseDateToInputDate(trip.endDate)}
-										className={styles.input_add_trip}
+										onWheel={(e) => e.target.blur()}
 									/>
 								</div>
 							</div>
 
-							<div className={styles.participants_container}>
-								<label htmlFor='maxParticipantsCount' className={styles.labels}>
-									Maksymalna liczba uczestników
-								</label>
-								<input
-									type='number'
-									id='maxParticipantsCount'
-									name='maxParticipantsCount'
-									defaultValue={trip.maxParticipantsCount}
-									required
-									className={styles.input_add_trip}
-									onWheel={(e) => e.target.blur()}
-								/>
-							</div>
-
-							<div className={styles.participants_data_container}>
-								<label htmlFor='participants' className={styles.labels}>
-									Zapisani uczestnicy:
-								</label>
-								<div className={styles.participants_border}>
-									{participants.length > 0 ? (
-										participants.map((participant) => {
-											return (
-												<div className={styles.participant} key={participant.id}>
-													{participant.firstName} {participant.lastName}
-													<button
-														className={styles.remove_user_btn}
-														type='button'
-														onClick={() => handleDeleteParticipant(participant.id)}
-													>
-														Usuń
-													</button>
-												</div>
-											);
-										})
-									) : (
-										<div>Nikt się jeszcze nie zapisał</div>
-									)}
+							<div className={styles.trip_info_box}>
+								<div className={styles.participants_data_container}>
+									<label htmlFor='participants' className={styles.labels}>
+										Zapisani uczestnicy:
+									</label>
+									<div className={styles.participants_border}>
+										{participants.length > 0 ? (
+											participants.map((participant) => {
+												return (
+													<div className={styles.participant} key={participant.id}>
+														{participant.firstName} {participant.lastName}
+														<button
+															className={styles.remove_user_btn}
+															type='button'
+															onClick={() => handleDeleteParticipant(participant.id)}
+														>
+															Usuń
+														</button>
+													</div>
+												);
+											})
+										) : (
+											<div>Nikt się jeszcze nie zapisał</div>
+										)}
+									</div>
 								</div>
 							</div>
 
-							<div className={styles.budget_container}>
-								<label htmlFor='budget' className={styles.labels}>
-									Budżet
-								</label>
-								<input
-									type='number'
-									id='budget'
-									name='budget'
-									defaultValue={trip.budget}
-									onWheel={(e) => e.target.blur()}
-									className={styles.input_add_trip}
-									required
-								/>
+							<div className={styles.trip_info_box}>
+								<div className={styles.budget_container}>
+									<label htmlFor='budget' className={styles.labels}>
+										Budżet
+									</label>
+									<input
+										type='number'
+										id='budget'
+										name='budget'
+										defaultValue={trip.budget}
+										onWheel={(e) => e.target.blur()}
+										className={styles.input_add_trip}
+										required
+									/>
+								</div>
 							</div>
 
-							<div className={styles.tags_container}>
-								<label htmlFor='tags' className={styles.labels}>
-									Tagi
-								</label>
-								<Tags
-									tags={tagsData}
-									selectedTags={selectedTags}
-									setSelectedTags={setSelectedTags}
-								/>
+							<div className={styles.trip_info_box}>
+								<div className={styles.tags_container}>
+									<label htmlFor='tags' className={styles.labels}>
+										Tagi
+									</label>
+									<Tags
+										tags={tagsData}
+										selectedTags={selectedTags}
+										setSelectedTags={setSelectedTags}
+									/>
+								</div>
 							</div>
 
 							<div className={styles.btn_container}>
-                            <ModalPopup
-								triggerBtn={
-									<button type='button' className={styles.cancel_btn}>
-										Anuluj
-									</button>
-								}
-								modalHeader='Czy na pewno chcesz anulować edycję podróży?'
-								modalAdditionalInfo='Spowoduje to usunięcie wszystkich wprowadzonych danych.'
-								handleConfirmCancelationClick={handleCancel}
-							/>
+								<ModalPopup
+									triggerBtn={
+										<button type='button' className={styles.cancel_btn}>
+											Anuluj
+										</button>
+									}
+									modalHeader='Czy na pewno chcesz anulować edycję podróży?'
+									modalAdditionalInfo='Spowoduje to usunięcie wszystkich wprowadzonych danych.'
+									handleConfirmCancelationClick={handleCancel}
+								/>
 								<button type='submit' className={styles.save_btn}>
 									Zapisz
 								</button>
